@@ -31,6 +31,31 @@ public class Team implements ITeam, ICodeSender {
 	private boolean clone;
 	private org.bukkit.scoreboard.Team team;
 
+	/**
+	 * Creates a team with the give name and the specified color. The color cannot be null.
+	 * 
+	 * @param name  The name of the team.
+	 * @param color The color of the team.
+	 * 
+	 * @return The created team.
+	 */
+	public static ITeam of(String name, EColor color) {
+		return new Team(name, color, false);
+	}
+
+	/**
+	 * Creates a team with the given name, its color is {@link EColor#RESET}.
+	 * 
+	 * @param name The name of the team.
+	 * 
+	 * @return The created team.
+	 * 
+	 * @see #of(String, EColor)
+	 */
+	public static ITeam of(String name) {
+		return of(name, EColor.RESET);
+	}
+
 	private Team(String name, EColor color, boolean clone) {
 		this.name = name;
 		this.color = color;
