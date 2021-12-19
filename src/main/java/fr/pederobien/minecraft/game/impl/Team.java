@@ -150,7 +150,8 @@ public class Team implements ITeam, ICodeSender {
 	}
 
 	private String getPrefix(Player sender, Player player) {
-		return color.getInColor("[" + (player.equals(sender) ? "me" : sender.getName()) + " -> " + getName() + "] ");
+		String playerName = player.equals(sender) ? getMessage(sender, EGameCode.GAME__TEAM__PLAYER_NAME) : sender.getName();
+		return color.getInColor(String.format("[%s -> %s] ", playerName, getName()));
 	}
 
 	private void onPlayerQuitEvent(PlayerQuitEvent event) {
