@@ -1,0 +1,5 @@
+[submodule "minecraft-command-tree"]
+	path = minecraft-command-tree
+	url = https://github.com/Pierre-Emmanuel41/minecraft-command-tree.git
+	update = rebase
+	branch = 1.0_MC_1.13.2-SNAPSHOT
