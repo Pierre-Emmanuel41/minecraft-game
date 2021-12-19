@@ -43,6 +43,7 @@ public class TimeTask implements ITimeTask, Runnable {
 		state = State.NOT_STARTED;
 		BukkitManager.getScheduler().cancelTask(taskId);
 		EventManager.callEvent(new TimeTaskStartPostEvent(this));
+		totalTime = gameTime = pauseTime = LocalTime.of(0, 0, 0);
 	}
 
 	@Override
