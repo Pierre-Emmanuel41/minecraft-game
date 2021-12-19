@@ -5,7 +5,7 @@
 	<groupId>fr.pederobien.minecraft</groupId>
 	<artifactId>game</artifactId>
 	<packaging>jar</packaging>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.0_MC_1.13.2-SNAPSHOT</version>
 	<name>game</name>
 	<url>http://maven.apache.org</url>
 	
