@@ -56,7 +56,7 @@ public class TeamAddPlayerNode extends TeamNode {
 		String playerNames = concat(args);
 
 		for (Player player : players)
-			getTree().getTeam().addPlayer(player);
+			getTree().getTeam().add(player);
 
 		switch (args.length) {
 		case 0:

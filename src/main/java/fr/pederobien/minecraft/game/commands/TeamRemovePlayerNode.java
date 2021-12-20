@@ -64,7 +64,7 @@ public class TeamRemovePlayerNode extends TeamNode {
 		String playerNames = concat(args);
 
 		for (Player player : players)
-			getTree().getTeam().removePlayer(player);
+			getTree().getTeam().remove(player);
 
 		switch (players.size()) {
 		case 0:

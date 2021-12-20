@@ -109,14 +109,14 @@ public class Team implements ITeam, ICodeSender {
 	}
 
 	@Override
-	public void addPlayer(Player player) {
-		add(player);
+	public void add(Player player) {
+		addPlayer(player);
 		synchronizeWithServerTeam(team -> team.addEntry(player.getName()), new TeamPlayerAddPostEvent(this, player));
 	}
 
 	@Override
-	public void removePlayer(Player player) {
-		remove(player);
+	public void remove(Player player) {
+		removePlayer(player);
 		synchronizeWithServerTeam(team -> team.addEntry(player.getName()), new TeamPlayerRemovePostEvent(this, player));
 	}
 
@@ -148,7 +148,7 @@ public class Team implements ITeam, ICodeSender {
 	public ITeam clone() {
 		ITeam team = new Team(getName(), getColor(), true);
 		for (Player player : getPlayers())
-			team.addPlayer(player);
+			team.add(player);
 		return team;
 	}
 
@@ -224,7 +224,7 @@ public class Team implements ITeam, ICodeSender {
 	 * 
 	 * @param player The player to add.
 	 */
-	private void add(Player player) {
+	private void addPlayer(Player player) {
 		lock.lock();
 		try {
 			players.add(player);
@@ -238,7 +238,7 @@ public class Team implements ITeam, ICodeSender {
 	 * 
 	 * @param player The player to remove.
 	 */
-	private void remove(Player player) {
+	private void removePlayer(Player player) {
 		lock.lock();
 		try {
 			players.remove(player);

@@ -47,7 +47,7 @@ public interface ITeam {
 	 * 
 	 * @param player The player to add.
 	 */
-	void addPlayer(Player player);
+	void add(Player player);
 
 	/**
 	 * Remove the player from this team. If this team has been created on the server and is not a clone, then the "server team" is
@@ -55,7 +55,7 @@ public interface ITeam {
 	 * 
 	 * @param player The player to remove.
 	 */
-	void removePlayer(Player player);
+	void remove(Player player);
 
 	/**
 	 * @return The list of players registered in this team. This list is unmodifiable.
