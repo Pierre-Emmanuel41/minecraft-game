@@ -1,4 +1,4 @@
-package fr.pederobien.minecraft.game.commands;
+package fr.pederobien.minecraft.game.commands.team;
 
 import java.util.List;
 
