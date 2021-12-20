@@ -100,6 +100,39 @@ public enum EGameCode implements IMinecraftCode {
 	// Code when one player has been added to a team
 	TEAM__ADD_PLAYER__SEVERAL_PLAYERS_ADDED,
 
+	// Code for the "startgame" command ------------------------------------------
+	START_GAME__EXPLANATION,
+
+	// Code when there is no game to start
+	START_GAME__NO_GAME_TO_START,
+
+	// Code when a game starts
+	START_GAME__STARTING_GAME,
+
+	// Code for the "pausegame" command ------------------------------------------
+	PAUSE_GAME__EXPLANATION,
+
+	// Code when there is no game to start
+	PAUSE_GAME__NO_GAME_TO_PAUSE,
+
+	// Code when there is no game to start
+	PAUSE_GAME__GAME_NOT_STARTED,
+
+	// Code when a game starts
+	PAUSE_GAME__PAUSING_GAME,
+
+	// Code when a game starts
+	PAUSE_GAME__RESUMING_GAME,
+
+	// Code for the "stopgame" command ------------------------------------------
+	STOP_GAME__EXPLANATION,
+
+	// Code when there is no game to start
+	STOP_GAME__NO_GAME_TO_STOP,
+
+	// Code when a game starts
+	STOP_GAME__STOPPING_GAME,
+
 	;
 
 	private IPlayerGroup group;

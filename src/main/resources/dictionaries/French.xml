@@ -131,5 +131,49 @@
 			<code>TEAM__ADD_PLAYER__SEVERAL_PLAYERS_ADDED</code>
 			<value>Les joueurs %s ont été ajouté à %s</value>
 		</message>
+		<message>
+			<code>START_GAME__EXPLANATION</code>
+			<value>Pour lancer une partie</value>
+		</message>
+		<message>
+			<code>START_GAME__NO_GAME_TO_START</code>
+			<value>Aucune partie à commencer</value>
+		</message>
+		<message>
+			<code>START_GAME__STARTING_GAME</code>
+			<value>Lancement de %s...</value>
+		</message>
+		<message>
+			<code>PAUSE_GAME__EXPLANATION</code>
+			<value>Pour mettre en pause ou reprendre une partie</value>
+		</message>
+		<message>
+			<code>PAUSE_GAME__NO_GAME_TO_PAUSE</code>
+			<value>Aucune partie à mettre en pause</value>
+		</message>
+		<message>
+			<code>PAUSE_GAME__GAME_NOT_STARTED</code>
+			<value>Impossible de mettre en pause ou reprendre %s, la partie n'a pas encore commencé</value>
+		</message>
+		<message>
+			<code>PAUSE_GAME__PAUSING_GAME</code>
+			<value>Mise en pause de %s...</value>
+		</message>
+		<message>
+			<code>PAUSE_GAME__RESUMING_GAME</code>
+			<value>Reprise de %s...</value>
+		</message>
+		<message>
+			<code>STOP_GAME__EXPLANATION</code>
+			<value>Pour arrêter une partie</value>
+		</message>
+		<message>
+			<code>STOP_GAME__NO_GAME_TO_STOP</code>
+			<value>Aucune partie à arrêter</value>
+		</message>
+		<message>
+			<code>STOP_GAME__STOPPING_GAME</code>
+			<value>Arrêt de %s...</value>
+		</message>
 	</messages>
 </dictionary>

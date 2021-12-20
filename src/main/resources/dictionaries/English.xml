@@ -134,5 +134,49 @@
 			<code>TEAM__ADD_PLAYER__SEVERAL_PLAYERS_ADDED</code>
 			<value>Players %s have been added to %s</value>
 		</message>
+		<message>
+			<code>START_GAME__EXPLANATION</code>
+			<value>To start a game</value>
+		</message>
+		<message>
+			<code>START_GAME__NO_GAME_TO_START</code>
+			<value>No game to start</value>
+		</message>
+		<message>
+			<code>START_GAME__STARTING_GAME</code>
+			<value>Starting %s...</value>
+		</message>
+		<message>
+			<code>PAUSE_GAME__EXPLANATION</code>
+			<value>To pause or resume the game</value>
+		</message>
+		<message>
+			<code>PAUSE_GAME__NO_GAME_TO_PAUSE</code>
+			<value>No game to pause</value>
+		</message>
+		<message>
+			<code>PAUSE_GAME__GAME_NOT_STARTED</code>
+			<value>Cannot pause/resume %s, the game has not started yet</value>
+		</message>
+		<message>
+			<code>PAUSE_GAME__PAUSING_GAME</code>
+			<value>Pausing %s...</value>
+		</message>
+		<message>
+			<code>PAUSE_GAME__RESUMING_GAME</code>
+			<value>Resuming %s...</value>
+		</message>
+		<message>
+			<code>STOP_GAME__EXPLANATION</code>
+			<value>To stop a game</value>
+		</message>
+		<message>
+			<code>STOP_GAME__NO_GAME_TO_STOP</code>
+			<value>No game to stop</value>
+		</message>
+		<message>
+			<code>STOP_GAME__STOPPING_GAME</code>
+			<value>Stopping %s...</value>
+		</message>
 	</messages>
 </dictionary>
