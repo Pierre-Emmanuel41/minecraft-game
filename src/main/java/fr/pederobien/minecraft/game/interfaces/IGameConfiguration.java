@@ -26,6 +26,15 @@ public interface IGameConfiguration {
 	void remove(ITeam team);
 
 	/**
+	 * Get the team associated to the given name.
+	 * 
+	 * @param name The name of the team to return.
+	 * 
+	 * @return The team if the given name corresponds to a registered team, null otherwise.
+	 */
+	ITeam getTeam(String name);
+
+	/**
 	 * Remove each registered team from this configuration. It also clear each registered teams.
 	 */
 	void clear();

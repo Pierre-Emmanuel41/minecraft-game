@@ -53,12 +53,26 @@ public class GameConfiguration implements IGameConfiguration {
 	}
 
 	@Override
+	public ITeam getTeam(String name) {
+		lock.lock();
+		try {
+			for (ITeam team : teams)
+				if (team.getName().equals(name))
+					return team;
+			return null;
+		} finally {
+			lock.unlock();
+		}
+	}
+
+	@Override
 	public void clear() {
 		lock.lock();
 		try {
 			int size = teams.size();
 			for (int i = 0; i < size; i++) {
 				ITeam team = teams.remove(0);
+				team.clear();
 				EventManager.callEvent(new ConfigurationTeamRemovePostEvent(this, team));
 			}
 		} finally {
