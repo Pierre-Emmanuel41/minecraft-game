@@ -1,5 +1,6 @@
 package fr.pederobien.minecraft.game.interfaces;
 
+import fr.pederobien.minecraft.game.impl.EGameState;
 import fr.pederobien.utils.IPausable;
 
 public interface IGame extends IPausable {
@@ -28,4 +29,9 @@ public interface IGame extends IPausable {
 	 * @param configuration The new game configuration.
 	 */
 	void setConfig(IGameConfiguration configuration);
+
+	/**
+	 * @return The state in which this game is.
+	 */
+	EGameState getState();
 }

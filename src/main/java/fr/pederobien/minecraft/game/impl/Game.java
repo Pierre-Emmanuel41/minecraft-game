@@ -6,6 +6,7 @@ import fr.pederobien.minecraft.game.interfaces.IGameConfiguration;
 public class Game implements IGame {
 	private String name;
 	private IGameConfiguration configuration;
+	private EGameState state;
 
 	/**
 	 * Creates a game.
@@ -16,6 +17,7 @@ public class Game implements IGame {
 	public Game(String name, IGameConfiguration configuration) {
 		this.name = name;
 		this.configuration = configuration;
+		state = EGameState.NOT_STARTED;
 	}
 
 	/**
@@ -25,27 +27,29 @@ public class Game implements IGame {
 	 */
 	public Game(String name) {
 		this.name = name;
+		state = EGameState.NOT_STARTED;
 	}
 
 	@Override
 	public void start() {
 		if (configuration == null)
 			throw new IllegalStateException("There is no configuration associated to this game");
+		state = EGameState.STARTED;
 	}
 
 	@Override
 	public void stop() {
-
+		state = EGameState.NOT_STARTED;
 	}
 
 	@Override
 	public void pause() {
-
+		state = EGameState.PAUSED;
 	}
 
 	@Override
 	public void resume() {
-
+		state = EGameState.STARTED;
 	}
 
 	@Override
@@ -61,5 +65,10 @@ public class Game implements IGame {
 	@Override
 	public void setConfig(IGameConfiguration configuration) {
 		this.configuration = configuration;
+	}
+
+	@Override
+	public EGameState getState() {
+		return state;
 	}
 }
