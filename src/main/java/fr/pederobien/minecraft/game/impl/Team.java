@@ -117,7 +117,7 @@ public class Team implements ITeam, ICodeSender {
 	@Override
 	public void remove(Player player) {
 		removePlayer(player);
-		synchronizeWithServerTeam(team -> team.addEntry(player.getName()), new TeamPlayerRemovePostEvent(this, player));
+		synchronizeWithServerTeam(team -> team.removeEntry(player.getName()), new TeamPlayerRemovePostEvent(this, player));
 	}
 
 	@Override
@@ -139,9 +139,16 @@ public class Team implements ITeam, ICodeSender {
 
 	@Override
 	public void clear() {
-		for (Player player : players)
-			synchronizeWithServerTeam(team -> team.removeEntry(player.getName()), new TeamPlayerRemovePostEvent(this, player));
-		players.clear();
+		lock.lock();
+		try {
+			int size = players.size();
+			for (int i = 0; i < size; i++) {
+				Player player = players.remove(0);
+				synchronizeWithServerTeam(team -> team.removeEntry(player.getName()), new TeamPlayerRemovePostEvent(this, player));
+			}
+		} finally {
+			lock.unlock();
+		}
 	}
 
 	@Override
