@@ -5,6 +5,9 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
+import java.util.StringJoiner;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Consumer;
 
 import org.bukkit.entity.Player;
@@ -27,6 +30,7 @@ import fr.pederobien.utils.event.EventManager;
 public class Team implements ITeam, ICodeSender {
 	private String name;
 	private EColor color;
+	private Lock lock;
 	private List<Player> players, quitPlayers;
 	private boolean clone;
 	private org.bukkit.scoreboard.Team team;
@@ -61,6 +65,7 @@ public class Team implements ITeam, ICodeSender {
 		this.color = color;
 		this.clone = clone;
 
+		lock = new ReentrantLock(true);
 		players = new ArrayList<Player>();
 		quitPlayers = new ArrayList<Player>();
 
@@ -105,13 +110,13 @@ public class Team implements ITeam, ICodeSender {
 
 	@Override
 	public void addPlayer(Player player) {
-		players.add(player);
+		add(player);
 		synchronizeWithServerTeam(team -> team.addEntry(player.getName()), new TeamPlayerAddPostEvent(this, player));
 	}
 
 	@Override
 	public void removePlayer(Player player) {
-		players.remove(player);
+		remove(player);
 		synchronizeWithServerTeam(team -> team.addEntry(player.getName()), new TeamPlayerRemovePostEvent(this, player));
 	}
 
@@ -162,6 +167,14 @@ public class Team implements ITeam, ICodeSender {
 		return TeamManager.getTeam(getName());
 	}
 
+	@Override
+	public String toString() {
+		StringJoiner joiner = new StringJoiner(",", "[", "]");
+		for (Player player : players)
+			joiner.add(player.getName());
+		return String.format("name=%s, players=%s", getColoredName(), getColor().getInColor(joiner.toString()));
+	}
+
 	/**
 	 * Update the server team with the consumer <code>team</code> and throw the given event.
 	 * 
@@ -180,9 +193,19 @@ public class Team implements ITeam, ICodeSender {
 	}
 
 	private void onPlayerQuitEvent(PlayerQuitEvent event) {
-		for (Player player : players)
-			if (player.getName().equals(event.getPlayer().getName()))
-				quitPlayers.add(event.getPlayer());
+		lock.lock();
+		try {
+			Iterator<Player> iterator = players.iterator();
+			while (iterator.hasNext()) {
+				Player player = iterator.next();
+				if (player.getName().equals(event.getPlayer().getName())) {
+					quitPlayers.add(player);
+					iterator.remove();
+				}
+			}
+		} finally {
+			lock.unlock();
+		}
 	}
 
 	private void onPlayerJoinEvent(PlayerJoinEvent event) {
@@ -190,10 +213,37 @@ public class Team implements ITeam, ICodeSender {
 		while (iterator.hasNext()) {
 			Player player = iterator.next();
 			if (player.getName().equals(event.getPlayer().getName())) {
-				removePlayer(player);
 				iterator.remove();
-				addPlayer(event.getPlayer());
+				add(event.getPlayer());
 			}
+		}
+	}
+
+	/**
+	 * Thread safe operation that adds a player to the list of players.
+	 * 
+	 * @param player The player to add.
+	 */
+	private void add(Player player) {
+		lock.lock();
+		try {
+			players.add(player);
+		} finally {
+			lock.unlock();
+		}
+	}
+
+	/**
+	 * Thread safe operation that removes a player from the list of players.
+	 * 
+	 * @param player The player to remove.
+	 */
+	private void remove(Player player) {
+		lock.lock();
+		try {
+			players.remove(player);
+		} finally {
+			lock.unlock();
 		}
 	}
 }
