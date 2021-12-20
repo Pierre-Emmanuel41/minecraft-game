@@ -15,7 +15,7 @@ import fr.pederobien.minecraft.managers.PlayerManager;
 public class TeamAddPlayerNode extends TeamNode {
 
 	protected TeamAddPlayerNode(TeamCommandTree tree) {
-		super(tree, "add", EGameCode.TEAM__ADD_PLAYER__EXPLANATION);
+		super(tree, "add", EGameCode.TEAM__ADD_PLAYER__EXPLANATION, team -> team != null);
 	}
 
 	@Override

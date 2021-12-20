@@ -7,7 +7,7 @@ public class TeamModifyNode extends TeamNode {
 	private TeamModifyColorNode colorNode;
 
 	protected TeamModifyNode(TeamCommandTree tree) {
-		super(tree, "modify", EGameCode.TEAM__MODIFY__EXPLANATION);
+		super(tree, "modify", EGameCode.TEAM__MODIFY__EXPLANATION, team -> team != null);
 
 		add(nameNode = new TeamModifyNameNode(tree));
 		add(colorNode = new TeamModifyColorNode(tree));

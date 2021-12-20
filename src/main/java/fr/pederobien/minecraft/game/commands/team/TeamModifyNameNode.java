@@ -10,7 +10,7 @@ import fr.pederobien.minecraft.game.impl.EGameCode;
 public class TeamModifyNameNode extends TeamNode {
 
 	protected TeamModifyNameNode(TeamCommandTree tree) {
-		super(tree, "name", EGameCode.TEAM__MODIFY_NAME__EXPLANATION);
+		super(tree, "name", EGameCode.TEAM__MODIFY_NAME__EXPLANATION, team -> team != null);
 	}
 
 	@Override

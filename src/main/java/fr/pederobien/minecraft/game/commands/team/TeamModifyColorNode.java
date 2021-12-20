@@ -12,7 +12,7 @@ import fr.pederobien.minecraft.managers.EColor;
 public class TeamModifyColorNode extends TeamNode {
 
 	protected TeamModifyColorNode(TeamCommandTree tree) {
-		super(tree, "color", EGameCode.TEAM__MODIFY_COLOR__EXPLANATION);
+		super(tree, "color", EGameCode.TEAM__MODIFY_COLOR__EXPLANATION, team -> team != null);
 	}
 
 	@Override

@@ -14,7 +14,7 @@ import fr.pederobien.minecraft.managers.PlayerManager;
 public class TeamRemovePlayerNode extends TeamNode {
 
 	protected TeamRemovePlayerNode(TeamCommandTree tree) {
-		super(tree, "remove", EGameCode.TEAM__REMOVE_PLAYER__EXPLANATION);
+		super(tree, "remove", EGameCode.TEAM__REMOVE_PLAYER__EXPLANATION, team -> team != null);
 	}
 
 	@Override
