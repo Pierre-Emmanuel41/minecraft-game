@@ -11,8 +11,128 @@
 	</locales>
 	<messages>
 		<message>
+			<code>NAME__COMPLETION</code>
+			<value>&lt;name&gt;</value>
+		</message>
+		<message>
 			<code>GAME__TEAM__PLAYER_NAME</code>
 			<value>Me</value>
+		</message>
+		<message>
+			<code>GAME__TEAM__ROOT_EXPLANATION</code>
+			<value>To create/modify a team</value>
+		</message>
+		<message>
+			<code>TEAM__NEW__EXPLANATION</code>
+			<value>To create a new team</value>
+		</message>
+		<message>
+			<code>TEAM__NEW__NAME_IS_MISSING</code>
+			<value>The name of the new team is missing</value>
+		</message>
+		<message>
+			<code>TEAM__NEW__NAME_ALREADY_USED</code>
+			<value>The name %s is already used</value>
+		</message>
+		<message>
+			<code>TEAM__NEW__COLOR_IS_MISSING</code>
+			<value>The color of the new team is missing</value>
+		</message>
+		<message>
+			<code>TEAM__NEW__COLOR_ALREADY_USED</code>
+			<value>The color %s is already used</value>
+		</message>
+		<message>
+			<code>TEAM__NEW__TEAM_CREATED</code>
+			<value>The team %s has been successfully created</value>
+		</message>
+		<message>
+			<code>TEAM__MODIFY__EXPLANATION</code>
+			<value>To modify the characteristics of a team</value>
+		</message>
+		<message>
+			<code>TEAM__MODIFY_NAME__EXPLANATION</code>
+			<value>To modify the name of a team</value>
+		</message>
+		<message>
+			<code>TEAM__MODIFY_NAME__NAME_IS_MISSING</code>
+			<value>Cannot rename team %s, the new team name is missing</value>
+		</message>
+		<message>
+			<code>TEAM__MODIFY_NAME__NAME_IS_ALREADY_USED</code>
+			<value>Cannot rename team %s as %s, the new team name is already used</value>
+		</message>
+		<message>
+			<code>TEAM__MODIFY_NAME__TEAM_NAME_UPDATED</code>
+			<value>The team %s as been renamed as %s</value>
+		</message>
+		<message>
+			<code>TEAM__MODIFY_COLOR__EXPLANATION</code>
+			<value>To modify the color of a team</value>
+		</message>
+		<message>
+			<code>TEAM__MODIFY_COLOR__COLOR_IS_MISSING</code>
+			<value>Cannot modify the color of team %s, the new team color is missing</value>
+		</message>
+		<message>
+			<code>TEAM__MODIFY_COLOR__COLOR_IS_ALREADY_USED</code>
+			<value>Cannot modify the color of team %s as %s, the new team color is already used</value>
+		</message>
+		<message>
+			<code>TEAM__MODIFY_COLOR__TEAM_COLOR_UPDATED</code>
+			<value>The color of team %s is %s</value>
+		</message>
+		<message>
+			<code>TEAM__REMOVE_PLAYER__EXPLANATION</code>
+			<value>To remove players from a team</value>
+		</message>
+		<message>
+			<code>TEAM__REMOVE_PLAYER__ALL_PLAYERS_REMOVED</code>
+			<value>All players from %s have been removed</value>
+		</message>
+		<message>
+			<code>TEAM__REMOVE_PLAYER__PLAYER_NOT_FOUND</code>
+			<value>Cannot remove %s from %s, the player does not exist</value>
+		</message>
+		<message>
+			<code>TEAM__REMOVE_PLAYER__PLAYER_NOT_REGISTERED</code>
+			<value>Cannot remove %s from %s, the player is not registered in this team</value>
+		</message>
+		<message>
+			<code>TEAM__REMOVE_PLAYER__NO_PLAYER_REMOVED</code>
+			<value>No player has been removed from %s</value>
+		</message>
+		<message>
+			<code>TEAM__REMOVE_PLAYER__ONE_PLAYER_REMOVED</code>
+			<value>%s has been removed from %s</value>
+		</message>
+		<message>
+			<code>TEAM__REMOVE_PLAYER__SEVERAL_PLAYERS_REMOVED</code>
+			<value>Players %s have been removed from %s</value>
+		</message>
+		<message>
+			<code>TEAM__ADD_PLAYER__EXPLANATION</code>
+			<value>To add players to a team</value>
+		</message>
+		<message>
+			<code>TEAM__ADD_PLAYER__PLAYER_NOT_FOUND</code>
+			<value>Cannot add %s to %s, the player does not exist</value>
+		</message>
+		<message>
+			<code>TEAM__ADD_PLAYER__PLAYER_ALREADY_REGISTERED</code>
+			<value>Cannot add %s to %s, the player is already registered in this team</value>
+		</message>
+		<message>
+			<code>TEAM__ADD_PLAYER__NO_PLAYER_ADDED</code>
+			<value>No player has been added to %s</value>
+		</message>
+		<message>
+			<code>TEAM__ADD_PLAYER__ONE_PLAYER_ADDED</code>
+			<value>%s has been added to %s</value>
+		</message>
+		<message>
+			<code>TEAM__ADD_PLAYER__SEVERAL_PLAYERS_ADDED</code>
+			<value>Players %s have been added to %s</value>
 		</message>
 	</messages>
 </dictionary>
