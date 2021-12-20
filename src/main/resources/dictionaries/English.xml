@@ -178,5 +178,29 @@
 			<code>STOP_GAME__STOPPING_GAME</code>
 			<value>Stopping %s...</value>
 		</message>
+		<message>
+			<code>GAME_CONFIG__REMOVE_TEAM__EXPLANATION</code>
+			<value>To remove a team from a game</value>
+		</message>
+		<message>
+			<code>GAME_CONFIG__REMOVE_TEAM__ALL_PLAYERS_REMOVED</code>
+			<value>All teams from %s have been removed</value>
+		</message>
+		<message>
+			<code>GAME_CONFIG__REMOVE_TEAM__TEAM_NOT_FOUND</code>
+			<value>Cannot remove %s from %s, the team is not registered in this game</value>
+		</message>
+		<message>
+			<code>GAME_CONFIG__REMOVE_TEAM__NO_TEAM_REMOVED</code>
+			<value>No team has been removed from %s</value>
+		</message>
+		<message>
+			<code>GAME_CONFIG__REMOVE_TEAM__ONE_TEAM_REMOVED</code>
+			<value>%s has been removed from %s</value>
+		</message>
+		<message>
+			<code>GAME_CONFIG__REMOVE_TEAM__SEVERAL_TEAMS_REMOVED</code>
+			<value>Teams %s have been removed from %s</value>
+		</message>
 	</messages>
 </dictionary>

@@ -175,5 +175,29 @@
 			<code>STOP_GAME__STOPPING_GAME</code>
 			<value>Arrêt de %s...</value>
 		</message>
+		<message>
+			<code>GAME_CONFIG__REMOVE_TEAM__EXPLANATION</code>
+			<value>Pour enlever une équipe d'une partie</value>
+		</message>
+		<message>
+			<code>GAME_CONFIG__REMOVE_TEAM__ALL_PLAYERS_REMOVED</code>
+			<value>Toutes les équipes de %s ont été enlevées</value>
+		</message>
+		<message>
+			<code>GAME_CONFIG__REMOVE_TEAM__TEAM_NOT_FOUND</code>
+			<value>Impossible d'enlever %s de %s, l'équipe n'est enregistrée dans cette partie</value>
+		</message>
+		<message>
+			<code>GAME_CONFIG__REMOVE_TEAM__NO_TEAM_REMOVED</code>
+			<value>Aucune équipe n'a été enlevée de %s</value>
+		</message>
+		<message>
+			<code>GAME_CONFIG__REMOVE_TEAM__ONE_TEAM_REMOVED</code>
+			<value>%s a été enlevée de %s</value>
+		</message>
+		<message>
+			<code>GAME_CONFIG__REMOVE_TEAM__SEVERAL_TEAMS_REMOVED</code>
+			<value>Les équipes %s ont été enlevées de %s</value>
+		</message>
 	</messages>
 </dictionary>

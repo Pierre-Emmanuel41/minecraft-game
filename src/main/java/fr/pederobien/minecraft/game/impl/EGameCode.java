@@ -133,7 +133,23 @@ public enum EGameCode implements IMinecraftCode {
 	// Code when a game starts
 	STOP_GAME__STOPPING_GAME,
 
-	;
+	// Code for the "remove team" command ---------------------------------------
+	GAME_CONFIG__REMOVE_TEAM__EXPLANATION,
+
+	// Code when removing all teams from a configuration
+	GAME_CONFIG__REMOVE_TEAM__ALL_PLAYERS_REMOVED,
+
+	// Code when the player name refers to no player
+	GAME_CONFIG__REMOVE_TEAM__TEAM_NOT_FOUND,
+
+	// Code when no team has been removed from a game.
+	GAME_CONFIG__REMOVE_TEAM__NO_TEAM_REMOVED,
+
+	// Code when one team has been removed from a game.
+	GAME_CONFIG__REMOVE_TEAM__ONE_TEAM_REMOVED,
+
+	// Code when several teams have been removed from a game.
+	GAME_CONFIG__REMOVE_TEAM__SEVERAL_TEAMS_REMOVED,;
 
 	private IPlayerGroup group;
 
