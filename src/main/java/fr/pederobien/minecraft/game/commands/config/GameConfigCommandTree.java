@@ -58,7 +58,7 @@ public class GameConfigCommandTree implements IEventListener {
 		if (!event.getTree().equals(teamTree))
 			return;
 
-		configuration.add(event.getTeam());
+		configuration.getTeams().add(event.getTeam());
 
 		// Updating the team tree.
 		teamTree.getExceptedNames().add(event.getTeam().getName());

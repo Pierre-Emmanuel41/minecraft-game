@@ -2,6 +2,7 @@ package fr.pederobien.minecraft.game.commands.config;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 import org.bukkit.command.Command;
@@ -36,28 +37,28 @@ public class GameConfigRemoveTeamNode extends GameConfigNode {
 
 		// Clearing the current configuration from its teams.
 		if (args[0].equals("all")) {
-			getTree().getConfiguration().clear();
+			getTree().getConfiguration().getTeams().clear();
 			send(eventBuilder(sender, EGameCode.GAME_CONFIG__REMOVE_TEAM__ALL_PLAYERS_REMOVED).build(configName));
 			return true;
 		}
 
 		List<ITeam> teams = new ArrayList<ITeam>();
 		for (String name : args) {
-			ITeam team = getTree().getConfiguration().getTeam(name);
+			Optional<ITeam> optTeam = getTree().getConfiguration().getTeams().getTeam(name);
 
 			// Checking if the team name refers to a registered team.
-			if (team == null) {
+			if (!optTeam.isPresent()) {
 				send(eventBuilder(sender, EGameCode.GAME_CONFIG__REMOVE_TEAM__TEAM_NOT_FOUND, name, configName));
 				return false;
 			}
 
-			teams.add(team);
+			teams.add(optTeam.get());
 		}
 
 		String teamNames = concat(args);
 
 		for (ITeam team : teams) {
-			getTree().getConfiguration().remove(team);
+			getTree().getConfiguration().getTeams().remove(team);
 
 			// Updating the team tree.
 			getTree().getTeamTree().getExceptedNames().remove(team.getName());
