@@ -12,6 +12,18 @@
 			<value>&lt;nom&gt;</value>
 		</message>
 		<message>
+			<code>ENABLE__COMPLETION</code>
+			<value>Activer</value>
+		</message>
+		<message>
+			<code>DISABLE__COMPLETION</code>
+			<value>Désactiver</value>
+		</message>
+		<message>
+			<code>ENABLE_DISABLE__BAD_FORMAT</code>
+			<value>Mauvais format pour le paramètre "Activer/Désactiver"</value>
+		</message>
+		<message>
 			<code>GAME__TEAM__PLAYER_NAME</code>
 			<value>Moi</value>
 		</message>
@@ -198,6 +210,22 @@
 		<message>
 			<code>GAME_CONFIG__REMOVE_TEAM__SEVERAL_TEAMS_REMOVED</code>
 			<value>Les équipes %s ont été enlevées de %s</value>
+		</message>
+		<message>
+			<code>GAME_CONFIG__FEATURE__EXPLANATION</code>
+			<value>Pour activer/désactiver une fonctionnalité</value>
+		</message>
+		<message>
+			<code>GAME_CONFIG__FEATURE__NAME_IS_MISSING</code>
+			<value>Impossible d'activer/désactiver une fonctionnalité, le nom est manquant.</value>
+		</message>
+		<message>
+			<code>GAME_CONFIG__FEATURE__ENABLE</code>
+			<value>Fonctionnalité %s est activée</value>
+		</message>
+		<message>
+			<code>GAME_CONFIG__FEATURE__DISABLE</code>
+			<value>Fonctionnalité %s est désactivée</value>
 		</message>
 	</messages>
 </dictionary>

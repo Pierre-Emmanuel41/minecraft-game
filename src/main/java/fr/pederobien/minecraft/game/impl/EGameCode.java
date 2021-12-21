@@ -10,6 +10,15 @@ public enum EGameCode implements IMinecraftCode {
 	// Code for the name completion
 	NAME__COMPLETION,
 
+	// For the "Enable" completion
+	ENABLE__COMPLETION,
+
+	// For the "Disable" completion
+	DISABLE__COMPLETION,
+
+	// For when the enable/disable value has a bad format
+	ENABLE_DISABLE__BAD_FORMAT,
+
 	// Code for player's name speaking to a team
 	GAME__TEAM__PLAYER_NAME,
 
@@ -149,7 +158,21 @@ public enum EGameCode implements IMinecraftCode {
 	GAME_CONFIG__REMOVE_TEAM__ONE_TEAM_REMOVED,
 
 	// Code when several teams have been removed from a game.
-	GAME_CONFIG__REMOVE_TEAM__SEVERAL_TEAMS_REMOVED,;
+	GAME_CONFIG__REMOVE_TEAM__SEVERAL_TEAMS_REMOVED,
+
+	// Code for the "feature" command -------------------------------------------
+	GAME_CONFIG__FEATURE__EXPLANATION,
+
+	// Code when the feature name is missing
+	GAME_CONFIG__FEATURE__NAME_IS_MISSING,
+
+	// Code when the feature is enabled
+	GAME_CONFIG__FEATURE__ENABLE,
+
+	// Code when the feature is disabled
+	GAME_CONFIG__FEATURE__DISABLE,
+
+	;
 
 	private IPlayerGroup group;
 

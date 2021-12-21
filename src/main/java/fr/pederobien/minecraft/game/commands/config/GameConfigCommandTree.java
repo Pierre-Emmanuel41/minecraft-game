@@ -1,9 +1,9 @@
 package fr.pederobien.minecraft.game.commands.config;
 
 import fr.pederobien.minecraft.game.commands.team.TeamCommandTree;
-import fr.pederobien.minecraft.game.event.TeamNewPostEvent;
 import fr.pederobien.minecraft.game.event.PlayerListPlayerAddPostEvent;
 import fr.pederobien.minecraft.game.event.PlayerListPlayerRemovePostEvent;
+import fr.pederobien.minecraft.game.event.TeamNewPostEvent;
 import fr.pederobien.minecraft.game.interfaces.IGameConfiguration;
 import fr.pederobien.utils.event.EventHandler;
 import fr.pederobien.utils.event.EventManager;
@@ -14,11 +14,13 @@ public class GameConfigCommandTree implements IEventListener {
 
 	private IGameConfiguration configuration;
 	private GameConfigRemoveTeamNode removeTeamNode;
+	private GameConfigFeatureNode featureNode;
 
 	public GameConfigCommandTree() {
 		teamTree = new TeamCommandTree();
 		teamTree.getRoot().setAvailable(() -> configuration != null);
 		removeTeamNode = new GameConfigRemoveTeamNode(this);
+		featureNode = new GameConfigFeatureNode(this);
 
 		EventManager.registerListener(this);
 	}
@@ -51,6 +53,13 @@ public class GameConfigCommandTree implements IEventListener {
 	 */
 	public GameConfigRemoveTeamNode getRemoveTeamNode() {
 		return removeTeamNode;
+	}
+
+	/**
+	 * @return The node that enable/disable feature of the current configuration.
+	 */
+	public GameConfigFeatureNode getFeatureNode() {
+		return featureNode;
 	}
 
 	@EventHandler

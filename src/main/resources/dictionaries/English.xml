@@ -15,6 +15,18 @@
 			<value>&lt;name&gt;</value>
 		</message>
 		<message>
+			<code>ENABLE__COMPLETION</code>
+			<value>Enable</value>
+		</message>
+		<message>
+			<code>DISABLE__COMPLETION</code>
+			<value>Disable</value>
+		</message>
+		<message>
+			<code>ENABLE_DISABLE__BAD_FORMAT</code>
+			<value>Bad format for parameter "Enable/Disable"</value>
+		</message>
+		<message>
 			<code>GAME__TEAM__PLAYER_NAME</code>
 			<value>Me</value>
 		</message>
@@ -201,6 +213,22 @@
 		<message>
 			<code>GAME_CONFIG__REMOVE_TEAM__SEVERAL_TEAMS_REMOVED</code>
 			<value>Teams %s have been removed from %s</value>
+		</message>
+		<message>
+			<code>GAME_CONFIG__FEATURE__EXPLANATION</code>
+			<value>To enable/disable a feature</value>
+		</message>
+		<message>
+			<code>GAME_CONFIG__FEATURE__NAME_IS_MISSING</code>
+			<value>Cannot enable/disable a feature, the name is missing</value>
+		</message>
+		<message>
+			<code>GAME_CONFIG__FEATURE__ENABLE</code>
+			<value>Feature %s is enabled</value>
+		</message>
+		<message>
+			<code>GAME_CONFIG__FEATURE__DISABLE</code>
+			<value>Feature %s is disabled</value>
 		</message>
 	</messages>
 </dictionary>
