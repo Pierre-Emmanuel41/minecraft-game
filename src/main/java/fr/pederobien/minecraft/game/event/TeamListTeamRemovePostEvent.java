@@ -11,7 +11,7 @@ public class TeamListTeamRemovePostEvent extends TeamListEvent {
 	/**
 	 * Creates an event thrown when a team has been removed from a teams list.
 	 * 
-	 * @param lite The list from which a team has been removed.
+	 * @param list The list from which a team has been removed.
 	 * @param team The removed team.
 	 */
 	public TeamListTeamRemovePostEvent(ITeamList list, ITeam team) {

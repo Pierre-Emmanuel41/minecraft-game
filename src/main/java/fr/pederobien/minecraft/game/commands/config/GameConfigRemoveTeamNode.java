@@ -14,7 +14,7 @@ import fr.pederobien.minecraft.game.interfaces.ITeam;
 public class GameConfigRemoveTeamNode extends GameConfigNode {
 
 	protected GameConfigRemoveTeamNode(GameConfigCommandTree tree) {
-		super(tree, "add", EGameCode.GAME_CONFIG__REMOVE_TEAM__EXPLANATION, config -> config != null);
+		super(tree, "remove", EGameCode.GAME_CONFIG__REMOVE_TEAM__EXPLANATION, config -> config != null);
 	}
 
 	@Override

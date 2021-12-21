@@ -16,7 +16,7 @@ public class PlayerAlreadyRegisteredException extends PlayerListException {
 	/**
 	 * @return The registered player.
 	 */
-	public Player getTeam() {
+	public Player getPlayer() {
 		return player;
 	}
 }

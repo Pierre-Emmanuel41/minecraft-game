@@ -2,6 +2,7 @@ package fr.pederobien.minecraft.game.impl;
 
 import org.bukkit.command.TabExecutor;
 
+import fr.pederobien.minecraft.game.interfaces.IFeatureList;
 import fr.pederobien.minecraft.game.interfaces.IGameConfiguration;
 import fr.pederobien.minecraft.game.interfaces.ITeamList;
 
@@ -9,6 +10,7 @@ public class GameConfiguration implements IGameConfiguration {
 	private String name;
 	private TabExecutor startTabExecutor, stopTabExecutor;
 	private ITeamList teams;
+	private IFeatureList features;
 
 	/**
 	 * Creates a game configuration.
@@ -23,6 +25,7 @@ public class GameConfiguration implements IGameConfiguration {
 		this.stopTabExecutor = stopTabExecutor;
 
 		teams = new TeamList(name);
+		features = new FeatureList(name);
 	}
 
 	@Override
@@ -33,6 +36,11 @@ public class GameConfiguration implements IGameConfiguration {
 	@Override
 	public ITeamList getTeams() {
 		return teams;
+	}
+
+	@Override
+	public IFeatureList getFeatures() {
+		return features;
 	}
 
 	@Override
