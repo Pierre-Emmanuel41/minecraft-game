@@ -4,19 +4,19 @@ import java.util.StringJoiner;
 
 import org.bukkit.entity.Player;
 
-import fr.pederobien.minecraft.game.interfaces.ITeam;
+import fr.pederobien.minecraft.game.interfaces.IPlayerList;
 
-public class TeamPlayerAddPostEvent extends TeamEvent {
+public class PlayerListPlayerAddPostEvent extends PlayerListEvent {
 	private Player player;
 
 	/**
-	 * Creates an event thrown when a player has been added to a team.
+	 * Creates an event thrown when a player has been added to a players list.
 	 * 
-	 * @param team   The team to which a player has been added.
+	 * @param list   The list to which a player has been added.
 	 * @param player The added player.
 	 */
-	public TeamPlayerAddPostEvent(ITeam team, Player player) {
-		super(team);
+	public PlayerListPlayerAddPostEvent(IPlayerList list, Player player) {
+		super(list);
 	}
 
 	/**
@@ -29,7 +29,7 @@ public class TeamPlayerAddPostEvent extends TeamEvent {
 	@Override
 	public String toString() {
 		StringJoiner joiner = new StringJoiner(", ", "{", "}");
-		joiner.add("team=" + getTeam().getName());
+		joiner.add("list=" + getList().getName());
 		joiner.add("player=" + player.getName());
 		return String.format("%s_%s", getName(), joiner.toString());
 	}

@@ -15,7 +15,7 @@ public class TeamListEvent extends GameEvent {
 	}
 
 	/**
-	 * @return The configuration involved in this event.
+	 * @return The list involved in this event.
 	 */
 	public ITeamList getList() {
 		return list;

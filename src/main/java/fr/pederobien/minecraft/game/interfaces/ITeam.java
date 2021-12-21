@@ -1,6 +1,5 @@
 package fr.pederobien.minecraft.game.interfaces;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.bukkit.entity.Player;
@@ -42,27 +41,6 @@ public interface ITeam {
 	void setColor(EColor color);
 
 	/**
-	 * Append the given player to this team. If this team has been created on the server and is not a clone, then the "server team" is
-	 * also updated.
-	 * 
-	 * @param player The player to add.
-	 */
-	void add(Player player);
-
-	/**
-	 * Remove the player from this team. If this team has been created on the server and is not a clone, then the "server team" is
-	 * also updated.
-	 * 
-	 * @param player The player to remove.
-	 */
-	void remove(Player player);
-
-	/**
-	 * @return The list of players registered in this team. This list is unmodifiable.
-	 */
-	List<Player> getPlayers();
-
-	/**
 	 * Send the given message to each player registered in this room.
 	 * 
 	 * @param sender The player who send the message.
@@ -79,10 +57,9 @@ public interface ITeam {
 	void sendMessage(Player sender, IMinecraftCode code, Object... args);
 
 	/**
-	 * Remove all registered players. If this team has been created on the server and is not a clone, then the "server team" is also
-	 * updated.
+	 * @return The list of teams for this team.
 	 */
-	void clear();
+	IPlayerList getPlayers();
 
 	/**
 	 * Clone this team. The returned team will have the same name, the same color and the same players than the original team. One

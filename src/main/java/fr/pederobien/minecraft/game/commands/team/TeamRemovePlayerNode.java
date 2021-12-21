@@ -37,7 +37,7 @@ public class TeamRemovePlayerNode extends TeamNode {
 
 		// Clearing the current team from its players.
 		if (args[0].equals("all")) {
-			getTree().getTeam().clear();
+			getTree().getTeam().getPlayers().clear();
 			send(eventBuilder(sender, EGameCode.TEAM__REMOVE_PLAYER__ALL_PLAYERS_REMOVED).build(teamColoredName));
 			return true;
 		}
@@ -53,7 +53,7 @@ public class TeamRemovePlayerNode extends TeamNode {
 			}
 
 			// Checking if the player is registered in the current team.
-			if (!getTree().getTeam().getPlayers().contains(player)) {
+			if (!getTree().getTeam().getPlayers().toList().contains(player)) {
 				send(eventBuilder(sender, EGameCode.TEAM__REMOVE_PLAYER__PLAYER_NOT_REGISTERED, name, teamColoredName));
 				return false;
 			}
@@ -64,7 +64,7 @@ public class TeamRemovePlayerNode extends TeamNode {
 		String playerNames = concat(args);
 
 		for (Player player : players)
-			getTree().getTeam().remove(player);
+			getTree().getTeam().getPlayers().remove(player);
 
 		switch (players.size()) {
 		case 0:

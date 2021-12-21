@@ -64,7 +64,7 @@ public class TeamList implements ITeamList {
 			Set<String> names = new HashSet<String>(teams.keySet());
 			for (String name : names) {
 				ITeam team = teams.remove(name);
-				team.clear();
+				team.getPlayers().clear();
 				EventManager.callEvent(new TeamListTeamRemovePostEvent(this, team));
 			}
 		} finally {

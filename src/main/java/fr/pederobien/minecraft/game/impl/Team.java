@@ -1,7 +1,6 @@
 package fr.pederobien.minecraft.game.impl;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
@@ -16,22 +15,26 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 import fr.pederobien.minecraft.commandtree.interfaces.ICodeSender;
 import fr.pederobien.minecraft.dictionary.interfaces.IMinecraftCode;
+import fr.pederobien.minecraft.game.event.PlayerListPlayerAddPostEvent;
+import fr.pederobien.minecraft.game.event.PlayerListPlayerRemovePostEvent;
 import fr.pederobien.minecraft.game.event.TeamColorChangePostEvent;
 import fr.pederobien.minecraft.game.event.TeamEvent;
 import fr.pederobien.minecraft.game.event.TeamNameChangePostEvent;
-import fr.pederobien.minecraft.game.event.TeamPlayerAddPostEvent;
-import fr.pederobien.minecraft.game.event.TeamPlayerRemovePostEvent;
+import fr.pederobien.minecraft.game.interfaces.IPlayerList;
 import fr.pederobien.minecraft.game.interfaces.ITeam;
 import fr.pederobien.minecraft.managers.EColor;
 import fr.pederobien.minecraft.managers.MessageManager;
 import fr.pederobien.minecraft.managers.TeamManager;
+import fr.pederobien.utils.event.EventHandler;
 import fr.pederobien.utils.event.EventManager;
+import fr.pederobien.utils.event.IEventListener;
 
-public class Team implements ITeam, ICodeSender {
+public class Team implements ITeam, IEventListener, ICodeSender {
 	private String name;
 	private EColor color;
 	private Lock lock;
-	private List<Player> players, quitPlayers;
+	private IPlayerList players;
+	private List<Player> quitPlayers;
 	private boolean clone;
 	private org.bukkit.scoreboard.Team team;
 
@@ -66,11 +69,12 @@ public class Team implements ITeam, ICodeSender {
 		this.clone = clone;
 
 		lock = new ReentrantLock(true);
-		players = new ArrayList<Player>();
+		players = new PlayerList(name);
 		quitPlayers = new ArrayList<Player>();
 
 		PlayerQuitOrJoinEventHandler.instance().registerQuitEventHandler(this, event -> onPlayerQuitEvent(event));
 		PlayerQuitOrJoinEventHandler.instance().registerJoinEventHandler(this, event -> onPlayerJoinEvent(event));
+		EventManager.registerListener(this);
 	}
 
 	@Override
@@ -109,23 +113,6 @@ public class Team implements ITeam, ICodeSender {
 	}
 
 	@Override
-	public void add(Player player) {
-		addPlayer(player);
-		synchronizeWithServerTeam(team -> team.addEntry(player.getName()), new TeamPlayerAddPostEvent(this, player));
-	}
-
-	@Override
-	public void remove(Player player) {
-		removePlayer(player);
-		synchronizeWithServerTeam(team -> team.removeEntry(player.getName()), new TeamPlayerRemovePostEvent(this, player));
-	}
-
-	@Override
-	public List<Player> getPlayers() {
-		return Collections.unmodifiableList(players);
-	}
-
-	@Override
 	public void sendMessage(Player sender, String message) {
 		for (Player player : players)
 			MessageManager.sendMessage(player, getPrefix(sender, player) + message);
@@ -138,24 +125,15 @@ public class Team implements ITeam, ICodeSender {
 	}
 
 	@Override
-	public void clear() {
-		lock.lock();
-		try {
-			int size = players.size();
-			for (int i = 0; i < size; i++) {
-				Player player = players.remove(0);
-				synchronizeWithServerTeam(team -> team.removeEntry(player.getName()), new TeamPlayerRemovePostEvent(this, player));
-			}
-		} finally {
-			lock.unlock();
-		}
+	public IPlayerList getPlayers() {
+		return players;
 	}
 
 	@Override
 	public ITeam clone() {
 		ITeam team = new Team(getName(), getColor(), true);
 		for (Player player : getPlayers())
-			team.add(player);
+			team.getPlayers().add(player);
 		return team;
 	}
 
@@ -182,6 +160,32 @@ public class Team implements ITeam, ICodeSender {
 		return String.format("name=%s, players=%s", getColoredName(), getColor().getInColor(joiner.toString()));
 	}
 
+	@EventHandler
+	private void onPlayerAdd(PlayerListPlayerAddPostEvent event) {
+		if (!event.getList().equals(players))
+			return;
+
+		updateServerTeam(team -> team.addEntry(event.getPlayer().getName()));
+	}
+
+	@EventHandler
+	private void onPlayerRemove(PlayerListPlayerRemovePostEvent event) {
+		if (!event.getList().equals(players))
+			return;
+
+		updateServerTeam(team -> team.removeEntry(event.getPlayer().getName()));
+	}
+
+	/**
+	 * Update the server team with the consumer <code>team</code>.
+	 * 
+	 * @param consumer The consumer used to update the server team.
+	 */
+	private void updateServerTeam(Consumer<org.bukkit.scoreboard.Team> consumer) {
+		if (team != null && isCreatedOnServer() && !clone)
+			consumer.accept(team);
+	}
+
 	/**
 	 * Update the server team with the consumer <code>team</code> and throw the given event.
 	 * 
@@ -189,8 +193,7 @@ public class Team implements ITeam, ICodeSender {
 	 * @param event    The event to throw in order to notify observers.
 	 */
 	private void synchronizeWithServerTeam(Consumer<org.bukkit.scoreboard.Team> consumer, TeamEvent event) {
-		if (team != null && isCreatedOnServer() && !clone)
-			consumer.accept(team);
+		updateServerTeam(consumer);
 		EventManager.callEvent(event);
 	}
 
@@ -221,36 +224,8 @@ public class Team implements ITeam, ICodeSender {
 			Player player = iterator.next();
 			if (player.getName().equals(event.getPlayer().getName())) {
 				iterator.remove();
-				add(event.getPlayer());
+				getPlayers().add(event.getPlayer());
 			}
-		}
-	}
-
-	/**
-	 * Thread safe operation that adds a player to the list of players.
-	 * 
-	 * @param player The player to add.
-	 */
-	private void addPlayer(Player player) {
-		lock.lock();
-		try {
-			players.add(player);
-		} finally {
-			lock.unlock();
-		}
-	}
-
-	/**
-	 * Thread safe operation that removes a player from the list of players.
-	 * 
-	 * @param player The player to remove.
-	 */
-	private void removePlayer(Player player) {
-		lock.lock();
-		try {
-			players.remove(player);
-		} finally {
-			lock.unlock();
 		}
 	}
 }

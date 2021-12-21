@@ -2,8 +2,8 @@ package fr.pederobien.minecraft.game.commands.config;
 
 import fr.pederobien.minecraft.game.commands.team.TeamCommandTree;
 import fr.pederobien.minecraft.game.event.TeamNewPostEvent;
-import fr.pederobien.minecraft.game.event.TeamPlayerAddPostEvent;
-import fr.pederobien.minecraft.game.event.TeamPlayerRemovePostEvent;
+import fr.pederobien.minecraft.game.event.PlayerListPlayerAddPostEvent;
+import fr.pederobien.minecraft.game.event.PlayerListPlayerRemovePostEvent;
 import fr.pederobien.minecraft.game.interfaces.IGameConfiguration;
 import fr.pederobien.utils.event.EventHandler;
 import fr.pederobien.utils.event.EventManager;
@@ -66,12 +66,12 @@ public class GameConfigCommandTree implements IEventListener {
 	}
 
 	@EventHandler
-	private void onPlayerAdd(TeamPlayerAddPostEvent event) {
+	private void onPlayerAdd(PlayerListPlayerAddPostEvent event) {
 		teamTree.getExceptedPlayers().add(event.getPlayer());
 	}
 
 	@EventHandler
-	private void onPlayerRemove(TeamPlayerRemovePostEvent event) {
+	private void onPlayerRemove(PlayerListPlayerRemovePostEvent event) {
 		teamTree.getExceptedPlayers().remove(event.getPlayer());
 	}
 }

@@ -45,7 +45,7 @@ public class TeamAddPlayerNode extends TeamNode {
 			}
 
 			// Checking if the player is registered in the current team.
-			if (getTree().getTeam().getPlayers().contains(player)) {
+			if (getTree().getTeam().getPlayers().toList().contains(player)) {
 				send(eventBuilder(sender, EGameCode.TEAM__ADD_PLAYER__PLAYER_ALREADY_REGISTERED, name, teamColoredName));
 				return false;
 			}
@@ -56,7 +56,7 @@ public class TeamAddPlayerNode extends TeamNode {
 		String playerNames = concat(args);
 
 		for (Player player : players)
-			getTree().getTeam().add(player);
+			getTree().getTeam().getPlayers().add(player);
 
 		switch (args.length) {
 		case 0:
