@@ -1,6 +1,8 @@
 package fr.pederobien.minecraft.game.impl;
 
+import fr.pederobien.minecraft.game.event.FeatureEnableChangePostEvent;
 import fr.pederobien.minecraft.game.interfaces.IFeature;
+import fr.pederobien.utils.event.EventManager;
 
 public class Feature implements IFeature {
 	private String name;
@@ -47,6 +49,10 @@ public class Feature implements IFeature {
 
 	@Override
 	public void setEnabled(boolean isEnable) {
+		if (this.isEnable == isEnable)
+			return;
+
 		this.isEnable = isEnable;
+		EventManager.callEvent(new FeatureEnableChangePostEvent(this));
 	}
 }
