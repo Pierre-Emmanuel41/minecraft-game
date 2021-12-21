@@ -5,7 +5,6 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 import fr.pederobien.minecraft.game.exceptions.TeamAlreadyRegisteredException;
-import fr.pederobien.minecraft.managers.EColor;
 
 public interface ITeamList extends Iterable<ITeam> {
 
@@ -13,17 +12,6 @@ public interface ITeamList extends Iterable<ITeam> {
 	 * @return The name of this list.
 	 */
 	String getName();
-
-	/**
-	 * Creates a new team.
-	 * 
-	 * @param name  The team name.
-	 * @param color The team color.
-	 * @param add   True to add automatically the created team to this list.
-	 * 
-	 * @return The created team.
-	 */
-	ITeam create(String name, EColor color, boolean add);
 
 	/**
 	 * Appends the given team to this list.

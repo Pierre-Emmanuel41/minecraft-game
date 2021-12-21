@@ -16,7 +16,6 @@ import fr.pederobien.minecraft.game.event.TeamListTeamRemovePostEvent;
 import fr.pederobien.minecraft.game.exceptions.TeamAlreadyRegisteredException;
 import fr.pederobien.minecraft.game.interfaces.ITeam;
 import fr.pederobien.minecraft.game.interfaces.ITeamList;
-import fr.pederobien.minecraft.managers.EColor;
 import fr.pederobien.utils.event.EventManager;
 
 public class TeamList implements ITeamList {
@@ -37,11 +36,6 @@ public class TeamList implements ITeamList {
 	@Override
 	public String getName() {
 		return name;
-	}
-
-	@Override
-	public ITeam create(String name, EColor color, boolean add) {
-		return null;
 	}
 
 	@Override
