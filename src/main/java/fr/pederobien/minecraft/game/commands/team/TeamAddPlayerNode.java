@@ -20,13 +20,17 @@ public class TeamAddPlayerNode extends TeamNode {
 
 	@Override
 	public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
+		List<String> playerNames;
+		Predicate<Player> filter;
 		switch (args.length) {
 		case 0:
-			List<String> playerNames = asList(args);
-			Predicate<Player> filter = player -> !getTree().getExceptedPlayers().contains(player) && playerNames.contains(player.getName());
+			playerNames = asList(args);
+			filter = player -> !getTree().getExceptedPlayers().contains(player) && playerNames.contains(player.getName());
 			return filter(PlayerGroup.ALL.toStream().filter(filter).map(player -> player.getName()), args);
 		default:
-			return emptyList();
+			playerNames = asList(extract(args, 1));
+			filter = player -> !getTree().getExceptedPlayers().contains(player) && playerNames.contains(player.getName());
+			return filter(PlayerGroup.ALL.toStream().filter(filter).map(player -> player.getName()), args);
 		}
 	}
 
