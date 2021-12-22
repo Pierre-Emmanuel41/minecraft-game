@@ -5,6 +5,7 @@ import fr.pederobien.minecraft.game.event.GamePausePostEvent;
 import fr.pederobien.minecraft.game.event.GameResumePostEvent;
 import fr.pederobien.minecraft.game.event.GameStartPostEvent;
 import fr.pederobien.minecraft.game.event.GameStopPostEvent;
+import fr.pederobien.minecraft.game.interfaces.IFeature;
 import fr.pederobien.minecraft.game.interfaces.IGame;
 import fr.pederobien.minecraft.game.interfaces.IGameConfiguration;
 import fr.pederobien.utils.event.EventManager;
@@ -41,24 +42,36 @@ public class Game implements IGame {
 		if (configuration == null)
 			throw new IllegalStateException("There is no configuration associated to this game");
 
+		for (IFeature feature : configuration.getFeatures())
+			feature.start();
+
 		state = EGameState.STARTED;
 		EventManager.callEvent(new GameStartPostEvent(this));
 	}
 
 	@Override
 	public void stop() {
+		for (IFeature feature : configuration.getFeatures())
+			feature.stop();
+
 		state = EGameState.NOT_STARTED;
 		EventManager.callEvent(new GameStopPostEvent(this));
 	}
 
 	@Override
 	public void pause() {
+		for (IFeature feature : configuration.getFeatures())
+			feature.pause();
+
 		state = EGameState.PAUSED;
 		EventManager.callEvent(new GamePausePostEvent(this));
 	}
 
 	@Override
 	public void resume() {
+		for (IFeature feature : configuration.getFeatures())
+			feature.resume();
+
 		state = EGameState.STARTED;
 		EventManager.callEvent(new GameResumePostEvent(this));
 	}
