@@ -1,5 +1,7 @@
 package fr.pederobien.minecraft.game.event;
 
+import java.util.StringJoiner;
+
 import fr.pederobien.minecraft.game.interfaces.IFeature;
 
 public class FeatureResumePostEvent extends FeatureEvent {
@@ -11,5 +13,12 @@ public class FeatureResumePostEvent extends FeatureEvent {
 	 */
 	public FeatureResumePostEvent(IFeature feature) {
 		super(feature);
+	}
+
+	@Override
+	public String toString() {
+		StringJoiner joiner = new StringJoiner(", ", "{", "}");
+		joiner.add("feature=" + getFeature().getName());
+		return String.format("%s_%s", getName(), joiner);
 	}
 }
