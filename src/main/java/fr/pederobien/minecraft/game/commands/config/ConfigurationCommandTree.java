@@ -17,6 +17,7 @@ public class ConfigurationCommandTree implements IEventListener {
 	private ConfigurationFeatureNode featureNode;
 	private ConfigurationRandomTeamNode randomTeamNode;
 	private ConfigurationMovePlayerNode movePlayerNode;
+	private ConfigurationTeamListNode teamListNode;
 
 	public ConfigurationCommandTree() {
 		teamTree = new TeamCommandTree();
@@ -25,6 +26,7 @@ public class ConfigurationCommandTree implements IEventListener {
 		featureNode = new ConfigurationFeatureNode(this);
 		randomTeamNode = new ConfigurationRandomTeamNode(this);
 		movePlayerNode = new ConfigurationMovePlayerNode(this);
+		teamListNode = ConfigurationTeamListNode.newInstance(this);
 
 		EventManager.registerListener(this);
 	}
@@ -78,6 +80,13 @@ public class ConfigurationCommandTree implements IEventListener {
 	 */
 	public ConfigurationMovePlayerNode getMovePlayerNode() {
 		return movePlayerNode;
+	}
+
+	/**
+	 * @return The node that displays the team list of the current configuration.
+	 */
+	public ConfigurationTeamListNode getTeamListNode() {
+		return teamListNode;
 	}
 
 	@EventHandler

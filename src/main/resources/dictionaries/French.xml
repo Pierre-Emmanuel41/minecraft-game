@@ -295,5 +295,21 @@
 			<code>GAME_CONFIG__MOVE_PLAYER__PLAYER_MOVED_FROM_TO</code>
 			<value>%s a été déplacé de %s à %s</value>
 		</message>
+		<message>
+			<code>GAME_CONFIG__LIST__EXPLANATION</code>
+			<value>Pour afficher la list des équipes</value>
+		</message>
+		<message>
+			<code>GAME_CONFIG__LIST__NO_TEAM_REGISTERED</code>
+			<value>%s n'a pas d'équipe</value>
+		</message>
+		<message>
+			<code>GAME_CONFIG__LIST__ONE_TEAM_REGISTERED</code>
+			<value>Equipe de %s: %s</value>
+		</message>
+		<message>
+			<code>GAME_CONFIG__LIST__ONE_TEAM_REGISTERED</code>
+			<value>Equipes de %s: %s</value>
+		</message>
 	</messages>
 </dictionary>
