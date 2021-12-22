@@ -216,19 +216,43 @@
 		</message>
 		<message>
 			<code>GAME_CONFIG__FEATURE__EXPLANATION</code>
-			<value>To enable/disable a feature</value>
+			<value>To setup a feature</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__FEATURE__NAME_IS_MISSING</code>
-			<value>Cannot enable/disable a feature, the name is missing</value>
+			<code>GAME_CONFIG__FEATURE_ENABLE__EXPLANATION</code>
+			<value>To enable a feature</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__FEATURE__ENABLE</code>
+			<code>GAME_CONFIG__FEATURE_ENABLE__NAME_IS_MISSING</code>
+			<value>Cannot enable a feature, the name is missing</value>
+		</message>
+		<message>
+			<code>GAME_CONFIG__FEATURE_ENABLE__ENABLED</code>
 			<value>Feature %s is enabled</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__FEATURE__DISABLE</code>
+			<code>GAME_CONFIG__FEATURE_DISABLE__EXPLANATION</code>
+			<value>To disable a feature</value>
+		</message>
+		<message>
+			<code>GAME_CONFIG__FEATURE_DISABLE__NAME_IS_MISSING</code>
+			<value>Cannot disable a feature, the name is missing</value>
+		</message>
+		<message>
+			<code>GAME_CONFIG__FEATURE_DISABLE__DISABLED</code>
 			<value>Feature %s is disabled</value>
+		</message>
+		<message>
+			<code>GAME_CONFIG__FEATURE_ARGUMENT__EXPLANATION</code>
+			<value>To set the argument before starting a feature</value>
+		</message>
+		<message>
+			<code>GAME_CONFIG__FEATURE_ARGUMENT__NAME_IS_MISSING</code>
+			<value>Cannot set the argument of a feature, the name is missing</value>
+		</message>
+		<message>
+			<code>GAME_CONFIG__FEATURE_ARGUMENT__FEATURE_NOT_REGISTERED</code>
+			<value>Cannot set the argument of a %s, it is not registered for %s</value>
 		</message>
 	</messages>
 </dictionary>
