@@ -16,6 +16,7 @@ public class ConfigurationCommandTree implements IEventListener {
 	private ConfigurationRemoveTeamNode removeTeamNode;
 	private ConfigurationFeatureNode featureNode;
 	private ConfigurationRandomTeamNode randomTeamNode;
+	private ConfigurationMovePlayerNode movePlayerNode;
 
 	public ConfigurationCommandTree() {
 		teamTree = new TeamCommandTree();
@@ -23,6 +24,7 @@ public class ConfigurationCommandTree implements IEventListener {
 		removeTeamNode = new ConfigurationRemoveTeamNode(this);
 		featureNode = new ConfigurationFeatureNode(this);
 		randomTeamNode = new ConfigurationRandomTeamNode(this);
+		movePlayerNode = new ConfigurationMovePlayerNode(this);
 
 		EventManager.registerListener(this);
 	}
@@ -51,24 +53,31 @@ public class ConfigurationCommandTree implements IEventListener {
 	}
 
 	/**
-	 * @return The node that remove a team from the current configuration.
+	 * @return The node that removes a team from the current configuration.
 	 */
 	public ConfigurationRemoveTeamNode getRemoveTeamNode() {
 		return removeTeamNode;
 	}
 
 	/**
-	 * @return The node that enable/disable feature of the current configuration.
+	 * @return The node that enables/disables feature of the current configuration.
 	 */
 	public ConfigurationFeatureNode getFeatureNode() {
 		return featureNode;
 	}
 
 	/**
-	 * @return The node that dispatch players randomly in teams.
+	 * @return The node that dispatches players randomly in teams.
 	 */
 	public ConfigurationRandomTeamNode getRandomTeamNode() {
 		return randomTeamNode;
+	}
+
+	/**
+	 * @return The node that moves a player from one team to another one.
+	 */
+	public ConfigurationMovePlayerNode getMovePlayerNode() {
+		return movePlayerNode;
 	}
 
 	@EventHandler

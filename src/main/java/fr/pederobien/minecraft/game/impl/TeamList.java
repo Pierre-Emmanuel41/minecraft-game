@@ -11,6 +11,8 @@ import java.util.Set;
 import java.util.concurrent.locks.Lock;
 import java.util.stream.Stream;
 
+import org.bukkit.entity.Player;
+
 import fr.pederobien.minecraft.game.event.TeamListTeamAddPostEvent;
 import fr.pederobien.minecraft.game.event.TeamListTeamRemovePostEvent;
 import fr.pederobien.minecraft.game.exceptions.TeamAlreadyRegisteredException;
@@ -85,6 +87,21 @@ public class TeamList implements ITeamList {
 	@Override
 	public List<ITeam> toList() {
 		return new ArrayList<ITeam>(teams.values());
+	}
+
+	@Override
+	public ITeam movePlayer(Player player, ITeam team) {
+		ITeam origin = null;
+		for (ITeam t : teams.values())
+			if (t.getPlayers().toList().contains(player)) {
+				origin = t;
+				break;
+			}
+		if (origin != null)
+			origin.getPlayers().remove(player);
+
+		team.getPlayers().add(player);
+		return origin;
 	}
 
 	/**

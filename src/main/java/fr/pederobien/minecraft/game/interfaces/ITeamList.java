@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
+import org.bukkit.entity.Player;
+
 import fr.pederobien.minecraft.game.exceptions.TeamAlreadyRegisteredException;
 
 public interface ITeamList extends Iterable<ITeam> {
@@ -63,4 +65,15 @@ public interface ITeamList extends Iterable<ITeam> {
 	 * @return A copy of the underlying list.
 	 */
 	List<ITeam> toList();
+
+	/**
+	 * Appends or moves the specified player in the given team. If the player was registered in a team, then the players is removed
+	 * from it.
+	 * 
+	 * @param player The player to move.
+	 * @param team   The new player team.
+	 * 
+	 * @return The old team player if it was registered in a team, null otherwise.
+	 */
+	ITeam movePlayer(Player player, ITeam team);
 }

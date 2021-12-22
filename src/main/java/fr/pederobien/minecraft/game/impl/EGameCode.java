@@ -205,6 +205,24 @@ public enum EGameCode implements IMinecraftCode {
 	// Code when there are not enough teams to create dispatch players
 	GAME_CONFIG__RANDOM_TEAMS__PLAYERS_DISPATCHED_IN_TEAMS,
 
+	// Code when the "movePlayer" command -------------------------------------------------
+	GAME_CONFIG__MOVE_PLAYER__EXPLANATION,
+
+	// Code when the player name is missing
+	GAME_CONFIG__MOVE_PLAYER__PLAYER_NAME_IS_MISSING,
+
+	// Code when the team name is missing
+	GAME_CONFIG__MOVE_PLAYER__TEAM_NAME_IS_MISSING,
+
+	// Code when the player name refers to no player
+	GAME_CONFIG__MOVE_PLAYER__PLAYER_NOT_FOUND,
+
+	// Code when the team name refers to no team
+	GAME_CONFIG__MOVE_PLAYER__TEAM_NOT_FOUND,
+
+	// Code when a player is moved from a team to another one
+	GAME_CONFIG__MOVE_PLAYER__PLAYER_MOVED_FROM_TO,
+
 	;
 
 	private IPlayerGroup group;

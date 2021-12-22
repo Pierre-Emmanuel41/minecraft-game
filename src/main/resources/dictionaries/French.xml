@@ -271,5 +271,29 @@
 			<code>GAME_CONFIG__RANDOM_TEAMS__PLAYERS_DISPATCHED_IN_TEAMS</code>
 			<value>Equipes :%n%s</value>
 		</message>
+		<message>
+			<code>GAME_CONFIG__MOVE_PLAYER__EXPLANATION</code>
+			<value>Pour déplacer un joueur d'une équipe une autre</value>
+		</message>
+		<message>
+			<code>GAME_CONFIG__MOVE_PLAYER__PLAYER_NAME_IS_MISSING</code>
+			<value>Impossible de déplacer un joueur, le nom du joueur est manquant</value>
+		</message>
+		<message>
+			<code>GAME_CONFIG__MOVE_PLAYER__TEAM_NAME_IS_MISSING</code>
+			<value>Impossible de déplacer un joueur, le nom de l'équipe est manquant</value>
+		</message>
+		<message>
+			<code>GAME_CONFIG__MOVE_PLAYER__PLAYER_NOT_FOUND</code>
+			<value>Impossible de déplacer %s, ce joueur n'existe pas</value>
+		</message>
+		<message>
+			<code>GAME_CONFIG__MOVE_PLAYER__TEAM_NOT_FOUND</code>
+			<value>Impossible de déplacer %s dans %s, cette équipe n'existe pas</value>
+		</message>
+		<message>
+			<code>GAME_CONFIG__MOVE_PLAYER__PLAYER_MOVED_FROM_TO</code>
+			<value>%s a été déplacé de %s à %s</value>
+		</message>
 	</messages>
 </dictionary>
