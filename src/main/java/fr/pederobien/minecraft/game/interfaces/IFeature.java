@@ -1,5 +1,7 @@
 package fr.pederobien.minecraft.game.interfaces;
 
+import org.bukkit.command.TabExecutor;
+
 import fr.pederobien.utils.IPausable;
 
 public interface IFeature extends IPausable {
@@ -21,4 +23,8 @@ public interface IFeature extends IPausable {
 	 */
 	void setEnabled(boolean isEnable);
 
+	/**
+	 * @return The tab executor in order to run specific treatment according to argument line before starting the feature.
+	 */
+	TabExecutor getStartTabExecutor();
 }
