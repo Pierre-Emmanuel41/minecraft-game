@@ -6,8 +6,8 @@ import fr.pederobien.minecraft.commandtree.impl.MinecraftCodeNode;
 import fr.pederobien.minecraft.dictionary.interfaces.IMinecraftCode;
 import fr.pederobien.minecraft.game.interfaces.IGameConfiguration;
 
-public class GameConfigNode extends MinecraftCodeNode {
-	private GameConfigCommandTree tree;
+public class ConfigurationNode extends MinecraftCodeNode {
+	private ConfigurationCommandTree tree;
 
 	/**
 	 * Create a team node defined by a label, which correspond to its name, and an explanation.
@@ -17,7 +17,7 @@ public class GameConfigNode extends MinecraftCodeNode {
 	 * @param explanation The explanation of the node.
 	 * @param isAvailable True if this node is available, false otherwise.
 	 */
-	protected GameConfigNode(GameConfigCommandTree tree, String label, IMinecraftCode explanation, Function<IGameConfiguration, Boolean> isAvailable) {
+	protected ConfigurationNode(ConfigurationCommandTree tree, String label, IMinecraftCode explanation, Function<IGameConfiguration, Boolean> isAvailable) {
 		super(label, explanation, () -> isAvailable.apply(tree.getConfiguration()));
 		this.tree = tree;
 	}
@@ -29,7 +29,7 @@ public class GameConfigNode extends MinecraftCodeNode {
 	 * @param label       The name of the node.
 	 * @param explanation The explanation of the node.
 	 */
-	protected GameConfigNode(GameConfigCommandTree tree, String label, IMinecraftCode explanation) {
+	protected ConfigurationNode(ConfigurationCommandTree tree, String label, IMinecraftCode explanation) {
 		super(label, explanation);
 		this.tree = tree;
 	}
@@ -37,7 +37,7 @@ public class GameConfigNode extends MinecraftCodeNode {
 	/**
 	 * @return The Tree associated to this node.
 	 */
-	protected GameConfigCommandTree getTree() {
+	protected ConfigurationCommandTree getTree() {
 		return tree;
 	}
 }

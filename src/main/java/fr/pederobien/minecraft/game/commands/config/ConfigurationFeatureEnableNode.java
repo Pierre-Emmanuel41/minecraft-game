@@ -10,10 +10,10 @@ import org.bukkit.command.CommandSender;
 import fr.pederobien.minecraft.game.impl.EGameCode;
 import fr.pederobien.minecraft.game.interfaces.IFeature;
 
-public class GameConfigFeatureDisableNode extends GameConfigNode {
+public class ConfigurationFeatureEnableNode extends ConfigurationNode {
 
-	protected GameConfigFeatureDisableNode(GameConfigCommandTree tree) {
-		super(tree, "disable", EGameCode.GAME_CONFIG__FEATURE_DISABLE__EXPLANATION, config -> config != null);
+	protected ConfigurationFeatureEnableNode(ConfigurationCommandTree tree) {
+		super(tree, "enable", EGameCode.GAME_CONFIG__FEATURE_ENABLE__EXPLANATION, config -> config != null);
 	}
 
 	@Override
@@ -34,12 +34,12 @@ public class GameConfigFeatureDisableNode extends GameConfigNode {
 		try {
 			optFeature = getTree().getConfiguration().getFeatures().getFeature(args[0]);
 		} catch (IndexOutOfBoundsException e) {
-			send(eventBuilder(sender, EGameCode.GAME_CONFIG__FEATURE_DISABLE__NAME_IS_MISSING).build());
+			send(eventBuilder(sender, EGameCode.GAME_CONFIG__FEATURE_ENABLE__NAME_IS_MISSING).build());
 			return false;
 		}
 
-		optFeature.get().setEnabled(false);
-		send(eventBuilder(sender, EGameCode.GAME_CONFIG__FEATURE_DISABLE__DISABLED, optFeature.get().getName()));
+		optFeature.get().setEnabled(true);
+		send(eventBuilder(sender, EGameCode.GAME_CONFIG__FEATURE_ENABLE__ENABLED, optFeature.get().getName()));
 		return true;
 	}
 

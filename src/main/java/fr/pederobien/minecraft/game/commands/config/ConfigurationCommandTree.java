@@ -9,18 +9,18 @@ import fr.pederobien.utils.event.EventHandler;
 import fr.pederobien.utils.event.EventManager;
 import fr.pederobien.utils.event.IEventListener;
 
-public class GameConfigCommandTree implements IEventListener {
+public class ConfigurationCommandTree implements IEventListener {
 	private TeamCommandTree teamTree;
 
 	private IGameConfiguration configuration;
-	private GameConfigRemoveTeamNode removeTeamNode;
-	private GameConfigFeatureNode featureNode;
+	private ConfigurationRemoveTeamNode removeTeamNode;
+	private ConfigurationFeatureNode featureNode;
 
-	public GameConfigCommandTree() {
+	public ConfigurationCommandTree() {
 		teamTree = new TeamCommandTree();
 		teamTree.getRoot().setAvailable(() -> configuration != null);
-		removeTeamNode = new GameConfigRemoveTeamNode(this);
-		featureNode = new GameConfigFeatureNode(this);
+		removeTeamNode = new ConfigurationRemoveTeamNode(this);
+		featureNode = new ConfigurationFeatureNode(this);
 
 		EventManager.registerListener(this);
 	}
@@ -51,14 +51,14 @@ public class GameConfigCommandTree implements IEventListener {
 	/**
 	 * @return The node that remove a team from the current configuration.
 	 */
-	public GameConfigRemoveTeamNode getRemoveTeamNode() {
+	public ConfigurationRemoveTeamNode getRemoveTeamNode() {
 		return removeTeamNode;
 	}
 
 	/**
 	 * @return The node that enable/disable feature of the current configuration.
 	 */
-	public GameConfigFeatureNode getFeatureNode() {
+	public ConfigurationFeatureNode getFeatureNode() {
 		return featureNode;
 	}
 

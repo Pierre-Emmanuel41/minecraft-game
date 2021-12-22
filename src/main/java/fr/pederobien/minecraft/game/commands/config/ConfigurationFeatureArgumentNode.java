@@ -9,9 +9,9 @@ import org.bukkit.command.CommandSender;
 import fr.pederobien.minecraft.game.impl.EGameCode;
 import fr.pederobien.minecraft.game.interfaces.IFeature;
 
-public class GameConfigFeatureArgumentNode extends GameConfigNode {
+public class ConfigurationFeatureArgumentNode extends ConfigurationNode {
 
-	protected GameConfigFeatureArgumentNode(GameConfigCommandTree tree) {
+	protected ConfigurationFeatureArgumentNode(ConfigurationCommandTree tree) {
 		super(tree, "argument", EGameCode.GAME_CONFIG__FEATURE_ARGUMENT__EXPLANATION, config -> config != null);
 	}
 

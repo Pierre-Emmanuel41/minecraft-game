@@ -11,9 +11,9 @@ import org.bukkit.command.CommandSender;
 import fr.pederobien.minecraft.game.impl.EGameCode;
 import fr.pederobien.minecraft.game.interfaces.ITeam;
 
-public class GameConfigRemoveTeamNode extends GameConfigNode {
+public class ConfigurationRemoveTeamNode extends ConfigurationNode {
 
-	protected GameConfigRemoveTeamNode(GameConfigCommandTree tree) {
+	protected ConfigurationRemoveTeamNode(ConfigurationCommandTree tree) {
 		super(tree, "remove", EGameCode.GAME_CONFIG__REMOVE_TEAM__EXPLANATION, config -> config != null);
 	}
 
