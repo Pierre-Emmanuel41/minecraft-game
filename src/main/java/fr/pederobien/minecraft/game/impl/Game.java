@@ -1,7 +1,13 @@
 package fr.pederobien.minecraft.game.impl;
 
+import fr.pederobien.minecraft.game.event.GameConfigurationChangePostEvent;
+import fr.pederobien.minecraft.game.event.GamePausePostEvent;
+import fr.pederobien.minecraft.game.event.GameResumePostEvent;
+import fr.pederobien.minecraft.game.event.GameStartPostEvent;
+import fr.pederobien.minecraft.game.event.GameStopPostEvent;
 import fr.pederobien.minecraft.game.interfaces.IGame;
 import fr.pederobien.minecraft.game.interfaces.IGameConfiguration;
+import fr.pederobien.utils.event.EventManager;
 
 public class Game implements IGame {
 	private String name;
@@ -34,22 +40,27 @@ public class Game implements IGame {
 	public void start() {
 		if (configuration == null)
 			throw new IllegalStateException("There is no configuration associated to this game");
+
 		state = EGameState.STARTED;
+		EventManager.callEvent(new GameStartPostEvent(this));
 	}
 
 	@Override
 	public void stop() {
 		state = EGameState.NOT_STARTED;
+		EventManager.callEvent(new GameStopPostEvent(this));
 	}
 
 	@Override
 	public void pause() {
 		state = EGameState.PAUSED;
+		EventManager.callEvent(new GamePausePostEvent(this));
 	}
 
 	@Override
 	public void resume() {
 		state = EGameState.STARTED;
+		EventManager.callEvent(new GameResumePostEvent(this));
 	}
 
 	@Override
@@ -64,7 +75,12 @@ public class Game implements IGame {
 
 	@Override
 	public void setConfig(IGameConfiguration configuration) {
+		if (this.configuration != null && this.configuration == configuration)
+			return;
+
+		IGameConfiguration oldConfiguration = this.configuration;
 		this.configuration = configuration;
+		EventManager.callEvent(new GameConfigurationChangePostEvent(this, oldConfiguration));
 	}
 
 	@Override
