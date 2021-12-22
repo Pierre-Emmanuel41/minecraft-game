@@ -2,7 +2,7 @@ package fr.pederobien.minecraft.game.event;
 
 import fr.pederobien.minecraft.game.interfaces.IFeature;
 
-public class FeatureEvent extends GameEvent {
+public class FeatureEvent extends ProjectGameEvent {
 	private IFeature feature;
 
 	/**

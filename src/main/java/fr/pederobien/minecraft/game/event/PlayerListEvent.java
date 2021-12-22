@@ -2,7 +2,7 @@ package fr.pederobien.minecraft.game.event;
 
 import fr.pederobien.minecraft.game.interfaces.IPlayerList;
 
-public class PlayerListEvent extends GameEvent {
+public class PlayerListEvent extends ProjectGameEvent {
 	private IPlayerList list;
 
 	/**

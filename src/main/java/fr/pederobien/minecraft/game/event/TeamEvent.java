@@ -2,7 +2,7 @@ package fr.pederobien.minecraft.game.event;
 
 import fr.pederobien.minecraft.game.interfaces.ITeam;
 
-public class TeamEvent extends GameEvent {
+public class TeamEvent extends ProjectGameEvent {
 	private ITeam team;
 
 	/**

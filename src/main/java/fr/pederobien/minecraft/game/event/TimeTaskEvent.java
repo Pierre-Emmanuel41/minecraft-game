@@ -4,7 +4,7 @@ import java.util.StringJoiner;
 
 import fr.pederobien.minecraft.game.interfaces.time.ITimeTask;
 
-public class TimeTaskEvent extends GameEvent {
+public class TimeTaskEvent extends ProjectGameEvent {
 	private ITimeTask task;
 
 	/**
