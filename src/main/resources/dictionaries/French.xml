@@ -12,6 +12,10 @@
 			<value>&lt;nom&gt;</value>
 		</message>
 		<message>
+			<code>BAD_FORMAT</code>
+			<value>Mauvais format, format attendu : %s</value>
+		</message>
+		<message>
 			<code>GAME__TEAM__PLAYER_NAME</code>
 			<value>Moi</value>
 		</message>
@@ -238,6 +242,34 @@
 		<message>
 			<code>GAME_CONFIG__FEATURE_ARGUMENT__FEATURE_NOT_REGISTERED</code>
 			<value>Impossible de définir les arguments de %s, elle n'est pas enregistrée pour %s</value>
+		</message>
+		<message>
+			<code>GAME_CONFIG__RANDOM_TEAMS__EXPLANATION</code>
+			<value>Pour créer des équipes aléatoires</value>
+		</message>
+		<message>
+			<code>GAME_CONFIG__RANDOM_TEAMS__MAX_PLAYERS_PER_TEAM</code>
+			<value>&lt;maxJoueursParEquipe&gt;</value>
+		</message>
+		<message>
+			<code>GAME_CONFIG__RANDOM_TEAMS__MAX_PLAYERS_PER_TEAM__NEGATIVE_VALUE</code>
+			<value>Le nombre maximum de joueur par équipe doit être strictement positif</value>
+		</message>
+		<message>
+			<code>GAME_CONFIG__RANDOM_TEAMS__MAX_PLAYERS_PER_TEAM__BAD_FORMAT</code>
+			<value>Un entier positif</value>
+		</message>
+		<message>
+			<code>GAME_CONFIG__RANDOM_TEAMS__NOT_ENOUGH_PLAYERS</code>
+			<value>Impossible de créer des équipes aléatoires, il n'y a pas assez de joueurs</value>
+		</message>
+		<message>
+			<code>GAME_CONFIG__RANDOM_TEAMS__NOT_ENOUGH_TEAMS</code>
+			<value>Impossible de créer des équipes aléatoires, il n'y a pas assez d'équipes</value>
+		</message>
+		<message>
+			<code>GAME_CONFIG__RANDOM_TEAMS__PLAYERS_DISPATCHED_IN_TEAMS</code>
+			<value>Equipes :%n%s</value>
 		</message>
 	</messages>
 </dictionary>

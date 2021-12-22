@@ -15,12 +15,14 @@ public class ConfigurationCommandTree implements IEventListener {
 	private IGameConfiguration configuration;
 	private ConfigurationRemoveTeamNode removeTeamNode;
 	private ConfigurationFeatureNode featureNode;
+	private ConfigurationRandomTeamNode randomTeamNode;
 
 	public ConfigurationCommandTree() {
 		teamTree = new TeamCommandTree();
 		teamTree.getRoot().setAvailable(() -> configuration != null);
 		removeTeamNode = new ConfigurationRemoveTeamNode(this);
 		featureNode = new ConfigurationFeatureNode(this);
+		randomTeamNode = new ConfigurationRandomTeamNode(this);
 
 		EventManager.registerListener(this);
 	}
@@ -60,6 +62,13 @@ public class ConfigurationCommandTree implements IEventListener {
 	 */
 	public ConfigurationFeatureNode getFeatureNode() {
 		return featureNode;
+	}
+
+	/**
+	 * @return The node that dispatch players randomly in teams.
+	 */
+	public ConfigurationRandomTeamNode getRandomTeamNode() {
+		return randomTeamNode;
 	}
 
 	@EventHandler

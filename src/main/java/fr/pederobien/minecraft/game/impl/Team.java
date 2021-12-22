@@ -154,10 +154,10 @@ public class Team implements ITeam, IEventListener, ICodeSender {
 
 	@Override
 	public String toString() {
-		StringJoiner joiner = new StringJoiner(",", "[", "]");
-		for (Player player : players)
-			joiner.add(player.getName());
-		return String.format("name=%s, players=%s", getColoredName(), getColor().getInColor(joiner.toString()));
+		StringJoiner players = new StringJoiner(" ", "[", "]");
+		for (Player player : getPlayers())
+			players.add(player.getName());
+		return getColor().getInColor(getName() + " " + players.toString());
 	}
 
 	@EventHandler

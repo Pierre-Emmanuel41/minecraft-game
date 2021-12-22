@@ -10,6 +10,9 @@ public enum EGameCode implements IMinecraftCode {
 	// Code for the name completion
 	NAME__COMPLETION,
 
+	// Code when a bad format occurs
+	BAD_FORMAT,
+
 	// Code for player's name speaking to a team
 	GAME__TEAM__PLAYER_NAME,
 
@@ -180,6 +183,27 @@ public enum EGameCode implements IMinecraftCode {
 
 	// Code when the feature is not registered
 	GAME_CONFIG__FEATURE_ARGUMENT__FEATURE_NOT_REGISTERED,
+
+	// Code when the "randomTeams" command ------------------------------------------
+	GAME_CONFIG__RANDOM_TEAMS__EXPLANATION,
+
+	// Code to get the max number of players per team
+	GAME_CONFIG__RANDOM_TEAMS__MAX_PLAYERS_PER_TEAM,
+
+	// Code when the max player per team value is negative
+	GAME_CONFIG__RANDOM_TEAMS__MAX_PLAYERS_PER_TEAM__NEGATIVE_VALUE,
+
+	// Code when bad format for the max player per team value
+	GAME_CONFIG__RANDOM_TEAMS__MAX_PLAYERS_PER_TEAM__BAD_FORMAT,
+
+	// Code when there are not enough players to create random teams
+	GAME_CONFIG__RANDOM_TEAMS__NOT_ENOUGH_PLAYERS,
+
+	// Code when there are not enough teams to create dispatch players
+	GAME_CONFIG__RANDOM_TEAMS__NOT_ENOUGH_TEAMS,
+
+	// Code when there are not enough teams to create dispatch players
+	GAME_CONFIG__RANDOM_TEAMS__PLAYERS_DISPATCHED_IN_TEAMS,
 
 	;
 

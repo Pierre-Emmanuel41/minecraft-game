@@ -15,6 +15,10 @@
 			<value>&lt;name&gt;</value>
 		</message>
 		<message>
+			<code>BAD_FORMAT</code>
+			<value>Bad format, expected format %s</value>
+		</message>
+		<message>
 			<code>ENABLE__COMPLETION</code>
 			<value>Enable</value>
 		</message>
@@ -253,6 +257,34 @@
 		<message>
 			<code>GAME_CONFIG__FEATURE_ARGUMENT__FEATURE_NOT_REGISTERED</code>
 			<value>Cannot set the argument of a %s, it is not registered for %s</value>
+		</message>
+		<message>
+			<code>GAME_CONFIG__RANDOM_TEAMS__EXPLANATION</code>
+			<value>To create random teams</value>
+		</message>
+		<message>
+			<code>GAME_CONFIG__RANDOM_TEAMS__MAX_PLAYERS_PER_TEAM</code>
+			<value>&lt;maxPlayerPerTeam&gt;</value>
+		</message>
+		<message>
+			<code>GAME_CONFIG__RANDOM_TEAMS__MAX_PLAYERS_PER_TEAM__NEGATIVE_VALUE</code>
+			<value>The maximum number of players per team should be strictly positive</value>
+		</message>
+		<message>
+			<code>GAME_CONFIG__RANDOM_TEAMS__MAX_PLAYERS_PER_TEAM__BAD_FORMAT</code>
+			<value>A positive integer</value>
+		</message>
+		<message>
+			<code>GAME_CONFIG__RANDOM_TEAMS__NOT_ENOUGH_PLAYERS</code>
+			<value>Cannot creates random teams, there is not enough players</value>
+		</message>
+		<message>
+			<code>GAME_CONFIG__RANDOM_TEAMS__NOT_ENOUGH_TEAMS</code>
+			<value>Cannot creates random teams, there is not enough teams</value>
+		</message>
+		<message>
+			<code>GAME_CONFIG__RANDOM_TEAMS__PLAYERS_DISPATCHED_IN_TEAMS</code>
+			<value>Teams :%n%s</value>
 		</message>
 	</messages>
 </dictionary>
