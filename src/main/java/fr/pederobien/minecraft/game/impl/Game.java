@@ -1,5 +1,7 @@
 package fr.pederobien.minecraft.game.impl;
 
+import org.bukkit.plugin.Plugin;
+
 import fr.pederobien.minecraft.game.event.GameConfigurationChangePostEvent;
 import fr.pederobien.minecraft.game.event.GamePausePostEvent;
 import fr.pederobien.minecraft.game.event.GameResumePostEvent;
@@ -12,6 +14,7 @@ import fr.pederobien.utils.event.EventManager;
 
 public class Game implements IGame {
 	private String name;
+	private Plugin plugin;
 	private IGameConfiguration configuration;
 	private EGameState state;
 
@@ -19,9 +22,10 @@ public class Game implements IGame {
 	 * Creates a game.
 	 * 
 	 * @param name          The game name.
+	 * @param plugin        The plugin associated to this name.
 	 * @param configuration The game configuration.
 	 */
-	public Game(String name, IGameConfiguration configuration) {
+	public Game(String name, Plugin plugin, IGameConfiguration configuration) {
 		this.name = name;
 		this.configuration = configuration;
 		state = EGameState.NOT_STARTED;
@@ -30,11 +34,11 @@ public class Game implements IGame {
 	/**
 	 * Creates a game.
 	 * 
-	 * @param name The game name.
+	 * @param name   The game name.
+	 * @param plugin The plugin associated to this game.
 	 */
-	public Game(String name) {
-		this.name = name;
-		state = EGameState.NOT_STARTED;
+	public Game(String name, Plugin plugin) {
+		this(name, plugin, null);
 	}
 
 	@Override
@@ -74,6 +78,11 @@ public class Game implements IGame {
 
 		state = EGameState.STARTED;
 		EventManager.callEvent(new GameResumePostEvent(this));
+	}
+
+	@Override
+	public Plugin getPlugin() {
+		return plugin;
 	}
 
 	@Override
