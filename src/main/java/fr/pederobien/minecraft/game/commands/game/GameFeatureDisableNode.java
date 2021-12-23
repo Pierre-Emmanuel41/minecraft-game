@@ -1,4 +1,4 @@
-package fr.pederobien.minecraft.game.commands.config;
+package fr.pederobien.minecraft.game.commands.game;
 
 import java.util.List;
 import java.util.Optional;
@@ -9,11 +9,12 @@ import org.bukkit.command.CommandSender;
 
 import fr.pederobien.minecraft.game.impl.EGameCode;
 import fr.pederobien.minecraft.game.interfaces.IFeature;
+import fr.pederobien.minecraft.game.interfaces.IGame;
 
-public class ConfigurationFeatureDisableNode extends ConfigurationNode {
+public class GameFeatureDisableNode extends GameNode {
 
-	protected ConfigurationFeatureDisableNode(ConfigurationCommandTree tree) {
-		super(tree, "disable", EGameCode.GAME_CONFIG__FEATURE_DISABLE__EXPLANATION, config -> config != null);
+	protected GameFeatureDisableNode(IGame game) {
+		super(game, "disable", EGameCode.GAME_CONFIG__FEATURE_DISABLE__EXPLANATION, g -> g != null);
 	}
 
 	@Override
@@ -22,7 +23,7 @@ public class ConfigurationFeatureDisableNode extends ConfigurationNode {
 		case 0:
 			List<String> alreadyMentionnedFeatures = asList(args);
 			Predicate<String> filter = name -> alreadyMentionnedFeatures.contains(name);
-			return filter(getTree().getConfiguration().getFeatures().stream().map(feature -> feature.getName()).filter(filter), args);
+			return filter(getGame().getFeatures().stream().map(feature -> feature.getName()).filter(filter), args);
 		default:
 			return emptyList();
 		}
@@ -32,7 +33,7 @@ public class ConfigurationFeatureDisableNode extends ConfigurationNode {
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		Optional<IFeature> optFeature;
 		try {
-			optFeature = getTree().getConfiguration().getFeatures().getFeature(args[0]);
+			optFeature = getGame().getFeatures().getFeature(args[0]);
 		} catch (IndexOutOfBoundsException e) {
 			send(eventBuilder(sender, EGameCode.GAME_CONFIG__FEATURE_DISABLE__NAME_IS_MISSING).build());
 			return false;

@@ -1,4 +1,4 @@
-package fr.pederobien.minecraft.game.commands.config;
+package fr.pederobien.minecraft.game.commands.game;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,21 +8,22 @@ import org.bukkit.command.CommandSender;
 
 import fr.pederobien.minecraft.game.impl.EGameCode;
 import fr.pederobien.minecraft.game.interfaces.IFeature;
+import fr.pederobien.minecraft.game.interfaces.IGame;
 
-public class ConfigurationFeatureArgumentNode extends ConfigurationNode {
+public class GameFeatureArgumentNode extends GameNode {
 
-	protected ConfigurationFeatureArgumentNode(ConfigurationCommandTree tree) {
-		super(tree, "argument", EGameCode.GAME_CONFIG__FEATURE_ARGUMENT__EXPLANATION, config -> config != null);
+	protected GameFeatureArgumentNode(IGame game) {
+		super(game, "argument", EGameCode.GAME_CONFIG__FEATURE_ARGUMENT__EXPLANATION, g -> g != null);
 	}
 
 	@Override
 	public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
 		switch (args.length) {
 		case 0:
-			return filter(getTree().getConfiguration().getFeatures().stream().map(feature -> feature.getName()), args);
+			return filter(getGame().getFeatures().stream().map(feature -> feature.getName()), args);
 		case 1:
 
-			Optional<IFeature> optFeature = getTree().getConfiguration().getFeatures().getFeature(args[0]);
+			Optional<IFeature> optFeature = getGame().getFeatures().getFeature(args[0]);
 			if (!optFeature.isPresent() || !optFeature.get().isEnable())
 				return emptyList();
 			else
@@ -41,10 +42,10 @@ public class ConfigurationFeatureArgumentNode extends ConfigurationNode {
 			send(eventBuilder(sender, EGameCode.GAME_CONFIG__FEATURE_ARGUMENT__NAME_IS_MISSING).build());
 			return false;
 		}
-		Optional<IFeature> optFeature = getTree().getConfiguration().getFeatures().getFeature(name);
+		Optional<IFeature> optFeature = getGame().getFeatures().getFeature(name);
 
 		if (!optFeature.isPresent()) {
-			send(eventBuilder(sender, EGameCode.GAME_CONFIG__FEATURE_ARGUMENT__FEATURE_NOT_REGISTERED, name, getTree().getConfiguration().getName()));
+			send(eventBuilder(sender, EGameCode.GAME_CONFIG__FEATURE_ARGUMENT__FEATURE_NOT_REGISTERED, name, getGame().getName()));
 			return false;
 		}
 

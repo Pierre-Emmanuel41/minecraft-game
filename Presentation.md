@@ -91,17 +91,22 @@ public interface ITeam {
 ```
 whose the default implementation can is [here](https://github.com/Pierre-Emmanuel41/minecraft-game/blob/master/src/main/java/fr/pederobien/minecraft/game/impl/Team.java).
 
-### 1.2) Game configuration
+### 1.2) Game
 
-A game can be configured through the <code>IGameConfiguration</code> interface that looks like :
+A game can be configured through the <code>IGame</code> interface that looks like :
 
 ```java
-public interface IGameConfiguration {
+public interface IGame extends IPausable {
 
 	/**
-	 * @return The name of this configuration.
+	 * @return The name of this game.
 	 */
 	String getName();
+
+	/**
+	 * @return The plugin associated to this game.
+	 */
+	Plugin getPlugin();
 
 	/**
 	 * @return The list of teams for this configuration.
@@ -122,10 +127,15 @@ public interface IGameConfiguration {
 	 * @return The tab executor in order to run specific treatment according to argument line before stopping the game.
 	 */
 	TabExecutor getStopTabExecutor();
+
+	/**
+	 * @return The state in which this game is.
+	 */
+	EGameState getState();
 }
 ```
 
-This interface can be extends by other configuration interfaces in order to add parameters. The default implementation of a game configuration can be found [here](https://github.com/Pierre-Emmanuel41/minecraft-game/blob/master/src/main/java/fr/pederobien/minecraft/game/impl/GameConfiguration.java). The interface IFeature can be used for adding new behaviors during the game. The default feature implementation is :
+This interface can be extends by other game interfaces in order to add parameters. The default implementation of a game can be found [here](https://github.com/Pierre-Emmanuel41/minecraft-game/blob/master/src/main/java/fr/pederobien/minecraft/game/impl/Game.java). The interface IFeature can be used for adding new behaviors during the game. The default feature implementation is :
 
 ```java
 public class Feature implements IFeature {
@@ -190,47 +200,6 @@ public class Feature implements IFeature {
 }
 ```
 
-### 1.3) Game
-
-Finally, a game to start, pause/resume and stop is represented by the <code>IGame</code> interface:
-
-```java
-public interface IGame extends IPausable {
-
-	/**
-	 * {@inheritDoc}.
-	 * 
-	 * @throws IllegalStateException If the configuration associated to this game is null.
-	 */
-	@Override
-	void start();
-
-	/**
-	 * @return The name of this game.
-	 */
-	String getName();
-
-	/**
-	 * @return The configuration associated to this game.
-	 */
-	IGameConfiguration getConfig();
-
-	/**
-	 * Set the configuration associated to this game.
-	 * 
-	 * @param configuration The new game configuration.
-	 */
-	void setConfig(IGameConfiguration configuration);
-
-	/**
-	 * @return The state in which this game is.
-	 */
-	EGameState getState();
-}
-```
-
-The default implementation of a game can be found [here](https://github.com/Pierre-Emmanuel41/minecraft-game/blob/master/src/main/java/fr/pederobien/minecraft/game/impl/Game.java).
-
 ### 1.4) Time
 
 The package <code>game.interfaces.time</code> proposes objects associated to the time elapsed during the game in order to perform actions punctually or periodically during the game. The two objects are <code>ITimeTask</code> and <code>ITimeLine</code>.  
@@ -240,7 +209,7 @@ The time line, whose the default implementation is [TimeLine](https://github.com
 
 # 2) Commands
 
-From the <code>GamePlugin</code> class, the developer can have access to the <code>GameCommandTree</code>. This tree gather three commands which are: <code>startgame</code>, <code>pausegame</code> and <code>stopgame</code> Those commands starts, pauses/resumes and stops the game associated to the GameCommandTree. This tree is already set as completer and executor for the minecraft commands startgame, pausegame and stopgame.  
+From the <code>GamePlugin</code> class, the developer can have access to the <code>GameCommandTree</code>. This tree gather nodes defined as completer and executor for the commands <code>startgame</code>, <code>pausegame</code> and <code>stopgame</code>. It also gather commands to add/remove teams from a game, to setup features of a game and to move player(s) from a team to another one. This tree creates a new instance of a team command tree. However, unlike the TeamCommandTree, this tree has no root, it simply gather argument nodes the developer can use as he wants.
 
 The <code>TeamCommandTree</code> gather commands in order to create new teams, to modify team characteristics or to add/remove players from a team. Those command are not registered for minecraft commands. The root is "team" which means that when registered as commands argument for a game the user has access to the following tree:
 
@@ -251,5 +220,3 @@ team
 &ensp;&ensp;color  
 &ensp;remove  
 &ensp;add  
-
-The <code>ConfigurationCommandTree</code> gather commands to add/remove teams from a configuration, to setup features of a configuration and to move player(s) from a team to another one. This tree creates a new instance of a team command tree. However, unlike the TeamCommandTree, this tree has no root, it simply gather argument nodes the developer can use as he wants.

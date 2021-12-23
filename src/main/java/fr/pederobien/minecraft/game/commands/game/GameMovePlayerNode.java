@@ -1,4 +1,4 @@
-package fr.pederobien.minecraft.game.commands.config;
+package fr.pederobien.minecraft.game.commands.game;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,13 +10,14 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import fr.pederobien.minecraft.game.impl.EGameCode;
+import fr.pederobien.minecraft.game.interfaces.IGame;
 import fr.pederobien.minecraft.game.interfaces.ITeam;
 import fr.pederobien.minecraft.managers.PlayerManager;
 
-public class ConfigurationMovePlayerNode extends ConfigurationNode {
+public class GameMovePlayerNode extends GameNode {
 
-	protected ConfigurationMovePlayerNode(ConfigurationCommandTree tree) {
-		super(tree, "movePlayer", EGameCode.GAME_CONFIG__MOVE_PLAYER__EXPLANATION);
+	protected GameMovePlayerNode(IGame game) {
+		super(game, "movePlayer", EGameCode.GAME_CONFIG__MOVE_PLAYER__EXPLANATION, g -> g != null && g.getTeams().toList().size() > 1);
 	}
 
 	@Override
@@ -24,7 +25,7 @@ public class ConfigurationMovePlayerNode extends ConfigurationNode {
 		switch (args.length) {
 		case 1:
 			List<Player> players = new ArrayList<Player>();
-			for (ITeam team : getTree().getConfiguration().getTeams())
+			for (ITeam team : getGame().getTeams())
 				for (Player player : team.getPlayers())
 					players.add(player);
 			return filter(players.stream().map(player -> player.getName()), args);
@@ -60,13 +61,13 @@ public class ConfigurationMovePlayerNode extends ConfigurationNode {
 			return false;
 		}
 
-		Optional<ITeam> optTeam = getTree().getConfiguration().getTeams().getTeam(teamName);
+		Optional<ITeam> optTeam = getGame().getTeams().getTeam(teamName);
 		if (!optTeam.isPresent()) {
 			send(eventBuilder(sender, EGameCode.GAME_CONFIG__MOVE_PLAYER__TEAM_NOT_FOUND, teamName));
 			return false;
 		}
 
-		ITeam team = getTree().getConfiguration().getTeams().movePlayer(player, optTeam.get());
+		ITeam team = getGame().getTeams().movePlayer(player, optTeam.get());
 		if (team != null)
 			send(eventBuilder(sender, EGameCode.GAME_CONFIG__MOVE_PLAYER__PLAYER_MOVED_FROM_TO, playerName, optTeam.get().getColoredName(), team.getColoredName()));
 		else
@@ -75,6 +76,6 @@ public class ConfigurationMovePlayerNode extends ConfigurationNode {
 	}
 
 	private Stream<ITeam> getOtherTeamNames(String name) {
-		return getTree().getConfiguration().getTeams().stream().filter(team -> !team.getPlayers().getPlayer(name).isPresent());
+		return getGame().getTeams().stream().filter(team -> !team.getPlayers().getPlayer(name).isPresent());
 	}
 }

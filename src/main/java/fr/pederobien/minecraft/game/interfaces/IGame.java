@@ -1,19 +1,12 @@
 package fr.pederobien.minecraft.game.interfaces;
 
+import org.bukkit.command.TabExecutor;
 import org.bukkit.plugin.Plugin;
 
 import fr.pederobien.minecraft.game.impl.EGameState;
 import fr.pederobien.utils.IPausable;
 
 public interface IGame extends IPausable {
-
-	/**
-	 * {@inheritDoc}.
-	 * 
-	 * @throws IllegalStateException If the configuration associated to this game is null.
-	 */
-	@Override
-	void start();
 
 	/**
 	 * @return The name of this game.
@@ -26,16 +19,24 @@ public interface IGame extends IPausable {
 	Plugin getPlugin();
 
 	/**
-	 * @return The configuration associated to this game.
+	 * @return The list of teams for this configuration.
 	 */
-	IGameConfiguration getConfig();
+	ITeamList getTeams();
 
 	/**
-	 * Set the configuration associated to this game.
-	 * 
-	 * @param configuration The new game configuration.
+	 * @return The list of features for this configuration.
 	 */
-	void setConfig(IGameConfiguration configuration);
+	IFeatureList getFeatures();
+
+	/**
+	 * @return The tab executor in order to run specific treatment according to argument line before starting the game.
+	 */
+	TabExecutor getStartTabExecutor();
+
+	/**
+	 * @return The tab executor in order to run specific treatment according to argument line before stopping the game.
+	 */
+	TabExecutor getStopTabExecutor();
 
 	/**
 	 * @return The state in which this game is.

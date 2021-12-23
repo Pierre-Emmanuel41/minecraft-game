@@ -10,38 +10,38 @@ import fr.pederobien.minecraft.game.interfaces.IGame;
 import fr.pederobien.minecraft.managers.EColor;
 
 public class GameNode extends MinecraftCodeNode {
-	private GameCommandTree tree;
+	private IGame game;
 
 	/**
 	 * Create a team node defined by a label, which correspond to its name, and an explanation.
 	 * 
-	 * @param tree        The tree that contains a reference to the game to modify.
+	 * @param game        The game associated to this node.
 	 * @param label       The name of the node.
 	 * @param explanation The explanation of the node.
 	 * @param isAvailable True if this node is available, false otherwise.
 	 */
-	protected GameNode(GameCommandTree tree, String label, IMinecraftCode explanation, Function<IGame, Boolean> isAvailable) {
-		super(label, explanation, () -> isAvailable.apply(tree.getGame()));
-		this.tree = tree;
+	protected GameNode(IGame game, String label, IMinecraftCode explanation, Function<IGame, Boolean> isAvailable) {
+		super(label, explanation, () -> isAvailable.apply(game));
+		this.game = game;
 	}
 
 	/**
 	 * Create a team node defined by a label, which correspond to its name, and an explanation.
 	 * 
-	 * @param tree        The tree that contains a reference to the game to modify.
+	 * @param game        The game associated to this node.
 	 * @param label       The name of the node.
 	 * @param explanation The explanation of the node.
 	 */
-	protected GameNode(GameCommandTree tree, String label, IMinecraftCode explanation) {
+	protected GameNode(IGame game, String label, IMinecraftCode explanation) {
 		super(label, explanation);
-		this.tree = tree;
+		this.game = game;
 	}
 
 	/**
 	 * @return The Tree associated to this node.
 	 */
-	protected GameCommandTree getTree() {
-		return tree;
+	protected IGame getGame() {
+		return game;
 	}
 
 	/**
@@ -52,6 +52,6 @@ public class GameNode extends MinecraftCodeNode {
 	protected void send(IMinecraftCode code) {
 		MinecraftMessageEventBuilder builder = eventBuilder(code);
 		builder.withPrefix(DEFAULT_PREFIX, EColor.GREEN).withSuffix(DEFAULT_SUFFIX, EColor.GREEN);
-		send(builder.withBold(true).withGroup(PlayerGroup.ALL).build(getTree().getGame().getName()));
+		send(builder.withBold(true).withGroup(PlayerGroup.ALL).build(getGame().getName()));
 	}
 }

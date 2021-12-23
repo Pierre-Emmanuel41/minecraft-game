@@ -1,52 +1,40 @@
 package fr.pederobien.minecraft.game.impl;
 
+import org.bukkit.command.TabExecutor;
 import org.bukkit.plugin.Plugin;
 
-import fr.pederobien.minecraft.game.event.GameConfigurationChangePostEvent;
 import fr.pederobien.minecraft.game.event.GamePausePostEvent;
 import fr.pederobien.minecraft.game.event.GameResumePostEvent;
 import fr.pederobien.minecraft.game.event.GameStartPostEvent;
 import fr.pederobien.minecraft.game.event.GameStopPostEvent;
 import fr.pederobien.minecraft.game.interfaces.IFeature;
+import fr.pederobien.minecraft.game.interfaces.IFeatureList;
 import fr.pederobien.minecraft.game.interfaces.IGame;
-import fr.pederobien.minecraft.game.interfaces.IGameConfiguration;
+import fr.pederobien.minecraft.game.interfaces.ITeamList;
 import fr.pederobien.utils.event.EventManager;
 
 public class Game implements IGame {
 	private String name;
 	private Plugin plugin;
-	private IGameConfiguration configuration;
+	private TabExecutor startTabExecutor, stopTabExecutor;
+	private ITeamList teams;
+	private IFeatureList features;
 	private EGameState state;
 
 	/**
 	 * Creates a game.
 	 * 
-	 * @param name          The game name.
-	 * @param plugin        The plugin associated to this name.
-	 * @param configuration The game configuration.
-	 */
-	public Game(String name, Plugin plugin, IGameConfiguration configuration) {
-		this.name = name;
-		this.configuration = configuration;
-		state = EGameState.NOT_STARTED;
-	}
-
-	/**
-	 * Creates a game.
-	 * 
 	 * @param name   The game name.
-	 * @param plugin The plugin associated to this game.
+	 * @param plugin The plugin associated to this name.
 	 */
 	public Game(String name, Plugin plugin) {
-		this(name, plugin, null);
+		this.name = name;
+		state = EGameState.NOT_STARTED;
 	}
 
 	@Override
 	public void start() {
-		if (configuration == null)
-			throw new IllegalStateException("There is no configuration associated to this game");
-
-		for (IFeature feature : configuration.getFeatures())
+		for (IFeature feature : getFeatures())
 			feature.start();
 
 		state = EGameState.STARTED;
@@ -55,7 +43,7 @@ public class Game implements IGame {
 
 	@Override
 	public void stop() {
-		for (IFeature feature : configuration.getFeatures())
+		for (IFeature feature : getFeatures())
 			feature.stop();
 
 		state = EGameState.NOT_STARTED;
@@ -64,7 +52,7 @@ public class Game implements IGame {
 
 	@Override
 	public void pause() {
-		for (IFeature feature : configuration.getFeatures())
+		for (IFeature feature : getFeatures())
 			feature.pause();
 
 		state = EGameState.PAUSED;
@@ -73,7 +61,7 @@ public class Game implements IGame {
 
 	@Override
 	public void resume() {
-		for (IFeature feature : configuration.getFeatures())
+		for (IFeature feature : getFeatures())
 			feature.resume();
 
 		state = EGameState.STARTED;
@@ -91,18 +79,23 @@ public class Game implements IGame {
 	}
 
 	@Override
-	public IGameConfiguration getConfig() {
-		return configuration;
+	public ITeamList getTeams() {
+		return teams;
 	}
 
 	@Override
-	public void setConfig(IGameConfiguration configuration) {
-		if (this.configuration != null && this.configuration == configuration)
-			return;
+	public IFeatureList getFeatures() {
+		return features;
+	}
 
-		IGameConfiguration oldConfiguration = this.configuration;
-		this.configuration = configuration;
-		EventManager.callEvent(new GameConfigurationChangePostEvent(this, oldConfiguration));
+	@Override
+	public TabExecutor getStartTabExecutor() {
+		return startTabExecutor;
+	}
+
+	@Override
+	public TabExecutor getStopTabExecutor() {
+		return stopTabExecutor;
 	}
 
 	@Override

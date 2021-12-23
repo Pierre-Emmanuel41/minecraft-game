@@ -1,4 +1,4 @@
-package fr.pederobien.minecraft.game.commands.config;
+package fr.pederobien.minecraft.game.commands.game;
 
 import java.util.List;
 import java.util.StringJoiner;
@@ -12,13 +12,14 @@ import fr.pederobien.minecraft.game.exceptions.RandomTeamNotEnoughPlayer;
 import fr.pederobien.minecraft.game.exceptions.RandomTeamNotEnoughTeam;
 import fr.pederobien.minecraft.game.impl.EGameCode;
 import fr.pederobien.minecraft.game.impl.TeamHelper;
+import fr.pederobien.minecraft.game.interfaces.IGame;
 import fr.pederobien.minecraft.game.interfaces.ITeam;
 
-public class ConfigurationRandomTeamNode extends ConfigurationNode {
+public class GameRandomTeamNode extends GameNode {
 	private IPlayerGroup group;
 
-	protected ConfigurationRandomTeamNode(ConfigurationCommandTree tree) {
-		super(tree, "randomTeams", EGameCode.GAME_CONFIG__RANDOM_TEAMS__EXPLANATION);
+	protected GameRandomTeamNode(IGame game) {
+		super(game, "randomTeams", EGameCode.GAME_CONFIG__RANDOM_TEAMS__EXPLANATION, g -> g != null && g.getTeams().toList().size() > 1);
 	}
 
 	@Override
@@ -48,7 +49,7 @@ public class ConfigurationRandomTeamNode extends ConfigurationNode {
 		}
 
 		try {
-			TeamHelper.dispatchPlayerRandomlyInTeam(getTree().getConfiguration().getTeams(), maxPlayerInTeam);
+			TeamHelper.dispatchPlayerRandomlyInTeam(getGame().getTeams(), maxPlayerInTeam);
 		} catch (RandomTeamNotEnoughPlayer e) {
 			send(eventBuilder(sender, EGameCode.GAME_CONFIG__RANDOM_TEAMS__NOT_ENOUGH_PLAYERS, e.getPlayersCount()));
 			return false;
@@ -58,7 +59,7 @@ public class ConfigurationRandomTeamNode extends ConfigurationNode {
 		}
 
 		StringJoiner joiner = new StringJoiner("\n");
-		for (ITeam team : getTree().getConfiguration().getTeams())
+		for (ITeam team : getGame().getTeams())
 			if (!team.getPlayers().toList().isEmpty())
 				joiner.add(team.toString());
 
