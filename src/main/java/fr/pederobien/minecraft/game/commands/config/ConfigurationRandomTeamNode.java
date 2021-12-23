@@ -43,7 +43,7 @@ public class ConfigurationRandomTeamNode extends ConfigurationNode {
 		} catch (IndexOutOfBoundsException e) {
 			maxPlayerInTeam = -1;
 		} catch (NumberFormatException e) {
-			send(eventBuilder(sender, EGameCode.BAD_FORMAT).build(EGameCode.GAME_CONFIG__RANDOM_TEAMS__MAX_PLAYERS_PER_TEAM__BAD_FORMAT));
+			send(eventBuilder(sender, EGameCode.BAD_FORMAT, EGameCode.GAME_CONFIG__RANDOM_TEAMS__MAX_PLAYERS_PER_TEAM__BAD_FORMAT));
 			return false;
 		}
 
