@@ -42,7 +42,7 @@ public class GamePlugin extends JavaPlugin {
 		instance = this;
 		gameTree = new GameCommandTree();
 
-		EventLogger.instance().ignore(DictionaryEvent.class).register();
+		EventLogger.instance().displayNewLine(false).ignore(DictionaryEvent.class).register();
 		PlayerQuitOrJoinEventHandler.instance().register(this);
 
 		registerDictionaries();
