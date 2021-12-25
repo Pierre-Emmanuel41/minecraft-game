@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.Stream;
 
 import org.bukkit.entity.Player;
@@ -27,6 +28,7 @@ public class PlayerList implements IPlayerList {
 	public PlayerList(String name) {
 		this.name = name;
 		players = new LinkedHashMap<String, Player>();
+		lock = new ReentrantLock(true);
 	}
 
 	@Override
