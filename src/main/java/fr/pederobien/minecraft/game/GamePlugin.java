@@ -8,6 +8,7 @@ import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import fr.pederobien.dictionary.exceptions.MessageRegisteredException;
 import fr.pederobien.dictionary.impl.JarXmlDictionaryParser;
 import fr.pederobien.minecraft.dictionary.impl.MinecraftDictionaryContext;
 import fr.pederobien.minecraft.game.commands.game.GameCommandTree;
@@ -55,7 +56,11 @@ public class GamePlugin extends JavaPlugin {
 			MinecraftDictionaryContext context = MinecraftDictionaryContext.instance();
 			String[] dictionaries = new String[] { "English.xml", "French.xml" };
 			for (String dictionary : dictionaries)
-				context.register(dictionaryParser.parse(DICTIONARY_FOLDER.resolve(dictionary)));
+				try {
+					context.register(dictionaryParser.parse(DICTIONARY_FOLDER.resolve(dictionary)));
+				} catch (MessageRegisteredException e) {
+					e.printStackTrace();
+				}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
