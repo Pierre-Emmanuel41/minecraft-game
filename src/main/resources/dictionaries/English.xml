@@ -323,7 +323,7 @@
 			<value>%s's team: %s</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__LIST__ONE_TEAM_REGISTERED</code>
+			<code>GAME_CONFIG__LIST__SEVERAL_TEAMS_REGISTERED</code>
 			<value>%s's teams: %s</value>
 		</message>
 	</messages>

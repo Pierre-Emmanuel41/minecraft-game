@@ -308,7 +308,7 @@
 			<value>Equipe de %s: %s</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__LIST__ONE_TEAM_REGISTERED</code>
+			<code>GAME_CONFIG__LIST__SEVERAL_TEAMS_REGISTERED</code>
 			<value>Equipes de %s: %s</value>
 		</message>
 	</messages>
