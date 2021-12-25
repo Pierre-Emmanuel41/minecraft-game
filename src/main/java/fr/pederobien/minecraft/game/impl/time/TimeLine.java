@@ -84,7 +84,9 @@ public class TimeLine implements ITimeLine, IEventListener {
 				obs.getCountDown().signal(currentTime);
 
 				LocalTime nextTime = obs.getNextTime();
-				if (nextTime == null)
+				// No need to register the observer if the next time is null
+				// No need to register the observer while the count down is not over
+				if (nextTime == null || obs.getCountDown().getCurrentValue() != obs.getCountDown().getInitialValue())
 					return;
 
 				register(nextTime, obs);
