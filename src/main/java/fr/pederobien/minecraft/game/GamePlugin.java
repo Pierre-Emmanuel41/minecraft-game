@@ -1,8 +1,6 @@
 package fr.pederobien.minecraft.game;
 
 import java.io.FileNotFoundException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.Plugin;
@@ -13,10 +11,11 @@ import fr.pederobien.dictionary.impl.JarXmlDictionaryParser;
 import fr.pederobien.minecraft.dictionary.impl.MinecraftDictionaryContext;
 import fr.pederobien.minecraft.game.commands.game.GameCommandTree;
 import fr.pederobien.minecraft.game.impl.PlayerQuitOrJoinEventHandler;
+import fr.pederobien.utils.AsyncConsole;
 import fr.pederobien.utils.event.EventLogger;
 
 public class GamePlugin extends JavaPlugin {
-	private static final Path DICTIONARY_FOLDER = Paths.get("resources/dictionaries");
+	private static final String DICTIONARY_FOLDER = "resources/dictionaries/";
 
 	private static Plugin instance;
 	private static GameCommandTree gameTree;
@@ -57,9 +56,11 @@ public class GamePlugin extends JavaPlugin {
 			String[] dictionaries = new String[] { "English.xml", "French.xml" };
 			for (String dictionary : dictionaries)
 				try {
-					context.register(dictionaryParser.parse(DICTIONARY_FOLDER.resolve(dictionary)));
+					context.register(dictionaryParser.parse(DICTIONARY_FOLDER.concat(dictionary)));
 				} catch (MessageRegisteredException e) {
-					e.printStackTrace();
+					AsyncConsole.print(e);
+					for (StackTraceElement element : e.getStackTrace())
+						AsyncConsole.print(element);
 				}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
