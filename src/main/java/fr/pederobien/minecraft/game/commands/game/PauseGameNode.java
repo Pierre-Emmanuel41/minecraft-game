@@ -4,8 +4,8 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
 import fr.pederobien.minecraft.game.impl.EGameCode;
-import fr.pederobien.minecraft.game.impl.EGameState;
 import fr.pederobien.minecraft.game.interfaces.IGame;
+import fr.pederobien.utils.IPausable.PausableState;
 
 public class PauseGameNode extends GameNode {
 
@@ -20,12 +20,12 @@ public class PauseGameNode extends GameNode {
 			return false;
 		}
 
-		if (getGame().getState() == EGameState.NOT_STARTED) {
+		if (getGame().getState() == PausableState.NOT_STARTED) {
 			send(eventBuilder(sender, EGameCode.PAUSE_GAME__GAME_NOT_STARTED, getGame().getName()));
 			return false;
 		}
 
-		if (getGame().getState() == EGameState.STARTED) {
+		if (getGame().getState() == PausableState.STARTED) {
 			getGame().pause();
 			sendSuccessful(sender, EGameCode.PAUSE_GAME__PAUSING_GAME, getGame().getName());
 		} else {

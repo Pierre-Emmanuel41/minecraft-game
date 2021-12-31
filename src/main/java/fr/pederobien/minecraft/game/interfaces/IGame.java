@@ -3,7 +3,6 @@ package fr.pederobien.minecraft.game.interfaces;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.plugin.Plugin;
 
-import fr.pederobien.minecraft.game.impl.EGameState;
 import fr.pederobien.utils.IPausable;
 
 public interface IGame extends IPausable {
@@ -27,9 +26,4 @@ public interface IGame extends IPausable {
 	 * @return The tab executor in order to run specific treatment according to argument line before stopping the game.
 	 */
 	TabExecutor getStopTabExecutor();
-
-	/**
-	 * @return The state in which this game is.
-	 */
-	EGameState getState();
 }

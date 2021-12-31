@@ -14,7 +14,7 @@ public class Game implements IGame {
 	private String name;
 	private Plugin plugin;
 	private TabExecutor startTabExecutor, stopTabExecutor;
-	private EGameState state;
+	private PausableState state;
 
 	/**
 	 * Creates a game.
@@ -24,31 +24,36 @@ public class Game implements IGame {
 	 */
 	public Game(String name, Plugin plugin) {
 		this.name = name;
-		state = EGameState.NOT_STARTED;
+		state = PausableState.NOT_STARTED;
 	}
 
 	@Override
 	public void start() {
-		state = EGameState.STARTED;
+		state = PausableState.STARTED;
 		EventManager.callEvent(new GameStartPostEvent(this));
 	}
 
 	@Override
 	public void stop() {
-		state = EGameState.NOT_STARTED;
+		state = PausableState.NOT_STARTED;
 		EventManager.callEvent(new GameStopPostEvent(this));
 	}
 
 	@Override
 	public void pause() {
-		state = EGameState.PAUSED;
+		state = PausableState.PAUSED;
 		EventManager.callEvent(new GamePausePostEvent(this));
 	}
 
 	@Override
 	public void resume() {
-		state = EGameState.STARTED;
+		state = PausableState.STARTED;
 		EventManager.callEvent(new GameResumePostEvent(this));
+	}
+
+	@Override
+	public PausableState getState() {
+		return state;
 	}
 
 	@Override
@@ -69,10 +74,5 @@ public class Game implements IGame {
 	@Override
 	public TabExecutor getStopTabExecutor() {
 		return stopTabExecutor;
-	}
-
-	@Override
-	public EGameState getState() {
-		return state;
 	}
 }

@@ -15,32 +15,32 @@ import fr.pederobien.utils.event.EventManager;
 public class TimeTask implements ITimeTask, Runnable {
 	private Plugin plugin;
 	private LocalTime totalTime, gameTime, pauseTime;
-	private State state;
+	private PausableState state;
 	int taskId;
 
 	public TimeTask(Plugin plugin) {
 		this.plugin = plugin;
 		totalTime = gameTime = pauseTime = LocalTime.of(0, 0, 0);
 
-		state = State.NOT_STARTED;
+		state = PausableState.NOT_STARTED;
 	}
 
 	@Override
 	public void start() {
-		if (state != State.NOT_STARTED)
+		if (state != PausableState.NOT_STARTED)
 			return;
 
-		state = State.STARTED;
+		state = PausableState.STARTED;
 		taskId = BukkitManager.getScheduler().runTaskTimer(plugin, this, 0, 20).getTaskId();
 		EventManager.callEvent(new TimeTaskStartPostEvent(this));
 	}
 
 	@Override
 	public void stop() {
-		if (state != State.STARTED || state != State.PAUSED)
+		if (state != PausableState.STARTED || state != PausableState.PAUSED)
 			return;
 
-		state = State.NOT_STARTED;
+		state = PausableState.NOT_STARTED;
 		BukkitManager.getScheduler().cancelTask(taskId);
 		EventManager.callEvent(new TimeTaskStartPostEvent(this));
 		totalTime = gameTime = pauseTime = LocalTime.of(0, 0, 0);
@@ -48,20 +48,25 @@ public class TimeTask implements ITimeTask, Runnable {
 
 	@Override
 	public void pause() {
-		if (state != State.NOT_STARTED)
+		if (state != PausableState.NOT_STARTED)
 			return;
 
-		state = State.PAUSED;
+		state = PausableState.PAUSED;
 		EventManager.callEvent(new TimeTaskPausePostEvent(this));
 	}
 
 	@Override
 	public void resume() {
-		if (state != State.PAUSED)
+		if (state != PausableState.PAUSED)
 			return;
 
-		state = State.STARTED;
+		state = PausableState.STARTED;
 		EventManager.callEvent(new TimeTaskResumePostEvent(this));
+	}
+
+	@Override
+	public PausableState getState() {
+		return state;
 	}
 
 	@Override
@@ -81,20 +86,16 @@ public class TimeTask implements ITimeTask, Runnable {
 
 	@Override
 	public void run() {
-		if (state == State.NOT_STARTED)
+		if (state == PausableState.NOT_STARTED)
 			return;
 
 		totalTime = totalTime.plusSeconds(1);
 
-		if (state == State.PAUSED)
+		if (state == PausableState.PAUSED)
 			pauseTime = pauseTime.plusSeconds(1);
 		else
 			gameTime = gameTime.plusSeconds(1);
 
 		EventManager.callEvent(new TimeTaskTimeChangePostEvent(this));
-	}
-
-	private enum State {
-		NOT_STARTED, STARTED, PAUSED;
 	}
 }

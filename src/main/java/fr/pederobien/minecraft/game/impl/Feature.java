@@ -12,6 +12,7 @@ import fr.pederobien.utils.event.EventManager;
 
 public class Feature implements IFeature {
 	private String name;
+	private PausableState state;
 	private TabExecutor startTabExecutor;
 	private boolean isEnable;
 
@@ -23,12 +24,7 @@ public class Feature implements IFeature {
 	public Feature(String name, TabExecutor startTabExecutor) {
 		this.name = name;
 		this.startTabExecutor = startTabExecutor;
-	}
-
-	@Override
-	public void start() {
-		if (isEnable)
-			EventManager.callEvent(new FeatureStartPostEvent(this));
+		state = PausableState.NOT_STARTED;
 	}
 
 	@Override
@@ -37,17 +33,28 @@ public class Feature implements IFeature {
 	}
 
 	@Override
+	public void start() {
+		if (isEnable) {
+			state = PausableState.STARTED;
+			EventManager.callEvent(new FeatureStartPostEvent(this));
+		}
+	}
+
+	@Override
 	public void stop() {
+		state = PausableState.NOT_STARTED;
 		EventManager.callEvent(new FeatureStopPostEvent(this));
 	}
 
 	@Override
 	public void pause() {
+		state = PausableState.PAUSED;
 		EventManager.callEvent(new FeaturePausePostEvent(this));
 	}
 
 	@Override
 	public void resume() {
+		state = PausableState.STARTED;
 		EventManager.callEvent(new FeatureResumePostEvent(this));
 	}
 
@@ -68,5 +75,10 @@ public class Feature implements IFeature {
 	@Override
 	public TabExecutor getStartTabExecutor() {
 		return startTabExecutor;
+	}
+
+	@Override
+	public PausableState getState() {
+		return state;
 	}
 }
