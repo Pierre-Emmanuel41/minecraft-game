@@ -10,21 +10,27 @@ import org.bukkit.command.CommandSender;
 
 import fr.pederobien.minecraft.game.commands.team.TeamCommandTree;
 import fr.pederobien.minecraft.game.impl.EGameCode;
-import fr.pederobien.minecraft.game.interfaces.IGame;
 import fr.pederobien.minecraft.game.interfaces.ITeam;
+import fr.pederobien.minecraft.game.interfaces.ITeamList;
 
-public class GameRemoveTeamNode extends GameNode {
+public class TeamsRemoveNode extends TeamsNode {
 	private TeamCommandTree teamTree;
 
-	protected GameRemoveTeamNode(IGame game, TeamCommandTree teamTree) {
-		super(game, "remove", EGameCode.GAME_CONFIG__REMOVE_TEAM__EXPLANATION, g -> g != null && g.getTeams().toList().size() > 1);
+	/**
+	 * Creates a node in order to remove teams from a team list.
+	 * 
+	 * @param teams    The list of teams associated to this node.
+	 * @param teamTree The command tree in order create or modify a team.
+	 */
+	protected TeamsRemoveNode(ITeamList teams, TeamCommandTree teamTree) {
+		super(teams, "remove", EGameCode.GAME_CONFIG__TEAMS_REMOVE__EXPLANATION, t -> t != null);
 		this.teamTree = teamTree;
 	}
 
 	@Override
 	public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
 		List<String> teamNames = asList(args);
-		Stream<String> teams = getGame().getTeams().stream().map(team -> team.getName()).filter(name -> !teamNames.contains(name));
+		Stream<String> teams = getTeams().stream().map(team -> team.getName()).filter(name -> !teamNames.contains(name));
 
 		// Adding all to delete all registered teams.
 		if (args.length == 1)
@@ -40,18 +46,18 @@ public class GameRemoveTeamNode extends GameNode {
 
 		// Clearing the current configuration from its teams.
 		if (args[0].equals("all")) {
-			getGame().getTeams().clear();
-			send(eventBuilder(sender, EGameCode.GAME_CONFIG__REMOVE_TEAM__ALL_PLAYERS_REMOVED).build(getGame().getName()));
+			getTeams().clear();
+			sendSuccessful(sender, EGameCode.GAME_CONFIG__TEAMS_REMOVE__ALL_PLAYERS_REMOVED, getTeams().getName());
 			return true;
 		}
 
 		List<ITeam> teams = new ArrayList<ITeam>();
 		for (String name : args) {
-			Optional<ITeam> optTeam = getGame().getTeams().getTeam(name);
+			Optional<ITeam> optTeam = getTeams().getTeam(name);
 
 			// Checking if the team name refers to a registered team.
 			if (!optTeam.isPresent()) {
-				send(eventBuilder(sender, EGameCode.GAME_CONFIG__REMOVE_TEAM__TEAM_NOT_FOUND, name, getGame().getName()));
+				send(eventBuilder(sender, EGameCode.GAME_CONFIG__TEAMS_REMOVE__TEAM_NOT_FOUND, name, getTeams().getName()));
 				return false;
 			}
 
@@ -61,7 +67,7 @@ public class GameRemoveTeamNode extends GameNode {
 		String teamNames = concat(args);
 
 		for (ITeam team : teams) {
-			getGame().getTeams().remove(team);
+			getTeams().remove(team);
 
 			// Updating the team tree.
 			teamTree.getExceptedNames().remove(team.getName());
@@ -70,13 +76,13 @@ public class GameRemoveTeamNode extends GameNode {
 
 		switch (teams.size()) {
 		case 0:
-			send(eventBuilder(sender, EGameCode.GAME_CONFIG__REMOVE_TEAM__NO_TEAM_REMOVED, getGame().getName()));
+			sendSuccessful(sender, EGameCode.GAME_CONFIG__TEAMS_REMOVE__NO_TEAM_REMOVED, getTeams().getName());
 			break;
 		case 1:
-			send(eventBuilder(sender, EGameCode.GAME_CONFIG__REMOVE_TEAM__ONE_TEAM_REMOVED, teamNames, getGame().getName()));
+			sendSuccessful(sender, EGameCode.GAME_CONFIG__TEAMS_REMOVE__ONE_TEAM_REMOVED, teamNames, getTeams().getName());
 			break;
 		default:
-			send(eventBuilder(sender, EGameCode.GAME_CONFIG__REMOVE_TEAM__SEVERAL_TEAMS_REMOVED, teamNames, getGame().getName()));
+			sendSuccessful(sender, EGameCode.GAME_CONFIG__TEAMS_REMOVE__SEVERAL_TEAMS_REMOVED, teamNames, getTeams().getName());
 			break;
 		}
 

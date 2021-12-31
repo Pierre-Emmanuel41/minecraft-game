@@ -12,21 +12,27 @@ import fr.pederobien.minecraft.game.exceptions.RandomTeamNotEnoughPlayer;
 import fr.pederobien.minecraft.game.exceptions.RandomTeamNotEnoughTeam;
 import fr.pederobien.minecraft.game.impl.EGameCode;
 import fr.pederobien.minecraft.game.impl.TeamHelper;
-import fr.pederobien.minecraft.game.interfaces.IGame;
 import fr.pederobien.minecraft.game.interfaces.ITeam;
+import fr.pederobien.minecraft.game.interfaces.ITeamList;
+import fr.pederobien.minecraft.managers.EColor;
 
-public class GameRandomTeamNode extends GameNode {
+public class TeamsRandomNode extends TeamsNode {
 	private IPlayerGroup group;
 
-	protected GameRandomTeamNode(IGame game) {
-		super(game, "randomTeams", EGameCode.GAME_CONFIG__RANDOM_TEAMS__EXPLANATION, g -> g != null && g.getTeams().toList().size() > 1);
+	/**
+	 * Creates a node in order to dispatch players randomly in team.
+	 * 
+	 * @param teams The list of teams associated to this node.
+	 */
+	protected TeamsRandomNode(ITeamList teams) {
+		super(teams, "random", EGameCode.GAME_CONFIG__TEAMS_RANDOM__EXPLANATION, t -> t != null);
 	}
 
 	@Override
 	public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
 		switch (args.length) {
 		case 1:
-			return asList(getMessage(sender, EGameCode.GAME_CONFIG__RANDOM_TEAMS__MAX_PLAYERS_PER_TEAM));
+			return asList(getMessage(sender, EGameCode.GAME_CONFIG__TEAMS_RANDOM__MAX_PLAYERS_PER_TEAM));
 		default:
 			return emptyList();
 		}
@@ -38,20 +44,20 @@ public class GameRandomTeamNode extends GameNode {
 		try {
 			maxPlayerInTeam = Integer.parseInt(args[0]);
 			if (maxPlayerInTeam <= 0) {
-				send(eventBuilder(sender, EGameCode.GAME_CONFIG__RANDOM_TEAMS__MAX_PLAYERS_PER_TEAM__NEGATIVE_VALUE).build());
+				send(eventBuilder(sender, EGameCode.GAME_CONFIG__TEAMS_RANDOM__MAX_PLAYERS_PER_TEAM__NEGATIVE_VALUE).build());
 				return false;
 			}
 		} catch (IndexOutOfBoundsException e) {
 			maxPlayerInTeam = -1;
 		} catch (NumberFormatException e) {
-			send(eventBuilder(sender, EGameCode.BAD_FORMAT, EGameCode.GAME_CONFIG__RANDOM_TEAMS__MAX_PLAYERS_PER_TEAM__BAD_FORMAT));
+			send(eventBuilder(sender, EGameCode.BAD_FORMAT, EGameCode.GAME_CONFIG__TEAMS_RANDOM__MAX_PLAYERS_PER_TEAM__BAD_FORMAT));
 			return false;
 		}
 
 		try {
-			TeamHelper.dispatchPlayerRandomlyInTeam(getGame().getTeams(), maxPlayerInTeam);
+			TeamHelper.dispatchPlayerRandomlyInTeam(getTeams(), maxPlayerInTeam);
 		} catch (RandomTeamNotEnoughPlayer e) {
-			send(eventBuilder(sender, EGameCode.GAME_CONFIG__RANDOM_TEAMS__NOT_ENOUGH_PLAYERS, e.getPlayersCount()));
+			send(eventBuilder(sender, EGameCode.GAME_CONFIG__TEAMS_RANDOM__NOT_ENOUGH_PLAYERS, e.getPlayersCount()));
 			return false;
 		} catch (RandomTeamNotEnoughTeam e) {
 			send(eventBuilder(sender, EGameCode.GAME_CONFIG__RANDOM_TEAMS__NOT_ENOUGH_TEAMS, e.getTeamsCount()));
@@ -59,7 +65,7 @@ public class GameRandomTeamNode extends GameNode {
 		}
 
 		StringJoiner joiner = new StringJoiner("\n");
-		for (ITeam team : getGame().getTeams())
+		for (ITeam team : getTeams())
 			if (!team.getPlayers().toList().isEmpty())
 				joiner.add(team.toString());
 
@@ -67,6 +73,7 @@ public class GameRandomTeamNode extends GameNode {
 		if (group != null)
 			builder.withGroup(group);
 
+		builder.withPrefix(DEFAULT_PREFIX, EColor.GREEN).withSuffix(DEFAULT_SUFFIX, EColor.GREEN).withColor(EColor.GOLD);
 		send(builder.build(joiner.toString()));
 		return true;
 	}
@@ -75,8 +82,11 @@ public class GameRandomTeamNode extends GameNode {
 	 * Set the group of players that will receive the teams composition.
 	 * 
 	 * @param group The group player.
+	 * 
+	 * @return This node.
 	 */
-	public void setTeamsCompositionGroup(IPlayerGroup group) {
+	public TeamsRandomNode setTeamsCompositionGroup(IPlayerGroup group) {
 		this.group = group;
+		return this;
 	}
 }

@@ -1,38 +1,43 @@
 package fr.pederobien.minecraft.game.commands.game;
 
 import fr.pederobien.minecraft.game.impl.EGameCode;
-import fr.pederobien.minecraft.game.interfaces.IGame;
+import fr.pederobien.minecraft.game.interfaces.IFeatureConfigurable;
 
-public class GameFeatureNode extends GameNode {
-	private GameFeatureEnableNode enableNode;
-	private GameFeatureDisableNode disableNode;
-	private GameFeatureArgumentNode argumentNode;
+public class GameFeatureNode extends FeatureNode {
+	private FeatureEnableNode enableNode;
+	private FeatureDisableNode disableNode;
+	private FeatureArgumentNode argumentNode;
 
-	protected GameFeatureNode(IGame game) {
-		super(game, "feature", EGameCode.GAME_CONFIG__FEATURE__EXPLANATION, g -> g != null);
-		add(enableNode = new GameFeatureEnableNode(game));
-		add(disableNode = new GameFeatureDisableNode(game));
-		add(argumentNode = new GameFeatureArgumentNode(game));
+	/**
+	 * Creates a node in order to modify a feature configurable object.
+	 * 
+	 * @param configurable The configurable object associated to this node.
+	 */
+	protected GameFeatureNode(IFeatureConfigurable configurable) {
+		super(configurable.getFeatures(), "feature", EGameCode.GAME_CONFIG__FEATURE__EXPLANATION, f -> f != null);
+		add(enableNode = new FeatureEnableNode(getFeatures()));
+		add(disableNode = new FeatureDisableNode(getFeatures()));
+		add(argumentNode = new FeatureArgumentNode(getFeatures()));
 	}
 
 	/**
 	 * @return The node that enables features.
 	 */
-	public GameFeatureEnableNode getEnableNode() {
+	public FeatureEnableNode getEnableNode() {
 		return enableNode;
 	}
 
 	/**
 	 * @return The node that disable features.
 	 */
-	public GameFeatureDisableNode getDisableNode() {
+	public FeatureDisableNode getDisableNode() {
 		return disableNode;
 	}
 
 	/**
 	 * @return The node that set the start argument of a feature.
 	 */
-	public GameFeatureArgumentNode getArgumentNode() {
+	public FeatureArgumentNode getArgumentNode() {
 		return argumentNode;
 	}
 }

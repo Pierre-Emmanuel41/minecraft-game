@@ -11,6 +11,11 @@ import fr.pederobien.minecraft.managers.EColor;
 
 public class TeamModifyColorNode extends TeamNode {
 
+	/**
+	 * Creates a node that modifies the color of a team.
+	 * 
+	 * @param tree The tree that contains a reference to the team to modify.
+	 */
 	protected TeamModifyColorNode(TeamCommandTree tree) {
 		super(tree, "color", EGameCode.TEAM__MODIFY_COLOR__EXPLANATION, team -> team != null);
 	}
@@ -46,7 +51,7 @@ public class TeamModifyColorNode extends TeamNode {
 
 		EColor oldColor = getTree().getTeam().getColor();
 		getTree().getTeam().setColor(color);
-		send(eventBuilder(sender, EGameCode.TEAM__MODIFY_COLOR__TEAM_COLOR_UPDATED, oldColor, getTree().getTeam().getColor().getColoredColorName()));
+		sendSuccessful(sender, EGameCode.TEAM__MODIFY_COLOR__TEAM_COLOR_UPDATED, oldColor.getColoredColorName(), getTree().getTeam().getColor().getColoredColorName());
 		return true;
 	}
 }

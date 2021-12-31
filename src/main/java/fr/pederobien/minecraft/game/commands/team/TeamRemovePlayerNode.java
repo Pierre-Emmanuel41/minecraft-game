@@ -13,6 +13,11 @@ import fr.pederobien.minecraft.managers.PlayerManager;
 
 public class TeamRemovePlayerNode extends TeamNode {
 
+	/**
+	 * Creates a node that removes players from a team.
+	 * 
+	 * @param tree The tree that contains a reference to the team to modify.
+	 */
 	protected TeamRemovePlayerNode(TeamCommandTree tree) {
 		super(tree, "remove", EGameCode.TEAM__REMOVE_PLAYER__EXPLANATION, team -> team != null);
 	}
@@ -38,7 +43,7 @@ public class TeamRemovePlayerNode extends TeamNode {
 		// Clearing the current team from its players.
 		if (args[0].equals("all")) {
 			getTree().getTeam().getPlayers().clear();
-			send(eventBuilder(sender, EGameCode.TEAM__REMOVE_PLAYER__ALL_PLAYERS_REMOVED).build(teamColoredName));
+			sendSuccessful(sender, EGameCode.TEAM__REMOVE_PLAYER__ALL_PLAYERS_REMOVED, teamColoredName);
 			return true;
 		}
 
@@ -68,13 +73,13 @@ public class TeamRemovePlayerNode extends TeamNode {
 
 		switch (players.size()) {
 		case 0:
-			send(eventBuilder(sender, EGameCode.TEAM__REMOVE_PLAYER__NO_PLAYER_REMOVED, teamColoredName));
+			sendSuccessful(sender, EGameCode.TEAM__REMOVE_PLAYER__NO_PLAYER_REMOVED, teamColoredName);
 			break;
 		case 1:
-			send(eventBuilder(sender, EGameCode.TEAM__REMOVE_PLAYER__ONE_PLAYER_REMOVED, playerNames, teamColoredName));
+			sendSuccessful(sender, EGameCode.TEAM__REMOVE_PLAYER__ONE_PLAYER_REMOVED, playerNames, teamColoredName);
 			break;
 		default:
-			send(eventBuilder(sender, EGameCode.TEAM__REMOVE_PLAYER__SEVERAL_PLAYERS_REMOVED, playerNames, teamColoredName));
+			sendSuccessful(sender, EGameCode.TEAM__REMOVE_PLAYER__SEVERAL_PLAYERS_REMOVED, playerNames, teamColoredName);
 			break;
 		}
 

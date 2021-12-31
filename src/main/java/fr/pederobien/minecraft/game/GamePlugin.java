@@ -6,6 +6,7 @@ import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import fr.pederobien.dictionary.event.DictionaryEvent;
 import fr.pederobien.dictionary.exceptions.MessageRegisteredException;
 import fr.pederobien.dictionary.impl.JarXmlDictionaryParser;
 import fr.pederobien.minecraft.dictionary.impl.MinecraftDictionaryContext;
@@ -41,7 +42,7 @@ public class GamePlugin extends JavaPlugin {
 		instance = this;
 		gameTree = new GameCommandTree();
 
-		EventLogger.instance().newLine(false).timeStamp(false).register();
+		EventLogger.instance().newLine(false).timeStamp(false).ignore(DictionaryEvent.class).register();
 		PlayerQuitOrJoinEventHandler.instance().register(this);
 
 		registerDictionaries();

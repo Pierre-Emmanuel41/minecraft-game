@@ -27,10 +27,10 @@ public class PauseGameNode extends GameNode {
 
 		if (getGame().getState() == EGameState.STARTED) {
 			getGame().pause();
-			send(EGameCode.PAUSE_GAME__PAUSING_GAME);
+			sendSuccessful(sender, EGameCode.PAUSE_GAME__PAUSING_GAME, getGame().getName());
 		} else {
 			getGame().resume();
-			send(EGameCode.PAUSE_GAME__RESUMING_GAME);
+			sendSuccessful(sender, EGameCode.PAUSE_GAME__RESUMING_GAME, getGame().getName());
 		}
 		return true;
 	}

@@ -9,12 +9,17 @@ import org.bukkit.command.CommandSender;
 
 import fr.pederobien.minecraft.game.impl.EGameCode;
 import fr.pederobien.minecraft.game.interfaces.IFeature;
-import fr.pederobien.minecraft.game.interfaces.IGame;
+import fr.pederobien.minecraft.game.interfaces.IFeatureList;
 
-public class GameFeatureDisableNode extends GameNode {
+public class FeatureDisableNode extends FeatureNode {
 
-	protected GameFeatureDisableNode(IGame game) {
-		super(game, "disable", EGameCode.GAME_CONFIG__FEATURE_DISABLE__EXPLANATION, g -> g != null);
+	/**
+	 * Creates a node to disable features.
+	 * 
+	 * @param features The list of features associated to this node.
+	 */
+	protected FeatureDisableNode(IFeatureList features) {
+		super(features, "disable", EGameCode.GAME_CONFIG__FEATURE_DISABLE__EXPLANATION, f -> f != null);
 	}
 
 	@Override
@@ -23,7 +28,7 @@ public class GameFeatureDisableNode extends GameNode {
 		case 0:
 			List<String> alreadyMentionnedFeatures = asList(args);
 			Predicate<String> filter = name -> alreadyMentionnedFeatures.contains(name);
-			return filter(getGame().getFeatures().stream().map(feature -> feature.getName()).filter(filter), args);
+			return filter(getFeatures().stream().map(feature -> feature.getName()).filter(filter), args);
 		default:
 			return emptyList();
 		}
@@ -33,15 +38,14 @@ public class GameFeatureDisableNode extends GameNode {
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		Optional<IFeature> optFeature;
 		try {
-			optFeature = getGame().getFeatures().getFeature(args[0]);
+			optFeature = getFeatures().getFeature(args[0]);
 		} catch (IndexOutOfBoundsException e) {
 			send(eventBuilder(sender, EGameCode.GAME_CONFIG__FEATURE_DISABLE__NAME_IS_MISSING).build());
 			return false;
 		}
 
 		optFeature.get().setEnabled(false);
-		send(eventBuilder(sender, EGameCode.GAME_CONFIG__FEATURE_DISABLE__DISABLED, optFeature.get().getName()));
+		sendSuccessful(sender, EGameCode.GAME_CONFIG__FEATURE_DISABLE__DISABLED, optFeature.get().getName());
 		return true;
 	}
-
 }

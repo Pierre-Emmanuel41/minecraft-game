@@ -3,11 +3,8 @@ package fr.pederobien.minecraft.game.commands.game;
 import com.google.common.base.Function;
 
 import fr.pederobien.minecraft.commandtree.impl.MinecraftCodeNode;
-import fr.pederobien.minecraft.dictionary.impl.MinecraftMessageEvent.MinecraftMessageEventBuilder;
-import fr.pederobien.minecraft.dictionary.impl.PlayerGroup;
 import fr.pederobien.minecraft.dictionary.interfaces.IMinecraftCode;
 import fr.pederobien.minecraft.game.interfaces.IGame;
-import fr.pederobien.minecraft.managers.EColor;
 
 public class GameNode extends MinecraftCodeNode {
 	private IGame game;
@@ -42,16 +39,5 @@ public class GameNode extends MinecraftCodeNode {
 	 */
 	protected IGame getGame() {
 		return game;
-	}
-
-	/**
-	 * Send a message to each player with green default prefix and green default suffix.
-	 * 
-	 * @param code The code to send.
-	 */
-	protected void send(IMinecraftCode code) {
-		MinecraftMessageEventBuilder builder = eventBuilder(code);
-		builder.withPrefix(DEFAULT_PREFIX, EColor.GREEN).withSuffix(DEFAULT_SUFFIX, EColor.GREEN);
-		send(builder.withBold(true).withGroup(PlayerGroup.ALL).build(getGame().getName()));
 	}
 }

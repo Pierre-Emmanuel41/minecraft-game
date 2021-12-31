@@ -14,6 +14,11 @@ import fr.pederobien.minecraft.managers.PlayerManager;
 
 public class TeamAddPlayerNode extends TeamNode {
 
+	/**
+	 * Creates a node that adds players to a team.
+	 * 
+	 * @param tree The tree that contains a reference to the team to modify.
+	 */
 	protected TeamAddPlayerNode(TeamCommandTree tree) {
 		super(tree, "add", EGameCode.TEAM__ADD_PLAYER__EXPLANATION, team -> team != null);
 	}
@@ -49,7 +54,8 @@ public class TeamAddPlayerNode extends TeamNode {
 			}
 
 			// Checking if the player is registered in the current team.
-			if (getTree().getTeam().getPlayers().toList().contains(player)) {
+			// Checking if player is in the "black player list".
+			if (getTree().getTeam().getPlayers().toList().contains(player) || getTree().getExceptedPlayers().contains(player)) {
 				send(eventBuilder(sender, EGameCode.TEAM__ADD_PLAYER__PLAYER_ALREADY_REGISTERED, name, teamColoredName));
 				return false;
 			}
@@ -59,18 +65,20 @@ public class TeamAddPlayerNode extends TeamNode {
 
 		String playerNames = concat(args);
 
-		for (Player player : players)
+		for (Player player : players) {
 			getTree().getTeam().getPlayers().add(player);
+			getTree().getExceptedPlayers().add(player);
+		}
 
 		switch (args.length) {
 		case 0:
-			send(eventBuilder(sender, EGameCode.TEAM__ADD_PLAYER__NO_PLAYER_ADDED, teamColoredName));
+			sendSuccessful(sender, EGameCode.TEAM__ADD_PLAYER__NO_PLAYER_ADDED, teamColoredName);
 			break;
 		case 1:
-			send(eventBuilder(sender, EGameCode.TEAM__ADD_PLAYER__ONE_PLAYER_ADDED, playerNames, teamColoredName));
+			sendSuccessful(sender, EGameCode.TEAM__ADD_PLAYER__ONE_PLAYER_ADDED, playerNames, teamColoredName);
 			break;
 		default:
-			send(eventBuilder(sender, EGameCode.TEAM__ADD_PLAYER__SEVERAL_PLAYERS_ADDED, playerNames, teamColoredName));
+			sendSuccessful(sender, EGameCode.TEAM__ADD_PLAYER__SEVERAL_PLAYERS_ADDED, playerNames, teamColoredName);
 			break;
 		}
 		return true;

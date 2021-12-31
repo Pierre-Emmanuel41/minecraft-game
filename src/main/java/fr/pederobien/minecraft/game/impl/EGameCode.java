@@ -5,7 +5,7 @@ import fr.pederobien.minecraft.dictionary.interfaces.IMinecraftCode;
 import fr.pederobien.minecraft.dictionary.interfaces.IPlayerGroup;
 
 public enum EGameCode implements IMinecraftCode {
-	// Common codes --------------------------------------------------------------
+	// Common codes -------------------------------------------------------------
 
 	// Code for the name completion
 	NAME__COMPLETION,
@@ -16,10 +16,10 @@ public enum EGameCode implements IMinecraftCode {
 	// Code for player's name speaking to a team
 	GAME__TEAM__PLAYER_NAME,
 
-	// Code for the "team" command explanation -----------------------------------
+	// Code for the "team" command explanation ----------------------------------
 	TEAM__ROOT__EXPLANATION,
 
-	// Code for the "team new" command explanation -------------------------------
+	// Code for the "team new" command explanation ------------------------------
 	TEAM__NEW__EXPLANATION,
 
 	// Code when the team name is missing
@@ -37,10 +37,10 @@ public enum EGameCode implements IMinecraftCode {
 	// Code when a new team is created
 	TEAM__NEW__TEAM_CREATED,
 
-	// Code for the "team modify" command explanation ----------------------------
+	// Code for the "team modify" command explanation ---------------------------
 	TEAM__MODIFY__EXPLANATION,
 
-	// Code for the "team modify name" command explanation -----------------------
+	// Code for the "team modify name" command explanation ----------------------
 	TEAM__MODIFY_NAME__EXPLANATION,
 
 	// Code when the new team name is missing
@@ -52,7 +52,7 @@ public enum EGameCode implements IMinecraftCode {
 	// Code when the new team name is missing
 	TEAM__MODIFY_NAME__TEAM_NAME_UPDATED,
 
-	// Code for the "team modify color" command explanation ----------------------
+	// Code for the "team modify color" command explanation ---------------------
 	TEAM__MODIFY_COLOR__EXPLANATION,
 
 	// Code when the new team color is missing
@@ -64,7 +64,7 @@ public enum EGameCode implements IMinecraftCode {
 	// Code when the new team name is missing
 	TEAM__MODIFY_COLOR__TEAM_COLOR_UPDATED,
 
-	// Code for the "team remove" command explanation ----------------------------
+	// Code for the "team remove" command explanation ---------------------------
 	TEAM__REMOVE_PLAYER__EXPLANATION,
 
 	// Code when removing all players from a team
@@ -85,7 +85,7 @@ public enum EGameCode implements IMinecraftCode {
 	// Code when one player has been removed from a team
 	TEAM__REMOVE_PLAYER__SEVERAL_PLAYERS_REMOVED,
 
-	// Code for the "team add" command explanation -------------------------------
+	// Code for the "team add" command explanation ------------------------------
 	TEAM__ADD_PLAYER__EXPLANATION,
 
 	// Code when the player name refers to no player
@@ -103,16 +103,16 @@ public enum EGameCode implements IMinecraftCode {
 	// Code when one player has been added to a team
 	TEAM__ADD_PLAYER__SEVERAL_PLAYERS_ADDED,
 
-	// Code for the "startgame" command ------------------------------------------
+	// Code for the "startgame" command -----------------------------------------
 	START_GAME__EXPLANATION,
 
 	// Code when there is no game to start
 	START_GAME__NO_GAME_TO_START,
 
 	// Code when a game starts
-	START_GAME__STARTING_GAME,
+	START_GAME__STARTING_GAME(PlayerGroup.ALL),
 
-	// Code for the "pausegame" command ------------------------------------------
+	// Code for the "pausegame" command -----------------------------------------
 	PAUSE_GAME__EXPLANATION,
 
 	// Code when there is no game to start
@@ -122,10 +122,10 @@ public enum EGameCode implements IMinecraftCode {
 	PAUSE_GAME__GAME_NOT_STARTED,
 
 	// Code when a game starts
-	PAUSE_GAME__PAUSING_GAME,
+	PAUSE_GAME__PAUSING_GAME(PlayerGroup.ALL),
 
 	// Code when a game starts
-	PAUSE_GAME__RESUMING_GAME,
+	PAUSE_GAME__RESUMING_GAME(PlayerGroup.ALL),
 
 	// Code for the "stopgame" command ------------------------------------------
 	STOP_GAME__EXPLANATION,
@@ -134,25 +134,37 @@ public enum EGameCode implements IMinecraftCode {
 	STOP_GAME__NO_GAME_TO_STOP,
 
 	// Code when a game starts
-	STOP_GAME__STOPPING_GAME,
+	STOP_GAME__STOPPING_GAME(PlayerGroup.ALL),
+
+	// Code for the "teams" command ---------------------------------------------
+	GAME_CONFIG__TEAMS__EXPLANATION,
+
+	// Code for the "teams add" command -----------------------------------------
+	GAME_CONFIG__TEAMS_ADD__EXPLANATION,
+
+	// Code when a team has been added
+	GAME_CONFIG__TEAMS_ADD__TEAM_ADDED,
 
 	// Code for the "remove team" command ---------------------------------------
-	GAME_CONFIG__REMOVE_TEAM__EXPLANATION,
+	GAME_CONFIG__TEAMS_REMOVE__EXPLANATION,
 
 	// Code when removing all teams from a configuration
-	GAME_CONFIG__REMOVE_TEAM__ALL_PLAYERS_REMOVED,
+	GAME_CONFIG__TEAMS_REMOVE__ALL_PLAYERS_REMOVED,
 
 	// Code when the player name refers to no player
-	GAME_CONFIG__REMOVE_TEAM__TEAM_NOT_FOUND,
+	GAME_CONFIG__TEAMS_REMOVE__TEAM_NOT_FOUND,
 
 	// Code when no team has been removed from a game.
-	GAME_CONFIG__REMOVE_TEAM__NO_TEAM_REMOVED,
+	GAME_CONFIG__TEAMS_REMOVE__NO_TEAM_REMOVED,
 
 	// Code when one team has been removed from a game.
-	GAME_CONFIG__REMOVE_TEAM__ONE_TEAM_REMOVED,
+	GAME_CONFIG__TEAMS_REMOVE__ONE_TEAM_REMOVED,
 
 	// Code when several teams have been removed from a game.
-	GAME_CONFIG__REMOVE_TEAM__SEVERAL_TEAMS_REMOVED,
+	GAME_CONFIG__TEAMS_REMOVE__SEVERAL_TEAMS_REMOVED,
+
+	// Code for the "teams modify" command --------------------------------------
+	GAME_CONFIG__TEAMS_MODIFY__EXPLANATION,
 
 	// Code for the "feature" command -------------------------------------------
 	GAME_CONFIG__FEATURE__EXPLANATION,
@@ -166,7 +178,7 @@ public enum EGameCode implements IMinecraftCode {
 	// Code when the feature is enabled
 	GAME_CONFIG__FEATURE_ENABLE__ENABLED,
 
-	// Code for the "feature disable" command ------------------------------------
+	// Code for the "feature disable" command -----------------------------------
 	GAME_CONFIG__FEATURE_DISABLE__EXPLANATION,
 
 	// Code when the feature name is missing
@@ -175,29 +187,29 @@ public enum EGameCode implements IMinecraftCode {
 	// Code when the feature is disable
 	GAME_CONFIG__FEATURE_DISABLE__DISABLED,
 
-	// Code for the "feature argument" command -------------------------------------
-	GAME_CONFIG__FEATURE_ARGUMENT__EXPLANATION,
+	// Code for the "feature args" command ----------------------------------
+	GAME_CONFIG__FEATURE_ARGS__EXPLANATION,
 
 	// Code when the feature name is missing
-	GAME_CONFIG__FEATURE_ARGUMENT__NAME_IS_MISSING,
+	GAME_CONFIG__FEATURE_ARGS__NAME_IS_MISSING,
 
 	// Code when the feature is not registered
-	GAME_CONFIG__FEATURE_ARGUMENT__FEATURE_NOT_REGISTERED,
+	GAME_CONFIG__FEATURE_ARGS__FEATURE_NOT_REGISTERED,
 
-	// Code when the "randomTeams" command ------------------------------------------
-	GAME_CONFIG__RANDOM_TEAMS__EXPLANATION,
+	// Code when the "random" command --------------------------------------
+	GAME_CONFIG__TEAMS_RANDOM__EXPLANATION,
 
 	// Code to get the max number of players per team
-	GAME_CONFIG__RANDOM_TEAMS__MAX_PLAYERS_PER_TEAM,
+	GAME_CONFIG__TEAMS_RANDOM__MAX_PLAYERS_PER_TEAM,
 
 	// Code when the max player per team value is negative
-	GAME_CONFIG__RANDOM_TEAMS__MAX_PLAYERS_PER_TEAM__NEGATIVE_VALUE,
+	GAME_CONFIG__TEAMS_RANDOM__MAX_PLAYERS_PER_TEAM__NEGATIVE_VALUE,
 
 	// Code when bad format for the max player per team value
-	GAME_CONFIG__RANDOM_TEAMS__MAX_PLAYERS_PER_TEAM__BAD_FORMAT,
+	GAME_CONFIG__TEAMS_RANDOM__MAX_PLAYERS_PER_TEAM__BAD_FORMAT,
 
 	// Code when there are not enough players to create random teams
-	GAME_CONFIG__RANDOM_TEAMS__NOT_ENOUGH_PLAYERS,
+	GAME_CONFIG__TEAMS_RANDOM__NOT_ENOUGH_PLAYERS,
 
 	// Code when there are not enough teams to create dispatch players
 	GAME_CONFIG__RANDOM_TEAMS__NOT_ENOUGH_TEAMS,
@@ -205,25 +217,25 @@ public enum EGameCode implements IMinecraftCode {
 	// Code when there are not enough teams to create dispatch players
 	GAME_CONFIG__RANDOM_TEAMS__PLAYERS_DISPATCHED_IN_TEAMS,
 
-	// Code for the "movePlayer" command -------------------------------------------------
-	GAME_CONFIG__MOVE_PLAYER__EXPLANATION,
+	// Code for the "move" command ----------------------------------------
+	GAME_CONFIG__MOVE__EXPLANATION,
 
 	// Code when the player name is missing
-	GAME_CONFIG__MOVE_PLAYER__PLAYER_NAME_IS_MISSING,
+	GAME_CONFIG__MOVE__PLAYER_NAME_IS_MISSING,
 
 	// Code when the team name is missing
-	GAME_CONFIG__MOVE_PLAYER__TEAM_NAME_IS_MISSING,
+	GAME_CONFIG__MOVE__TEAM_NAME_IS_MISSING,
 
 	// Code when the player name refers to no player
-	GAME_CONFIG__MOVE_PLAYER__PLAYER_NOT_FOUND,
+	GAME_CONFIG__MOVE__PLAYER_NOT_FOUND,
 
 	// Code when the team name refers to no team
-	GAME_CONFIG__MOVE_PLAYER__TEAM_NOT_FOUND,
+	GAME_CONFIG__MOVE__TEAM_NOT_FOUND,
 
 	// Code when a player is moved from a team to another one
-	GAME_CONFIG__MOVE_PLAYER__PLAYER_MOVED_FROM_TO,
+	GAME_CONFIG__MOVE__PLAYER_MOVED_FROM_TO,
 
-	// Code for the "list" command -------------------------------------------------------
+	// Code for the "list" command ----------------------------------------------
 	GAME_CONFIG__LIST__EXPLANATION,
 
 	// Code when there is no list in configuration

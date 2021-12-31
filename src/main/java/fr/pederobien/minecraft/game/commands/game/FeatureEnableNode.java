@@ -9,12 +9,17 @@ import org.bukkit.command.CommandSender;
 
 import fr.pederobien.minecraft.game.impl.EGameCode;
 import fr.pederobien.minecraft.game.interfaces.IFeature;
-import fr.pederobien.minecraft.game.interfaces.IGame;
+import fr.pederobien.minecraft.game.interfaces.IFeatureList;
 
-public class GameFeatureEnableNode extends GameNode {
+public class FeatureEnableNode extends FeatureNode {
 
-	protected GameFeatureEnableNode(IGame game) {
-		super(game, "enable", EGameCode.GAME_CONFIG__FEATURE_ENABLE__EXPLANATION, g -> g != null);
+	/**
+	 * Creates a node to enable features.
+	 * 
+	 * @param features The list of features associated to this node.
+	 */
+	protected FeatureEnableNode(IFeatureList features) {
+		super(features, "enable", EGameCode.GAME_CONFIG__FEATURE_ENABLE__EXPLANATION, f -> f != null);
 	}
 
 	@Override
@@ -23,7 +28,7 @@ public class GameFeatureEnableNode extends GameNode {
 		case 0:
 			List<String> alreadyMentionnedFeatures = asList(args);
 			Predicate<String> filter = name -> alreadyMentionnedFeatures.contains(name);
-			return filter(getGame().getFeatures().stream().map(feature -> feature.getName()).filter(filter), args);
+			return filter(getFeatures().stream().map(feature -> feature.getName()).filter(filter), args);
 		default:
 			return emptyList();
 		}
@@ -33,15 +38,14 @@ public class GameFeatureEnableNode extends GameNode {
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		Optional<IFeature> optFeature;
 		try {
-			optFeature = getGame().getFeatures().getFeature(args[0]);
+			optFeature = getFeatures().getFeature(args[0]);
 		} catch (IndexOutOfBoundsException e) {
 			send(eventBuilder(sender, EGameCode.GAME_CONFIG__FEATURE_ENABLE__NAME_IS_MISSING).build());
 			return false;
 		}
 
 		optFeature.get().setEnabled(true);
-		send(eventBuilder(sender, EGameCode.GAME_CONFIG__FEATURE_ENABLE__ENABLED, optFeature.get().getName()));
+		sendSuccessful(sender, EGameCode.GAME_CONFIG__FEATURE_ENABLE__ENABLED, optFeature.get().getName());
 		return true;
 	}
-
 }

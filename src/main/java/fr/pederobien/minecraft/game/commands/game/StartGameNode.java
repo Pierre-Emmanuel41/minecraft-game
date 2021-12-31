@@ -32,7 +32,7 @@ public class StartGameNode extends GameNode {
 		if (getGame().getStartTabExecutor().onCommand(sender, command, label, args)) {
 			getGame().start();
 
-			send(EGameCode.START_GAME__STARTING_GAME);
+			sendSuccessful(sender, EGameCode.START_GAME__STARTING_GAME, getGame().getName());
 			return true;
 		}
 

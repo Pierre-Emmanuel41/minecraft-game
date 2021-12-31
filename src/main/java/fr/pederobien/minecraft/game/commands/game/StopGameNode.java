@@ -31,7 +31,7 @@ public class StopGameNode extends GameNode {
 
 		if (getGame().getStartTabExecutor().onCommand(sender, command, label, args)) {
 			getGame().stop();
-			send(EGameCode.STOP_GAME__STOPPING_GAME);
+			sendSuccessful(sender, EGameCode.STOP_GAME__STOPPING_GAME, getGame().getName());
 			return true;
 		}
 

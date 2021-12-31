@@ -8,22 +8,27 @@ import org.bukkit.command.CommandSender;
 
 import fr.pederobien.minecraft.game.impl.EGameCode;
 import fr.pederobien.minecraft.game.interfaces.IFeature;
-import fr.pederobien.minecraft.game.interfaces.IGame;
+import fr.pederobien.minecraft.game.interfaces.IFeatureList;
 
-public class GameFeatureArgumentNode extends GameNode {
+public class FeatureArgumentNode extends FeatureNode {
 
-	protected GameFeatureArgumentNode(IGame game) {
-		super(game, "argument", EGameCode.GAME_CONFIG__FEATURE_ARGUMENT__EXPLANATION, g -> g != null);
+	/**
+	 * Creates a node to set feature arguments before starting.
+	 * 
+	 * @param features The list of features associated to this node.
+	 */
+	protected FeatureArgumentNode(IFeatureList features) {
+		super(features, "args", EGameCode.GAME_CONFIG__FEATURE_ARGS__EXPLANATION, f -> f != null);
 	}
 
 	@Override
 	public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
 		switch (args.length) {
 		case 0:
-			return filter(getGame().getFeatures().stream().map(feature -> feature.getName()), args);
+			return filter(getFeatures().stream().map(feature -> feature.getName()), args);
 		case 1:
 
-			Optional<IFeature> optFeature = getGame().getFeatures().getFeature(args[0]);
+			Optional<IFeature> optFeature = getFeatures().getFeature(args[0]);
 			if (!optFeature.isPresent() || !optFeature.get().isEnable())
 				return emptyList();
 			else
@@ -39,13 +44,13 @@ public class GameFeatureArgumentNode extends GameNode {
 		try {
 			name = args[0];
 		} catch (IndexOutOfBoundsException e) {
-			send(eventBuilder(sender, EGameCode.GAME_CONFIG__FEATURE_ARGUMENT__NAME_IS_MISSING).build());
+			send(eventBuilder(sender, EGameCode.GAME_CONFIG__FEATURE_ARGS__NAME_IS_MISSING).build());
 			return false;
 		}
-		Optional<IFeature> optFeature = getGame().getFeatures().getFeature(name);
+		Optional<IFeature> optFeature = getFeatures().getFeature(name);
 
 		if (!optFeature.isPresent()) {
-			send(eventBuilder(sender, EGameCode.GAME_CONFIG__FEATURE_ARGUMENT__FEATURE_NOT_REGISTERED, name, getGame().getName()));
+			send(eventBuilder(sender, EGameCode.GAME_CONFIG__FEATURE_ARGS__FEATURE_NOT_REGISTERED, name, getFeatures().getName()));
 			return false;
 		}
 

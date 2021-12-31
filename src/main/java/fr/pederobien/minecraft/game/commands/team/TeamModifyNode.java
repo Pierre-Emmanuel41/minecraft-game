@@ -6,6 +6,11 @@ public class TeamModifyNode extends TeamNode {
 	private TeamModifyNameNode nameNode;
 	private TeamModifyColorNode colorNode;
 
+	/**
+	 * Creates a node that modifies a team.
+	 * 
+	 * @param tree The tree that contains a reference to the team to modify.
+	 */
 	protected TeamModifyNode(TeamCommandTree tree) {
 		super(tree, "modify", EGameCode.TEAM__MODIFY__EXPLANATION, team -> team != null);
 

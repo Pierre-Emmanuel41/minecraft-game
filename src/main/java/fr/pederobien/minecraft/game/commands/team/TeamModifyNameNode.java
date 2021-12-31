@@ -9,6 +9,11 @@ import fr.pederobien.minecraft.game.impl.EGameCode;
 
 public class TeamModifyNameNode extends TeamNode {
 
+	/**
+	 * Creates a node that modifies the name of a team.
+	 * 
+	 * @param tree The tree that contains a reference to the team to modify.
+	 */
 	protected TeamModifyNameNode(TeamCommandTree tree) {
 		super(tree, "name", EGameCode.TEAM__MODIFY_NAME__EXPLANATION, team -> team != null);
 	}
@@ -40,7 +45,7 @@ public class TeamModifyNameNode extends TeamNode {
 
 		String oldName = getTree().getTeam().getColoredName();
 		getTree().getTeam().setName(name);
-		send(eventBuilder(sender, EGameCode.TEAM__MODIFY_NAME__TEAM_NAME_UPDATED, oldName, getTree().getTeam().getColoredName()));
+		sendSuccessful(sender, EGameCode.TEAM__MODIFY_NAME__TEAM_NAME_UPDATED, oldName, getTree().getTeam().getColoredName());
 		return true;
 	}
 }

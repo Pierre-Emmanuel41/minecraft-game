@@ -6,14 +6,17 @@ import java.util.List;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
-import fr.pederobien.minecraft.game.event.TeamNewPostEvent;
 import fr.pederobien.minecraft.game.impl.EGameCode;
 import fr.pederobien.minecraft.game.impl.Team;
 import fr.pederobien.minecraft.managers.EColor;
-import fr.pederobien.utils.event.EventManager;
 
 public class TeamNewNode extends TeamNode {
 
+	/**
+	 * Creates a node that creates a new team.
+	 * 
+	 * @param tree The tree that contains a reference to the team to modify.
+	 */
 	protected TeamNewNode(TeamCommandTree tree) {
 		super(tree, "new", EGameCode.TEAM__NEW__EXPLANATION, team -> true);
 	}
@@ -62,8 +65,7 @@ public class TeamNewNode extends TeamNode {
 		}
 
 		getTree().setTeam(Team.of(name, color));
-		send(eventBuilder(sender, EGameCode.TEAM__NEW__TEAM_CREATED, getTree().getTeam().getColoredName()));
-		EventManager.callEvent(new TeamNewPostEvent(getTree().getTeam(), getTree()));
+		sendSuccessful(sender, EGameCode.TEAM__NEW__TEAM_CREATED, getTree().getTeam().getColoredName());
 		return true;
 	}
 }

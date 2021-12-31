@@ -16,7 +16,7 @@
 		</message>
 		<message>
 			<code>BAD_FORMAT</code>
-			<value>Bad format, expected format %s</value>
+			<value>Bad format, expected format: %s</value>
 		</message>
 		<message>
 			<code>ENABLE__COMPLETION</code>
@@ -25,10 +25,6 @@
 		<message>
 			<code>DISABLE__COMPLETION</code>
 			<value>Disable</value>
-		</message>
-		<message>
-			<code>ENABLE_DISABLE__BAD_FORMAT</code>
-			<value>Bad format for parameter "Enable/Disable"</value>
 		</message>
 		<message>
 			<code>GAME__TEAM__PLAYER_NAME</code>
@@ -195,28 +191,44 @@
 			<value>Stopping %s...</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__REMOVE_TEAM__EXPLANATION</code>
+			<code>GAME_CONFIG__TEAMS__EXPLANATION</code>
+			<value>To modify a list of teams of a game</value>
+		</message>
+		<message>
+			<code>GAME_CONFIG__TEAMS_ADD__EXPLANATION</code>
+			<value>To add a team to a game</value>
+		</message>
+		<message>
+			<code>GAME_CONFIG__TEAMS_ADD__TEAM_ADDED</code>
+			<value>Team %s has been added to %s</value>
+		</message>
+		<message>
+			<code>GAME_CONFIG__TEAMS_REMOVE__EXPLANATION</code>
 			<value>To remove a team from a game</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__REMOVE_TEAM__ALL_PLAYERS_REMOVED</code>
-			<value>All teams from %s have been removed</value>
+			<code>GAME_CONFIG__TEAMS_REMOVE__ALL_PLAYERS_REMOVED</code>
+			<value>All teams have been removed from %s</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__REMOVE_TEAM__TEAM_NOT_FOUND</code>
+			<code>GAME_CONFIG__TEAMS_REMOVE__TEAM_NOT_FOUND</code>
 			<value>Cannot remove %s from %s, the team is not registered in this game</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__REMOVE_TEAM__NO_TEAM_REMOVED</code>
+			<code>GAME_CONFIG__TEAMS_REMOVE__NO_TEAM_REMOVED</code>
 			<value>No team has been removed from %s</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__REMOVE_TEAM__ONE_TEAM_REMOVED</code>
+			<code>GAME_CONFIG__TEAMS_REMOVE__ONE_TEAM_REMOVED</code>
 			<value>%s has been removed from %s</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__REMOVE_TEAM__SEVERAL_TEAMS_REMOVED</code>
+			<code>GAME_CONFIG__TEAMS_REMOVE__SEVERAL_TEAMS_REMOVED</code>
 			<value>Teams %s have been removed from %s</value>
+		</message>
+		<message>
+			<code>GAME_CONFIG__TEAMS_MODIFY__EXPLANATION</code>
+			<value>To modify the characteristics of a team</value>
 		</message>
 		<message>
 			<code>GAME_CONFIG__FEATURE__EXPLANATION</code>
@@ -247,43 +259,43 @@
 			<value>Feature %s is disabled</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__FEATURE_ARGUMENT__EXPLANATION</code>
+			<code>GAME_CONFIG__FEATURE_ARGS__EXPLANATION</code>
 			<value>To set the argument before starting a feature</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__FEATURE_ARGUMENT__NAME_IS_MISSING</code>
+			<code>GAME_CONFIG__FEATURE_ARGS__NAME_IS_MISSING</code>
 			<value>Cannot set the argument of a feature, the name is missing</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__FEATURE_ARGUMENT__FEATURE_NOT_REGISTERED</code>
+			<code>GAME_CONFIG__FEATURE_ARGS__FEATURE_NOT_REGISTERED</code>
 			<value>Cannot set the argument of a %s, it is not registered for %s</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__RANDOM_TEAMS__EXPLANATION</code>
+			<code>GAME_CONFIG__TEAMS_RANDOM__EXPLANATION</code>
 			<value>To create random teams</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__RANDOM_TEAMS__MAX_PLAYERS_PER_TEAM</code>
+			<code>GAME_CONFIG__TEAMS_RANDOM__MAX_PLAYERS_PER_TEAM</code>
 			<value>&lt;maxPlayerPerTeam&gt;</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__RANDOM_TEAMS__MAX_PLAYERS_PER_TEAM__NEGATIVE_VALUE</code>
+			<code>GAME_CONFIG__TEAMS_RANDOM__MAX_PLAYERS_PER_TEAM__NEGATIVE_VALUE</code>
 			<value>The maximum number of players per team should be strictly positive</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__RANDOM_TEAMS__MAX_PLAYERS_PER_TEAM__BAD_FORMAT</code>
+			<code>GAME_CONFIG__TEAMS_RANDOM__MAX_PLAYERS_PER_TEAM__BAD_FORMAT</code>
 			<value>A positive integer</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__RANDOM_TEAMS__NOT_ENOUGH_PLAYERS</code>
+			<code>GAME_CONFIG__TEAMS_RANDOM__NOT_ENOUGH_PLAYERS</code>
 			<value>Cannot creates random teams, there is not enough players</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__RANDOM_TEAMS__NOT_ENOUGH_TEAMS</code>
+			<code>GAME_CONFIG__TEAMS_RANDOM__NOT_ENOUGH_TEAMS</code>
 			<value>Cannot creates random teams, there is not enough teams</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__RANDOM_TEAMS__PLAYERS_DISPATCHED_IN_TEAMS</code>
+			<code>GAME_CONFIG__TEAMS_RANDOM__PLAYERS_DISPATCHED_IN_TEAMS</code>
 			<value>Teams:%n%s</value>
 		</message>
 		<message>

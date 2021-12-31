@@ -19,6 +19,7 @@ public class TeamNode extends MinecraftCodeNode {
 	 */
 	protected TeamNode(TeamCommandTree tree, String label, IMinecraftCode explanation, Function<ITeam, Boolean> isAvailable) {
 		super(label, explanation, () -> isAvailable.apply(tree.getTeam()));
+		this.tree = tree;
 	}
 
 	/**
@@ -30,10 +31,11 @@ public class TeamNode extends MinecraftCodeNode {
 	 */
 	protected TeamNode(TeamCommandTree tree, String label, IMinecraftCode explanation) {
 		super(label, explanation);
+		this.tree = tree;
 	}
 
 	/**
-	 * @return The Tree associated to this node.
+	 * @return The team associated to this node.
 	 */
 	protected TeamCommandTree getTree() {
 		return tree;
