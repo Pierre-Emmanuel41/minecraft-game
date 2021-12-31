@@ -19,16 +19,6 @@ public interface IGame extends IPausable {
 	Plugin getPlugin();
 
 	/**
-	 * @return The list of teams for this configuration.
-	 */
-	ITeamList getTeams();
-
-	/**
-	 * @return The list of features for this configuration.
-	 */
-	IFeatureList getFeatures();
-
-	/**
 	 * @return The tab executor in order to run specific treatment according to argument line before starting the game.
 	 */
 	TabExecutor getStartTabExecutor();

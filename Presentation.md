@@ -109,16 +109,6 @@ public interface IGame extends IPausable {
 	Plugin getPlugin();
 
 	/**
-	 * @return The list of teams for this configuration.
-	 */
-	ITeamList getTeams();
-
-	/**
-	 * @return The list of features for this configuration.
-	 */
-	IFeatureList getFeatures();
-
-	/**
 	 * @return The tab executor in order to run specific treatment according to argument line before starting the game.
 	 */
 	TabExecutor getStartTabExecutor();
@@ -135,7 +125,9 @@ public interface IGame extends IPausable {
 }
 ```
 
-This interface can be extends by other game interfaces in order to add parameters. The default implementation of a game can be found [here](https://github.com/Pierre-Emmanuel41/minecraft-game/blob/master/src/main/java/fr/pederobien/minecraft/game/impl/Game.java). The interface IFeature can be used for adding new behaviors during the game. The default feature implementation is :
+This interface can be extends by other game interfaces in order to add parameters. The default implementation of a game can be found [here](https://github.com/Pierre-Emmanuel41/minecraft-game/blob/master/src/main/java/fr/pederobien/minecraft/game/impl/Game.java).  
+
+There are three implementations of an IGame : <code>TeamsGame</code>, <code>FeaturesGame</code> and <code>TeamsFeaturesGame</code> in order to add teams management, features management or both. The interface IFeature can be used for adding new behaviors during the game. The default feature implementation is :
 
 ```java
 public class Feature implements IFeature {
@@ -209,7 +201,7 @@ The time line, whose the default implementation is [TimeLine](https://github.com
 
 # 2) Commands
 
-From the <code>GamePlugin</code> class, the developer can have access to the <code>GameCommandTree</code>. This tree gather nodes defined as completer and executor for the commands <code>startgame</code>, <code>pausegame</code> and <code>stopgame</code>. It also gather commands to add/remove teams from a game, to setup features of a game and to move player(s) from a team to another one. This tree creates a new instance of a team command tree. However, unlike the TeamCommandTree, this tree has no root, it simply gather argument nodes the developer can use as he wants.
+From the <code>GamePlugin</code> class, the developer can have access to the <code>GameCommandTree</code>. This tree gather nodes defined as completer and executor for the commands <code>startgame</code>, <code>pausegame</code> and <code>stopgame</code>.
 
 The <code>TeamCommandTree</code> gather commands in order to create new teams, to modify team characteristics or to add/remove players from a team. Those command are not registered for minecraft commands. The root is "team" which means that when registered as commands argument for a game the user has access to the following tree:
 
@@ -220,3 +212,5 @@ team
 &ensp;&ensp;color  
 &ensp;remove  
 &ensp;add  
+
+Finally, the <code>NodeFactory</code> gather nodes in order to add/remove/modify teams of a game, to move player(s) from a team to another one and to setup features of a game.
