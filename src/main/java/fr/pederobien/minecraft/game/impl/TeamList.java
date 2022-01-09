@@ -19,6 +19,7 @@ import fr.pederobien.minecraft.game.event.TeamListTeamRemovePostEvent;
 import fr.pederobien.minecraft.game.exceptions.TeamAlreadyRegisteredException;
 import fr.pederobien.minecraft.game.interfaces.ITeam;
 import fr.pederobien.minecraft.game.interfaces.ITeamList;
+import fr.pederobien.minecraft.managers.EColor;
 import fr.pederobien.utils.event.EventManager;
 
 public class TeamList implements ITeamList {
@@ -79,6 +80,19 @@ public class TeamList implements ITeamList {
 	@Override
 	public Optional<ITeam> getTeam(String name) {
 		return Optional.ofNullable(teams.get(name));
+	}
+
+	@Override
+	public Optional<ITeam> getTeam(EColor color) {
+		lock.lock();
+		try {
+			for (ITeam team : teams.values())
+				if (team.getColor().equals(color))
+					return Optional.of(team);
+			return Optional.empty();
+		} finally {
+			lock.unlock();
+		}
 	}
 
 	@Override

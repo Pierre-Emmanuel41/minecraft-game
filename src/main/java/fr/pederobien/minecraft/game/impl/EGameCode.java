@@ -31,6 +31,9 @@ public enum EGameCode implements IMinecraftCode {
 	// Code when the team color is missing
 	TEAM__NEW__COLOR_IS_MISSING,
 
+	// Code when the team color is missing
+	TEAM__NEW__COLOR_NOT_FOUND,
+
 	// Code when the team name is already used
 	TEAM__NEW__COLOR_ALREADY_USED,
 

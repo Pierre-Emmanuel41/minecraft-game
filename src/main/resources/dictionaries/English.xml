@@ -51,6 +51,10 @@
 			<value>The color of the new team is missing</value>
 		</message>
 		<message>
+			<code>TEAM__NEW__COLOR_NOT_FOUND</code>
+			<value>The color of the new team does not exists</value>
+		</message>
+		<message>
 			<code>TEAM__NEW__COLOR_ALREADY_USED</code>
 			<value>The color %s is already used</value>
 		</message>

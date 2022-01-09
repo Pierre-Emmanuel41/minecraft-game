@@ -1,5 +1,6 @@
 package fr.pederobien.minecraft.game.commands.team;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.command.Command;
@@ -8,6 +9,7 @@ import org.bukkit.command.CommandSender;
 import fr.pederobien.minecraft.game.impl.EGameCode;
 
 public class TeamModifyNameNode extends TeamNode {
+	private List<String> exceptedNames;
 
 	/**
 	 * Creates a node that modifies the name of a team.
@@ -16,6 +18,7 @@ public class TeamModifyNameNode extends TeamNode {
 	 */
 	protected TeamModifyNameNode(TeamCommandTree tree) {
 		super(tree, "name", EGameCode.TEAM__MODIFY_NAME__EXPLANATION, team -> team != null);
+		exceptedNames = new ArrayList<String>();
 	}
 
 	@Override
@@ -38,8 +41,8 @@ public class TeamModifyNameNode extends TeamNode {
 			return false;
 		}
 
-		if (getTree().getExceptedNames().contains(name)) {
-			send(eventBuilder(sender, EGameCode.TEAM__MODIFY_NAME__NAME_IS_ALREADY_USED).build(getTree().getTeam().getName(), name));
+		if (exceptedNames.contains(name)) {
+			send(eventBuilder(sender, EGameCode.TEAM__MODIFY_NAME__NAME_IS_ALREADY_USED, name));
 			return false;
 		}
 
@@ -47,5 +50,12 @@ public class TeamModifyNameNode extends TeamNode {
 		getTree().getTeam().setName(name);
 		sendSuccessful(sender, EGameCode.TEAM__MODIFY_NAME__TEAM_NAME_UPDATED, oldName, getTree().getTeam().getColoredName());
 		return true;
+	}
+
+	/**
+	 * @return The list of names that should not be used for a team.
+	 */
+	public List<String> getExceptedNames() {
+		return exceptedNames;
 	}
 }

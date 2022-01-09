@@ -2,6 +2,7 @@ package fr.pederobien.minecraft.game.commands.game;
 
 import java.util.List;
 import java.util.StringJoiner;
+import java.util.function.Supplier;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -13,7 +14,7 @@ import fr.pederobien.minecraft.game.exceptions.RandomTeamNotEnoughTeam;
 import fr.pederobien.minecraft.game.impl.EGameCode;
 import fr.pederobien.minecraft.game.impl.TeamHelper;
 import fr.pederobien.minecraft.game.interfaces.ITeam;
-import fr.pederobien.minecraft.game.interfaces.ITeamList;
+import fr.pederobien.minecraft.game.interfaces.ITeamConfigurable;
 import fr.pederobien.minecraft.managers.EColor;
 
 public class TeamsRandomNode extends TeamsNode {
@@ -24,8 +25,8 @@ public class TeamsRandomNode extends TeamsNode {
 	 * 
 	 * @param teams The list of teams associated to this node.
 	 */
-	protected TeamsRandomNode(ITeamList teams) {
-		super(teams, "random", EGameCode.GAME_CONFIG__TEAMS_RANDOM__EXPLANATION, t -> t != null);
+	protected TeamsRandomNode(Supplier<ITeamConfigurable> teams) {
+		super(teams, "random", EGameCode.GAME_CONFIG__TEAMS_RANDOM__EXPLANATION, t -> t != null && t.getTeams() != null);
 	}
 
 	@Override

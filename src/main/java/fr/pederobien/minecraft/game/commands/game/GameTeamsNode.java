@@ -1,10 +1,13 @@
 package fr.pederobien.minecraft.game.commands.game;
 
+import java.util.function.Supplier;
+
+import fr.pederobien.minecraft.commandtree.impl.MinecraftCodeNode;
 import fr.pederobien.minecraft.game.commands.team.TeamCommandTree;
 import fr.pederobien.minecraft.game.impl.EGameCode;
 import fr.pederobien.minecraft.game.interfaces.ITeamConfigurable;
 
-public class GameTeamsNode extends TeamsNode {
+public class GameTeamsNode extends MinecraftCodeNode {
 	private TeamCommandTree teamTree;
 	private TeamsAddNode addNode;
 	private TeamsListNode listNode;
@@ -18,16 +21,16 @@ public class GameTeamsNode extends TeamsNode {
 	 * 
 	 * @param configurable The configurable object associated to this node.
 	 */
-	protected GameTeamsNode(ITeamConfigurable configurable) {
-		super(configurable.getTeams(), "teams", EGameCode.GAME_CONFIG__TEAMS__EXPLANATION);
+	protected GameTeamsNode(Supplier<ITeamConfigurable> configurable) {
+		super("teams", EGameCode.GAME_CONFIG__TEAMS__EXPLANATION, () -> configurable.get() != null);
 
 		teamTree = new TeamCommandTree();
-		add(addNode = new TeamsAddNode(getTeams(), teamTree));
-		add(listNode = TeamsListNode.newInstance(getTeams()));
-		add(removeNode = new TeamsRemoveNode(getTeams(), teamTree));
-		add(modifyNode = new TeamsModifyNode(getTeams(), teamTree));
-		add(randomNode = new TeamsRandomNode(getTeams()));
-		add(moveNode = new TeamsMoveNode(getTeams()));
+		add(addNode = new TeamsAddNode(configurable, teamTree));
+		add(listNode = TeamsListNode.newInstance(() -> configurable.get().getTeams()));
+		add(removeNode = new TeamsRemoveNode(configurable));
+		add(modifyNode = new TeamsModifyNode(configurable, teamTree));
+		add(randomNode = new TeamsRandomNode(configurable));
+		add(moveNode = new TeamsMoveNode(configurable));
 	}
 
 	/**

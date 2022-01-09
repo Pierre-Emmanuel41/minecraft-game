@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 import org.bukkit.entity.Player;
 
 import fr.pederobien.minecraft.game.exceptions.TeamAlreadyRegisteredException;
+import fr.pederobien.minecraft.managers.EColor;
 
 public interface ITeamList extends Iterable<ITeam> {
 
@@ -55,6 +56,15 @@ public interface ITeamList extends Iterable<ITeam> {
 	 * @return An optional that contains the team if registered, an empty optional otherwise.
 	 */
 	Optional<ITeam> getTeam(String name);
+
+	/**
+	 * Get the team associated to the given color.
+	 * 
+	 * @param volor The team color.
+	 * 
+	 * @return An optional that contains the team if registered, an empty optional otherwise.
+	 */
+	Optional<ITeam> getTeam(EColor color);
 
 	/**
 	 * @return a sequential {@code Stream} over the elements in this collection.

@@ -10,6 +10,7 @@ import fr.pederobien.minecraft.game.impl.EGameCode;
 import fr.pederobien.minecraft.managers.EColor;
 
 public class TeamModifyColorNode extends TeamNode {
+	private List<EColor> exceptedColors;
 
 	/**
 	 * Creates a node that modifies the color of a team.
@@ -18,6 +19,7 @@ public class TeamModifyColorNode extends TeamNode {
 	 */
 	protected TeamModifyColorNode(TeamCommandTree tree) {
 		super(tree, "color", EGameCode.TEAM__MODIFY_COLOR__EXPLANATION, team -> team != null);
+		exceptedColors = new ArrayList<EColor>();
 	}
 
 	@Override
@@ -26,7 +28,7 @@ public class TeamModifyColorNode extends TeamNode {
 		case 1:
 			List<String> colors = new ArrayList<String>();
 			for (EColor color : EColor.values())
-				if (!getTree().getExceptedColors().contains(color))
+				if (!exceptedColors.contains(color))
 					colors.add(color.toString());
 			return colors;
 		default:
@@ -40,12 +42,17 @@ public class TeamModifyColorNode extends TeamNode {
 		try {
 			color = EColor.getByColorName(args[0]);
 		} catch (IndexOutOfBoundsException e) {
-			send(eventBuilder(sender, EGameCode.TEAM__MODIFY_COLOR__COLOR_IS_MISSING).build(getTree().getTeam().getName()));
+			send(eventBuilder(sender, EGameCode.TEAM__MODIFY_COLOR__COLOR_IS_MISSING, getTree().getTeam().getName()));
 			return false;
 		}
 
-		if (getTree().getExceptedColors().contains(color)) {
-			send(eventBuilder(sender, EGameCode.TEAM__MODIFY_COLOR__COLOR_IS_ALREADY_USED).build(getTree().getTeam().getName(), color));
+		if (color == null) {
+			send(eventBuilder(sender, EGameCode.TEAM__NEW__COLOR_NOT_FOUND, args[0]));
+			return false;
+		}
+
+		if (exceptedColors.contains(color)) {
+			send(eventBuilder(sender, EGameCode.TEAM__MODIFY_COLOR__COLOR_IS_ALREADY_USED, getTree().getTeam().getName(), color));
 			return false;
 		}
 
@@ -53,5 +60,12 @@ public class TeamModifyColorNode extends TeamNode {
 		getTree().getTeam().setColor(color);
 		sendSuccessful(sender, EGameCode.TEAM__MODIFY_COLOR__TEAM_COLOR_UPDATED, oldColor.getColoredColorName(), getTree().getTeam().getColor().getColoredColorName());
 		return true;
+	}
+
+	/**
+	 * @return The list of colors that should not be used for a team.
+	 */
+	public List<EColor> getExceptedColors() {
+		return exceptedColors;
 	}
 }

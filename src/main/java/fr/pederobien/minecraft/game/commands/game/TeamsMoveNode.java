@@ -3,6 +3,7 @@ package fr.pederobien.minecraft.game.commands.game;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 import org.bukkit.command.Command;
@@ -11,7 +12,7 @@ import org.bukkit.entity.Player;
 
 import fr.pederobien.minecraft.game.impl.EGameCode;
 import fr.pederobien.minecraft.game.interfaces.ITeam;
-import fr.pederobien.minecraft.game.interfaces.ITeamList;
+import fr.pederobien.minecraft.game.interfaces.ITeamConfigurable;
 import fr.pederobien.minecraft.managers.PlayerManager;
 
 public class TeamsMoveNode extends TeamsNode {
@@ -21,8 +22,8 @@ public class TeamsMoveNode extends TeamsNode {
 	 * 
 	 * @param teams The list of teams associated to this node.
 	 */
-	protected TeamsMoveNode(ITeamList teams) {
-		super(teams, "move", EGameCode.GAME_CONFIG__MOVE__EXPLANATION, t -> t != null);
+	protected TeamsMoveNode(Supplier<ITeamConfigurable> teams) {
+		super(teams, "move", EGameCode.GAME_CONFIG__MOVE__EXPLANATION, t -> t != null && t.getTeams() != null);
 	}
 
 	@Override

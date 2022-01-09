@@ -11,6 +11,8 @@ import fr.pederobien.minecraft.game.impl.Team;
 import fr.pederobien.minecraft.managers.EColor;
 
 public class TeamNewNode extends TeamNode {
+	private List<String> exceptedNames;
+	private List<EColor> exceptedColors;
 
 	/**
 	 * Creates a node that creates a new team.
@@ -19,19 +21,21 @@ public class TeamNewNode extends TeamNode {
 	 */
 	protected TeamNewNode(TeamCommandTree tree) {
 		super(tree, "new", EGameCode.TEAM__NEW__EXPLANATION, team -> true);
+		exceptedNames = new ArrayList<String>();
+		exceptedColors = new ArrayList<EColor>();
 	}
 
 	@Override
 	public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
 		switch (args.length) {
-		case 0:
-			return asList(getMessage(sender, EGameCode.NAME__COMPLETION));
 		case 1:
+			return asList(getMessage(sender, EGameCode.NAME__COMPLETION));
+		case 2:
 			List<String> colors = new ArrayList<String>();
 			for (EColor color : EColor.values())
-				if (!getTree().getExceptedColors().contains(color))
+				if (!exceptedColors.contains(color))
 					colors.add(color.toString());
-			return colors;
+			return filter(colors.stream(), args);
 		}
 		return emptyList();
 	}
@@ -46,8 +50,8 @@ public class TeamNewNode extends TeamNode {
 			return false;
 		}
 
-		if (getTree().getExceptedNames().contains(name)) {
-			send(eventBuilder(sender, EGameCode.TEAM__NEW__NAME_ALREADY_USED).build(name));
+		if (exceptedNames.contains(name)) {
+			send(eventBuilder(sender, EGameCode.TEAM__NEW__NAME_ALREADY_USED, name));
 			return false;
 		}
 
@@ -59,7 +63,12 @@ public class TeamNewNode extends TeamNode {
 			return false;
 		}
 
-		if (getTree().getExceptedColors().contains(color)) {
+		if (color == null) {
+			send(eventBuilder(sender, EGameCode.TEAM__NEW__COLOR_NOT_FOUND, args[1]));
+			return false;
+		}
+
+		if (exceptedColors.contains(color)) {
 			send(eventBuilder(sender, EGameCode.TEAM__NEW__COLOR_ALREADY_USED).build(color.getColoredColorName()));
 			return false;
 		}
@@ -67,5 +76,19 @@ public class TeamNewNode extends TeamNode {
 		getTree().setTeam(Team.of(name, color));
 		sendSuccessful(sender, EGameCode.TEAM__NEW__TEAM_CREATED, getTree().getTeam().getColoredName());
 		return true;
+	}
+
+	/**
+	 * @return The list of names that should not be used for a team.
+	 */
+	public List<String> getExceptedNames() {
+		return exceptedNames;
+	}
+
+	/**
+	 * @return The list of colors that should no be used for a team.
+	 */
+	public List<EColor> getExceptedColors() {
+		return exceptedColors;
 	}
 }

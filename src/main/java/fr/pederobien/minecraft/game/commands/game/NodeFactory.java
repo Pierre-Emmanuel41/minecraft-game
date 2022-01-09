@@ -1,5 +1,7 @@
 package fr.pederobien.minecraft.game.commands.game;
 
+import java.util.function.Supplier;
+
 import fr.pederobien.minecraft.game.interfaces.IFeatureConfigurable;
 import fr.pederobien.minecraft.game.interfaces.ITeamConfigurable;
 
@@ -13,7 +15,7 @@ public class NodeFactory {
 	 * 
 	 * @return A node.
 	 */
-	public static GameTeamsNode teams(ITeamConfigurable configurable) {
+	public static GameTeamsNode teams(Supplier<ITeamConfigurable> configurable) {
 		return new GameTeamsNode(configurable);
 	}
 
@@ -25,7 +27,7 @@ public class NodeFactory {
 	 * 
 	 * @return A node.
 	 */
-	public static GameFeatureNode features(IFeatureConfigurable configurable) {
+	public static GameFeatureNode features(Supplier<IFeatureConfigurable> configurable) {
 		return new GameFeatureNode(configurable);
 	}
 }

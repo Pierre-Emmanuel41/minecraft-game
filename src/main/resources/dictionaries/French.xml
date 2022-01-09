@@ -40,6 +40,10 @@
 			<value>La couleur de la nouvelle équipe est manquante</value>
 		</message>
 		<message>
+			<code>TEAM__NEW__COLOR_NOT_FOUND</code>
+			<value>La couleur de la nouvelle équipe n'existe pas</value>
+		</message>
+		<message>
 			<code>TEAM__NEW__COLOR_ALREADY_USED</code>
 			<value>La couleur %s est déjà utilisée</value>
 		</message>

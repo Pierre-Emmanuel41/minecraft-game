@@ -6,16 +6,13 @@ import java.util.List;
 import org.bukkit.entity.Player;
 
 import fr.pederobien.minecraft.commandtree.impl.MinecraftCodeRootNode;
-import fr.pederobien.minecraft.commandtree.interfaces.IMinecraftCodeNode;
+import fr.pederobien.minecraft.commandtree.interfaces.IMinecraftCodeRootNode;
 import fr.pederobien.minecraft.game.impl.EGameCode;
 import fr.pederobien.minecraft.game.interfaces.ITeam;
-import fr.pederobien.minecraft.managers.EColor;
 
 public class TeamCommandTree {
 	private ITeam team;
-	private IMinecraftCodeNode root;
-	private List<String> exceptedNames;
-	private List<EColor> exceptedColors;
+	private IMinecraftCodeRootNode root;
 	private List<Player> exceptedPlayers;
 	private TeamNewNode newNode;
 	private TeamModifyNode modifyNode;
@@ -23,8 +20,6 @@ public class TeamCommandTree {
 	private TeamAddPlayerNode addPlayerNode;
 
 	public TeamCommandTree() {
-		exceptedNames = new ArrayList<String>();
-		exceptedColors = new ArrayList<EColor>();
 		exceptedPlayers = new ArrayList<Player>();
 
 		root = new MinecraftCodeRootNode("team", EGameCode.TEAM__ROOT__EXPLANATION, () -> true);
@@ -37,7 +32,7 @@ public class TeamCommandTree {
 	/**
 	 * @return The root of this command tree.
 	 */
-	public IMinecraftCodeNode getRoot() {
+	public IMinecraftCodeRootNode getRoot() {
 		return root;
 	}
 
@@ -83,20 +78,6 @@ public class TeamCommandTree {
 	 */
 	public void setTeam(ITeam team) {
 		this.team = team;
-	}
-
-	/**
-	 * @return The list that contains names that should not be used for another team.
-	 */
-	public List<String> getExceptedNames() {
-		return exceptedNames;
-	}
-
-	/**
-	 * @return The list that contains colors that should not be used for another team.
-	 */
-	public List<EColor> getExceptedColors() {
-		return exceptedColors;
 	}
 
 	/**

@@ -3,13 +3,14 @@ package fr.pederobien.minecraft.game.commands.game;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
 import fr.pederobien.minecraft.game.impl.EGameCode;
 import fr.pederobien.minecraft.game.interfaces.IFeature;
-import fr.pederobien.minecraft.game.interfaces.IFeatureList;
+import fr.pederobien.minecraft.game.interfaces.IFeatureConfigurable;
 
 public class FeatureEnableNode extends FeatureNode {
 
@@ -18,8 +19,8 @@ public class FeatureEnableNode extends FeatureNode {
 	 * 
 	 * @param features The list of features associated to this node.
 	 */
-	protected FeatureEnableNode(IFeatureList features) {
-		super(features, "enable", EGameCode.GAME_CONFIG__FEATURE_ENABLE__EXPLANATION, f -> f != null);
+	protected FeatureEnableNode(Supplier<IFeatureConfigurable> features) {
+		super(features, "enable", EGameCode.GAME_CONFIG__FEATURE_ENABLE__EXPLANATION, f -> f != null && f.getFeatures() != null);
 	}
 
 	@Override

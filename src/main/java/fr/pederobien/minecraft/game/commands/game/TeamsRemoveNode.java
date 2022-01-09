@@ -3,18 +3,17 @@ package fr.pederobien.minecraft.game.commands.game;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
-import fr.pederobien.minecraft.game.commands.team.TeamCommandTree;
 import fr.pederobien.minecraft.game.impl.EGameCode;
 import fr.pederobien.minecraft.game.interfaces.ITeam;
-import fr.pederobien.minecraft.game.interfaces.ITeamList;
+import fr.pederobien.minecraft.game.interfaces.ITeamConfigurable;
 
 public class TeamsRemoveNode extends TeamsNode {
-	private TeamCommandTree teamTree;
 
 	/**
 	 * Creates a node in order to remove teams from a team list.
@@ -22,9 +21,8 @@ public class TeamsRemoveNode extends TeamsNode {
 	 * @param teams    The list of teams associated to this node.
 	 * @param teamTree The command tree in order create or modify a team.
 	 */
-	protected TeamsRemoveNode(ITeamList teams, TeamCommandTree teamTree) {
-		super(teams, "remove", EGameCode.GAME_CONFIG__TEAMS_REMOVE__EXPLANATION, t -> t != null);
-		this.teamTree = teamTree;
+	protected TeamsRemoveNode(Supplier<ITeamConfigurable> teams) {
+		super(teams, "remove", EGameCode.GAME_CONFIG__TEAMS_REMOVE__EXPLANATION, t -> t != null && t.getTeams() != null);
 	}
 
 	@Override
@@ -66,13 +64,8 @@ public class TeamsRemoveNode extends TeamsNode {
 
 		String teamNames = concat(args);
 
-		for (ITeam team : teams) {
+		for (ITeam team : teams)
 			getTeams().remove(team);
-
-			// Updating the team tree.
-			teamTree.getExceptedNames().remove(team.getName());
-			teamTree.getExceptedColors().remove(team.getColor());
-		}
 
 		switch (teams.size()) {
 		case 0:
