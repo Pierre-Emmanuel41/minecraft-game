@@ -1,10 +1,5 @@
 package fr.pederobien.minecraft.game.commands.team;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.bukkit.entity.Player;
-
 import fr.pederobien.minecraft.commandtree.impl.MinecraftCodeRootNode;
 import fr.pederobien.minecraft.commandtree.interfaces.IMinecraftCodeRootNode;
 import fr.pederobien.minecraft.game.impl.EGameCode;
@@ -13,15 +8,12 @@ import fr.pederobien.minecraft.game.interfaces.ITeam;
 public class TeamCommandTree {
 	private ITeam team;
 	private IMinecraftCodeRootNode root;
-	private List<Player> exceptedPlayers;
 	private TeamNewNode newNode;
 	private TeamModifyNode modifyNode;
 	private TeamRemovePlayerNode removePlayerNode;
 	private TeamAddPlayerNode addPlayerNode;
 
 	public TeamCommandTree() {
-		exceptedPlayers = new ArrayList<Player>();
-
 		root = new MinecraftCodeRootNode("team", EGameCode.TEAM__ROOT__EXPLANATION, () -> true);
 		root.add(newNode = new TeamNewNode(this));
 		root.add(modifyNode = new TeamModifyNode(this));
@@ -78,12 +70,5 @@ public class TeamCommandTree {
 	 */
 	public void setTeam(ITeam team) {
 		this.team = team;
-	}
-
-	/**
-	 * @return The list that contains players that should not be added to another team.
-	 */
-	public List<Player> getExceptedPlayers() {
-		return exceptedPlayers;
 	}
 }

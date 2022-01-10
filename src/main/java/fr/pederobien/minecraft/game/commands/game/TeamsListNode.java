@@ -9,7 +9,7 @@ import fr.pederobien.minecraft.game.commands.ListNode;
 import fr.pederobien.minecraft.game.commands.ListNode.ListNodeBuilder;
 import fr.pederobien.minecraft.game.impl.EGameCode;
 import fr.pederobien.minecraft.game.interfaces.ITeam;
-import fr.pederobien.minecraft.game.interfaces.ITeamList;
+import fr.pederobien.minecraft.game.interfaces.ITeamConfigurable;
 
 public class TeamsListNode extends MinecraftCodeNodeWrapper {
 
@@ -22,7 +22,7 @@ public class TeamsListNode extends MinecraftCodeNodeWrapper {
 	 * 
 	 * @param teams The list of teams to display.
 	 */
-	public static TeamsListNode newInstance(Supplier<ITeamList> teams) {
+	public static TeamsListNode newInstance(Supplier<ITeamConfigurable> teams) {
 		return new GameTeamListNodeBuilder(teams).build();
 	}
 
@@ -34,15 +34,15 @@ public class TeamsListNode extends MinecraftCodeNodeWrapper {
 		 * 
 		 * @param teams The list of teams to display.
 		 */
-		public GameTeamListNodeBuilder(Supplier<ITeamList> teams) {
-			builder = ListNode.builder(() -> teams.get().toList());
-			builder.onNoElement(sender -> sendSuccessful(sender, EGameCode.GAME_CONFIG__LIST__NO_TEAM_REGISTERED, teams.get().getName()));
-			builder.onOneElement((sender, team) -> sendSuccessful(sender, EGameCode.GAME_CONFIG__LIST__ONE_TEAM_REGISTERED, teams.get().getName(), team));
+		public GameTeamListNodeBuilder(Supplier<ITeamConfigurable> teams) {
+			builder = ListNode.builder(() -> teams.get().getTeams().toList());
+			builder.onNoElement(sender -> sendSuccessful(sender, EGameCode.GAME_CONFIG__LIST__NO_TEAM_REGISTERED, teams.get().getTeams().getName()));
+			builder.onOneElement((sender, team) -> sendSuccessful(sender, EGameCode.GAME_CONFIG__LIST__ONE_TEAM_REGISTERED, teams.get().getTeams(), team));
 			builder.onSeveralElements((sender, teamsList) -> {
-				StringJoiner joiner = new StringJoiner(", ");
+				StringJoiner joiner = new StringJoiner("\n");
 				for (ITeam team : teamsList)
-					joiner.add(team.getColoredName());
-				sendSuccessful(sender, EGameCode.GAME_CONFIG__LIST__SEVERAL_TEAMS_REGISTERED, teams.get().getName(), joiner.toString());
+					joiner.add("" + team);
+				sendSuccessful(sender, EGameCode.GAME_CONFIG__LIST__SEVERAL_TEAMS_REGISTERED, teams.get().getTeams().getName(), joiner.toString());
 			});
 		}
 

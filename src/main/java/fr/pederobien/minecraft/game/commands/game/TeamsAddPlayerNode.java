@@ -8,28 +8,18 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import fr.pederobien.minecraft.game.commands.team.TeamAddPlayerNode;
 import fr.pederobien.minecraft.game.commands.team.TeamCommandTree;
-import fr.pederobien.minecraft.game.commands.team.TeamModifyColorNode;
-import fr.pederobien.minecraft.game.commands.team.TeamModifyNameNode;
 import fr.pederobien.minecraft.game.impl.EGameCode;
 import fr.pederobien.minecraft.game.interfaces.ITeam;
 import fr.pederobien.minecraft.game.interfaces.ITeamConfigurable;
 
-public class TeamsModifyNode extends TeamsNode {
+public class TeamsAddPlayerNode extends TeamsNode {
 	private TeamCommandTree teamTree;
 
-	/**
-	 * Creates a node that modify characteristics of a team.
-	 * 
-	 * @param teams    The list of teams associated to this node.
-	 * @param teamTree The command tree in order create or modify a team.
-	 */
-	protected TeamsModifyNode(Supplier<ITeamConfigurable> teams, TeamCommandTree teamTree) {
-		super(teams, "modify", EGameCode.GAME_CONFIG__TEAMS_MODIFY__EXPLANATION, t -> t != null && t.getTeams() != null);
+	protected TeamsAddPlayerNode(Supplier<ITeamConfigurable> teams, TeamCommandTree teamTree) {
+		super(teams, "player", EGameCode.TEAM__ADD_PLAYER__EXPLANATION, t -> t != null);
 		this.teamTree = teamTree;
-
-		add(teamTree.getModifyNode().getNameNode());
-		add(teamTree.getModifyNode().getColorNode());
 	}
 
 	@Override
@@ -46,7 +36,7 @@ public class TeamsModifyNode extends TeamsNode {
 
 			updateExceptedList();
 			teamTree.setTeam(optTeam.get());
-			return super.onTabComplete(sender, command, alias, extract(args, 1));
+			return teamTree.getAddPlayerNode().onTabComplete(sender, command, alias, extract(args, 1));
 		}
 	}
 
@@ -65,30 +55,19 @@ public class TeamsModifyNode extends TeamsNode {
 
 		updateExceptedList();
 		teamTree.setTeam(optTeam.get());
-		return super.onCommand(sender, command, label, extract(args, 1));
+		return teamTree.getAddPlayerNode().onCommand(sender, command, label, extract(args, 1));
 	}
 
 	/**
-	 * @return The node that modifies the name of a team.
+	 * @return The node that add players to the current team.
 	 */
-	public TeamModifyNameNode getNameNode() {
-		return teamTree.getModifyNode().getNameNode();
-	}
-
-	/**
-	 * @return The node that modifies the color of a team.
-	 */
-	public TeamModifyColorNode getColorNode() {
-		return teamTree.getModifyNode().getColorNode();
+	public TeamAddPlayerNode getAddPlayerNode() {
+		return teamTree.getAddPlayerNode();
 	}
 
 	private void updateExceptedList() {
-		teamTree.getModifyNode().getNameNode().getExceptedNames().clear();
-		teamTree.getModifyNode().getColorNode().getExceptedColors().clear();
 		teamTree.getAddPlayerNode().getExceptedPlayers().clear();
 		getTeams().toList().forEach(t -> {
-			teamTree.getModifyNode().getNameNode().getExceptedNames().add(t.getName());
-			teamTree.getModifyNode().getColorNode().getExceptedColors().add(t.getColor());
 			for (Player player : t.getPlayers().toList())
 				teamTree.getAddPlayerNode().getExceptedPlayers().add(player);
 		});

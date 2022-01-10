@@ -14,7 +14,6 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.Team;
 
-import fr.pederobien.minecraft.game.exceptions.RandomTeamNotEnoughPlayer;
 import fr.pederobien.minecraft.game.exceptions.RandomTeamNotEnoughTeam;
 import fr.pederobien.minecraft.game.interfaces.ITeam;
 import fr.pederobien.minecraft.game.interfaces.ITeamList;
@@ -183,8 +182,7 @@ public class TeamHelper {
 	 * @param teams           A list of team in which players are dispatched.
 	 * @param maxPlayerInTeam The max player allowed per team.
 	 * 
-	 * @throws RandomTeamNotEnoughPlayer If there are not enough players.
-	 * @throws RandomTeamNotEnoughTeam   If there are not enough teams.
+	 * @throws RandomTeamNotEnoughTeam If there are not enough teams.
 	 */
 	public static void dispatchPlayerRandomlyInTeam(ITeamList teams, int maxPlayerInTeam) {
 		for (ITeam team : teams)
@@ -196,10 +194,8 @@ public class TeamHelper {
 		copyPlayers = TeamManager.mix(copyPlayers);
 
 		if (maxPlayerInTeam > 0) {
-			if (copyPlayers.size() <= maxPlayerInTeam)
-				throw new RandomTeamNotEnoughPlayer(copyPlayers.size());
 			int nbTeams = copyPlayers.size() / maxPlayerInTeam + (copyPlayers.size() % maxPlayerInTeam > 0 ? 1 : 0);
-			if (copyTeams.size() < nbTeams)
+			if (teams.toList().isEmpty() || copyTeams.size() < nbTeams)
 				throw new RandomTeamNotEnoughTeam(copyTeams.size());
 
 			for (int i = 0; i < teams.toList().size() - nbTeams; i++)

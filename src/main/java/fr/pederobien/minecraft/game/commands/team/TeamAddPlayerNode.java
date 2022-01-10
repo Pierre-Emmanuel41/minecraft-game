@@ -13,6 +13,7 @@ import fr.pederobien.minecraft.game.impl.EGameCode;
 import fr.pederobien.minecraft.managers.PlayerManager;
 
 public class TeamAddPlayerNode extends TeamNode {
+	private List<Player> exceptedPlayers;
 
 	/**
 	 * Creates a node that adds players to a team.
@@ -21,20 +22,18 @@ public class TeamAddPlayerNode extends TeamNode {
 	 */
 	protected TeamAddPlayerNode(TeamCommandTree tree) {
 		super(tree, "add", EGameCode.TEAM__ADD_PLAYER__EXPLANATION, team -> team != null);
+		exceptedPlayers = new ArrayList<Player>();
 	}
 
 	@Override
 	public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
-		List<String> playerNames;
 		Predicate<Player> filter;
 		switch (args.length) {
 		case 0:
-			playerNames = asList(args);
-			filter = player -> !getTree().getExceptedPlayers().contains(player) && playerNames.contains(player.getName());
-			return filter(PlayerGroup.ALL.toStream().filter(filter).map(player -> player.getName()), args);
+			return emptyList();
 		default:
-			playerNames = asList(extract(args, 1));
-			filter = player -> !getTree().getExceptedPlayers().contains(player) && playerNames.contains(player.getName());
+			List<String> alreadyMentionned = asList(args);
+			filter = player -> !exceptedPlayers.contains(player) && !alreadyMentionned.contains(player.getName());
 			return filter(PlayerGroup.ALL.toStream().filter(filter).map(player -> player.getName()), args);
 		}
 	}
@@ -55,7 +54,7 @@ public class TeamAddPlayerNode extends TeamNode {
 
 			// Checking if the player is registered in the current team.
 			// Checking if player is in the "black player list".
-			if (getTree().getTeam().getPlayers().toList().contains(player) || getTree().getExceptedPlayers().contains(player)) {
+			if (getTree().getTeam().getPlayers().toList().contains(player) || exceptedPlayers.contains(player)) {
 				send(eventBuilder(sender, EGameCode.TEAM__ADD_PLAYER__PLAYER_ALREADY_REGISTERED, name, teamColoredName));
 				return false;
 			}
@@ -65,10 +64,8 @@ public class TeamAddPlayerNode extends TeamNode {
 
 		String playerNames = concat(args);
 
-		for (Player player : players) {
+		for (Player player : players)
 			getTree().getTeam().getPlayers().add(player);
-			getTree().getExceptedPlayers().add(player);
-		}
 
 		switch (args.length) {
 		case 0:
@@ -82,5 +79,12 @@ public class TeamAddPlayerNode extends TeamNode {
 			break;
 		}
 		return true;
+	}
+
+	/**
+	 * @return The list of players that should not be added in a team.
+	 */
+	public List<Player> getExceptedPlayers() {
+		return exceptedPlayers;
 	}
 }

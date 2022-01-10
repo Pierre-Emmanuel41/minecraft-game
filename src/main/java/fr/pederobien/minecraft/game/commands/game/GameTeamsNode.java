@@ -3,6 +3,7 @@ package fr.pederobien.minecraft.game.commands.game;
 import java.util.function.Supplier;
 
 import fr.pederobien.minecraft.commandtree.impl.MinecraftCodeNode;
+import fr.pederobien.minecraft.dictionary.impl.PlayerGroup;
 import fr.pederobien.minecraft.game.commands.team.TeamCommandTree;
 import fr.pederobien.minecraft.game.impl.EGameCode;
 import fr.pederobien.minecraft.game.interfaces.ITeamConfigurable;
@@ -13,8 +14,8 @@ public class GameTeamsNode extends MinecraftCodeNode {
 	private TeamsListNode listNode;
 	private TeamsRemoveNode removeNode;
 	private TeamsModifyNode modifyNode;
-	private TeamsRandomNode randomNode;
 	private TeamsMoveNode moveNode;
+	private TeamsRandomNode randomNode;
 
 	/**
 	 * Creates a node in order to modify a team configurable object.
@@ -26,11 +27,14 @@ public class GameTeamsNode extends MinecraftCodeNode {
 
 		teamTree = new TeamCommandTree();
 		add(addNode = new TeamsAddNode(configurable, teamTree));
-		add(listNode = TeamsListNode.newInstance(() -> configurable.get().getTeams()));
-		add(removeNode = new TeamsRemoveNode(configurable));
+		add(removeNode = new TeamsRemoveNode(configurable, teamTree));
 		add(modifyNode = new TeamsModifyNode(configurable, teamTree));
-		add(randomNode = new TeamsRandomNode(configurable));
+		add(listNode = TeamsListNode.newInstance(configurable));
 		add(moveNode = new TeamsMoveNode(configurable));
+		add(randomNode = new TeamsRandomNode(configurable));
+
+		// By default, all players receive the new teams composition
+		randomNode.setTeamsCompositionGroup(PlayerGroup.ALL);
 	}
 
 	/**
@@ -62,16 +66,16 @@ public class GameTeamsNode extends MinecraftCodeNode {
 	}
 
 	/**
-	 * @return The node that dispatches players randomly in team.
-	 */
-	public TeamsRandomNode getRandomNode() {
-		return randomNode;
-	}
-
-	/**
 	 * @return The node that moves a player from one team to another one.
 	 */
 	public TeamsMoveNode getMoveNode() {
 		return moveNode;
+	}
+
+	/**
+	 * @return The node that dispatches players randomly in team.
+	 */
+	public TeamsRandomNode getRandomNode() {
+		return randomNode;
 	}
 }

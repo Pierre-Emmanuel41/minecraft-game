@@ -16,13 +16,16 @@ import org.bukkit.entity.Player;
 
 import fr.pederobien.minecraft.game.event.TeamListTeamAddPostEvent;
 import fr.pederobien.minecraft.game.event.TeamListTeamRemovePostEvent;
+import fr.pederobien.minecraft.game.event.TeamNameChangePostEvent;
 import fr.pederobien.minecraft.game.exceptions.TeamAlreadyRegisteredException;
 import fr.pederobien.minecraft.game.interfaces.ITeam;
 import fr.pederobien.minecraft.game.interfaces.ITeamList;
 import fr.pederobien.minecraft.managers.EColor;
+import fr.pederobien.utils.event.EventHandler;
 import fr.pederobien.utils.event.EventManager;
+import fr.pederobien.utils.event.IEventListener;
 
-public class TeamList implements ITeamList {
+public class TeamList implements ITeamList, IEventListener {
 	private String name;
 	private Map<String, ITeam> teams;
 	private Lock lock;
@@ -31,6 +34,8 @@ public class TeamList implements ITeamList {
 		this.name = name;
 		teams = new LinkedHashMap<String, ITeam>();
 		lock = new ReentrantLock(true);
+
+		EventManager.registerListener(this);
 	}
 
 	@Override
@@ -120,6 +125,20 @@ public class TeamList implements ITeamList {
 		return origin;
 	}
 
+	@EventHandler
+	private void onTeamNameChange(TeamNameChangePostEvent event) {
+		Optional<ITeam> optOldTeam = getTeam(event.getOldName());
+		if (!optOldTeam.isPresent())
+			return;
+
+		Optional<ITeam> optNewTeam = getTeam(event.getTeam().getName());
+		if (optNewTeam.isPresent())
+			throw new TeamAlreadyRegisteredException(this, optNewTeam.get());
+
+		remove(event.getOldName());
+		add(event.getTeam());
+	}
+
 	/**
 	 * Thread safe operation that adds a team to the teams list.
 	 * 
@@ -149,7 +168,10 @@ public class TeamList implements ITeamList {
 	private ITeam removeTeam(String name) {
 		lock.lock();
 		try {
-			return teams.remove(name);
+			ITeam team = teams.remove(name);
+			if (team != null)
+				team.getPlayers().clear();
+			return team;
 		} finally {
 			lock.unlock();
 		}

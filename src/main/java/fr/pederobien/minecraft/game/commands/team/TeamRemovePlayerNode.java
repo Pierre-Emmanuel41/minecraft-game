@@ -9,6 +9,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import fr.pederobien.minecraft.game.impl.EGameCode;
+import fr.pederobien.minecraft.managers.EColor;
 import fr.pederobien.minecraft.managers.PlayerManager;
 
 public class TeamRemovePlayerNode extends TeamNode {
@@ -27,6 +28,9 @@ public class TeamRemovePlayerNode extends TeamNode {
 		List<String> playerNames = asList(args);
 		Stream<String> players = getTree().getTeam().getPlayers().stream().map(player -> player.getName()).filter(name -> !playerNames.contains(name));
 
+		if (getTree().getTeam().getPlayers().toList().isEmpty())
+			return emptyList();
+
 		// Adding all to delete all registered players.
 		if (args.length == 1)
 			return filter(Stream.concat(players, Stream.of("all")), args);
@@ -40,10 +44,18 @@ public class TeamRemovePlayerNode extends TeamNode {
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		String teamColoredName = getTree().getTeam().getColoredName();
 
+		String first;
+		try {
+			first = args[0];
+		} catch (IndexOutOfBoundsException e) {
+			sendSuccessful(sender, EGameCode.TEAM__REMOVE_PLAYER__NO_PLAYER_REMOVED, teamColoredName);
+			return false;
+		}
+
 		// Clearing the current team from its players.
-		if (args[0].equals("all")) {
+		if (first.equals("all")) {
 			getTree().getTeam().getPlayers().clear();
-			sendSuccessful(sender, EGameCode.TEAM__REMOVE_PLAYER__ALL_PLAYERS_REMOVED, teamColoredName);
+			sendSuccessful(sender, EGameCode.TEAM__REMOVE_PLAYER__ALL_PLAYERS_REMOVED, getTree().getTeam().getColoredName(EColor.GOLD));
 			return true;
 		}
 
@@ -72,14 +84,11 @@ public class TeamRemovePlayerNode extends TeamNode {
 			getTree().getTeam().getPlayers().remove(player);
 
 		switch (players.size()) {
-		case 0:
-			sendSuccessful(sender, EGameCode.TEAM__REMOVE_PLAYER__NO_PLAYER_REMOVED, teamColoredName);
-			break;
 		case 1:
-			sendSuccessful(sender, EGameCode.TEAM__REMOVE_PLAYER__ONE_PLAYER_REMOVED, playerNames, teamColoredName);
+			sendSuccessful(sender, EGameCode.TEAM__REMOVE_PLAYER__ONE_PLAYER_REMOVED, playerNames, getTree().getTeam().getColoredName(EColor.GOLD));
 			break;
 		default:
-			sendSuccessful(sender, EGameCode.TEAM__REMOVE_PLAYER__SEVERAL_PLAYERS_REMOVED, playerNames, teamColoredName);
+			sendSuccessful(sender, EGameCode.TEAM__REMOVE_PLAYER__SEVERAL_PLAYERS_REMOVED, playerNames, getTree().getTeam().getColoredName(EColor.GOLD));
 			break;
 		}
 

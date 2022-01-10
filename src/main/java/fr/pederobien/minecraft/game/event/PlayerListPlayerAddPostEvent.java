@@ -17,6 +17,7 @@ public class PlayerListPlayerAddPostEvent extends PlayerListEvent {
 	 */
 	public PlayerListPlayerAddPostEvent(IPlayerList list, Player player) {
 		super(list);
+		this.player = player;
 	}
 
 	/**
@@ -30,7 +31,7 @@ public class PlayerListPlayerAddPostEvent extends PlayerListEvent {
 	public String toString() {
 		StringJoiner joiner = new StringJoiner(", ", "{", "}");
 		joiner.add("list=" + getList().getName());
-		joiner.add("player=" + player.getName());
-		return String.format("%s_%s", getName(), joiner.toString());
+		joiner.add("player=" + getPlayer().getName());
+		return String.format("%s_%s", getName(), joiner);
 	}
 }

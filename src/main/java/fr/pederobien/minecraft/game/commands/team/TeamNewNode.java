@@ -69,12 +69,12 @@ public class TeamNewNode extends TeamNode {
 		}
 
 		if (exceptedColors.contains(color)) {
-			send(eventBuilder(sender, EGameCode.TEAM__NEW__COLOR_ALREADY_USED).build(color.getColoredColorName()));
+			send(eventBuilder(sender, EGameCode.TEAM__NEW__COLOR_ALREADY_USED, color.getColoredColorName()));
 			return false;
 		}
 
 		getTree().setTeam(Team.of(name, color));
-		sendSuccessful(sender, EGameCode.TEAM__NEW__TEAM_CREATED, getTree().getTeam().getColoredName());
+		sendSuccessful(sender, EGameCode.TEAM__NEW__TEAM_CREATED, getTree().getTeam().getColoredName(EColor.GOLD));
 		return true;
 	}
 

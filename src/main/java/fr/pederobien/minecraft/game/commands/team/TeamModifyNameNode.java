@@ -7,6 +7,8 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
 import fr.pederobien.minecraft.game.impl.EGameCode;
+import fr.pederobien.minecraft.game.interfaces.ITeam;
+import fr.pederobien.minecraft.managers.EColor;
 
 public class TeamModifyNameNode extends TeamNode {
 	private List<String> exceptedNames;
@@ -33,22 +35,24 @@ public class TeamModifyNameNode extends TeamNode {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+		ITeam team = getTree().getTeam();
+
 		String name;
 		try {
 			name = args[0];
 		} catch (IndexOutOfBoundsException e) {
-			send(eventBuilder(sender, EGameCode.TEAM__MODIFY_NAME__NAME_IS_MISSING).build(getTree().getTeam().getName()));
+			send(eventBuilder(sender, EGameCode.TEAM__MODIFY_NAME__NAME_IS_MISSING, team.getName()));
 			return false;
 		}
 
 		if (exceptedNames.contains(name)) {
-			send(eventBuilder(sender, EGameCode.TEAM__MODIFY_NAME__NAME_IS_ALREADY_USED, name));
+			send(eventBuilder(sender, EGameCode.TEAM__MODIFY_NAME__NAME_IS_ALREADY_USED, team.getColoredName(), team.getColor().getInColor(name)));
 			return false;
 		}
 
-		String oldName = getTree().getTeam().getColoredName();
-		getTree().getTeam().setName(name);
-		sendSuccessful(sender, EGameCode.TEAM__MODIFY_NAME__TEAM_NAME_UPDATED, oldName, getTree().getTeam().getColoredName());
+		String oldName = team.getColoredName(EColor.GOLD);
+		team.setName(name);
+		sendSuccessful(sender, EGameCode.TEAM__MODIFY_NAME__TEAM_NAME_UPDATED, oldName, team.getColoredName(EColor.GOLD));
 		return true;
 	}
 

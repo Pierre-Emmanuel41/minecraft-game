@@ -9,7 +9,6 @@ import org.bukkit.command.CommandSender;
 
 import fr.pederobien.minecraft.dictionary.impl.MinecraftMessageEvent.MinecraftMessageEventBuilder;
 import fr.pederobien.minecraft.dictionary.interfaces.IPlayerGroup;
-import fr.pederobien.minecraft.game.exceptions.RandomTeamNotEnoughPlayer;
 import fr.pederobien.minecraft.game.exceptions.RandomTeamNotEnoughTeam;
 import fr.pederobien.minecraft.game.impl.EGameCode;
 import fr.pederobien.minecraft.game.impl.TeamHelper;
@@ -51,17 +50,14 @@ public class TeamsRandomNode extends TeamsNode {
 		} catch (IndexOutOfBoundsException e) {
 			maxPlayerInTeam = -1;
 		} catch (NumberFormatException e) {
-			send(eventBuilder(sender, EGameCode.BAD_FORMAT, EGameCode.GAME_CONFIG__TEAMS_RANDOM__MAX_PLAYERS_PER_TEAM__BAD_FORMAT));
+			send(eventBuilder(sender, EGameCode.BAD_FORMAT, getMessage(sender, EGameCode.STRICTLY_POSITIVE_INTEGER__BAD_FORMAT)));
 			return false;
 		}
 
 		try {
 			TeamHelper.dispatchPlayerRandomlyInTeam(getTeams(), maxPlayerInTeam);
-		} catch (RandomTeamNotEnoughPlayer e) {
-			send(eventBuilder(sender, EGameCode.GAME_CONFIG__TEAMS_RANDOM__NOT_ENOUGH_PLAYERS, e.getPlayersCount()));
-			return false;
 		} catch (RandomTeamNotEnoughTeam e) {
-			send(eventBuilder(sender, EGameCode.GAME_CONFIG__RANDOM_TEAMS__NOT_ENOUGH_TEAMS, e.getTeamsCount()));
+			send(eventBuilder(sender, EGameCode.GAME_CONFIG__TEAMS_RANDOM__NOT_ENOUGH_TEAMS).build());
 			return false;
 		}
 
@@ -70,7 +66,7 @@ public class TeamsRandomNode extends TeamsNode {
 			if (!team.getPlayers().toList().isEmpty())
 				joiner.add(team.toString());
 
-		MinecraftMessageEventBuilder builder = eventBuilder(sender, EGameCode.GAME_CONFIG__RANDOM_TEAMS__PLAYERS_DISPATCHED_IN_TEAMS);
+		MinecraftMessageEventBuilder builder = eventBuilder(sender, EGameCode.GAME_CONFIG__TEAMS_RANDOM__PLAYERS_DISPATCHED_IN_TEAMS);
 		if (group != null)
 			builder.withGroup(group);
 

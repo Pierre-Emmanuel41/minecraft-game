@@ -19,6 +19,10 @@
 			<value>Bad format, expected format: %s</value>
 		</message>
 		<message>
+			<code>STRICTLY_POSITIVE_INTEGER__BAD_FORMAT</code>
+			<value>A strictly positive integer</value>
+		</message>
+		<message>
 			<code>ENABLE__COMPLETION</code>
 			<value>Enable</value>
 		</message>
@@ -52,7 +56,7 @@
 		</message>
 		<message>
 			<code>TEAM__NEW__COLOR_NOT_FOUND</code>
-			<value>The color of the new team does not exists</value>
+			<value>The color %s of the new team does not exists</value>
 		</message>
 		<message>
 			<code>TEAM__NEW__COLOR_ALREADY_USED</code>
@@ -76,7 +80,7 @@
 		</message>
 		<message>
 			<code>TEAM__MODIFY_NAME__NAME_IS_ALREADY_USED</code>
-			<value>Cannot rename team %s as %s, the new team name is already used</value>
+			<value>Cannot rename team %s as %s, this team already exists</value>
 		</message>
 		<message>
 			<code>TEAM__MODIFY_NAME__TEAM_NAME_UPDATED</code>
@@ -91,8 +95,12 @@
 			<value>Cannot modify the color of team %s, the new team color is missing</value>
 		</message>
 		<message>
+			<code>TEAM__MODIFY_COLOR__COLOR_NOT_FOUND</code>
+			<value>Cannot modify the color of team %s, the color %s does not exist</value>
+		</message>
+		<message>
 			<code>TEAM__MODIFY_COLOR__COLOR_IS_ALREADY_USED</code>
-			<value>Cannot modify the color of team %s as %s, the new team color is already used</value>
+			<value>Cannot modify the color of team %s as %s, this color is already used</value>
 		</message>
 		<message>
 			<code>TEAM__MODIFY_COLOR__TEAM_COLOR_UPDATED</code>
@@ -136,7 +144,7 @@
 		</message>
 		<message>
 			<code>TEAM__ADD_PLAYER__PLAYER_ALREADY_REGISTERED</code>
-			<value>Cannot add %s to %s, the player is already registered in this team</value>
+			<value>Cannot add %s to %s, the player is already registered in a team</value>
 		</message>
 		<message>
 			<code>TEAM__ADD_PLAYER__NO_PLAYER_ADDED</code>
@@ -200,39 +208,55 @@
 		</message>
 		<message>
 			<code>GAME_CONFIG__TEAMS_ADD__EXPLANATION</code>
+			<value>To add a team to a game or to add a player to a team</value>
+		</message>
+		<message>
+			<code>GAME_CONFIG__TEAMS_ADD_TEAM__EXPLANATION</code>
 			<value>To add a team to a game</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__TEAMS_ADD__TEAM_ADDED</code>
+			<code>GAME_CONFIG__TEAMS_ADD_TEAM__TEAM_ADDED</code>
 			<value>Team %s has been added to %s</value>
 		</message>
 		<message>
 			<code>GAME_CONFIG__TEAMS_REMOVE__EXPLANATION</code>
+			<value>To remove a team from a game or players from a team</value>
+		</message>
+		<message>
+			<code>GAME_CONFIG__TEAMS_REMOVE_TEAM__EXPLANATION</code>
 			<value>To remove a team from a game</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__TEAMS_REMOVE__ALL_PLAYERS_REMOVED</code>
+			<code>GAME_CONFIG__TEAMS_REMOVE_TEAM__ALL_PLAYERS_REMOVED</code>
 			<value>All teams have been removed from %s</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__TEAMS_REMOVE__TEAM_NOT_FOUND</code>
+			<code>GAME_CONFIG__TEAMS_REMOVE_TEAM__TEAM_NOT_FOUND</code>
 			<value>Cannot remove %s from %s, the team is not registered in this game</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__TEAMS_REMOVE__NO_TEAM_REMOVED</code>
+			<code>GAME_CONFIG__TEAMS_REMOVE_TEAM__NO_TEAM_REMOVED</code>
 			<value>No team has been removed from %s</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__TEAMS_REMOVE__ONE_TEAM_REMOVED</code>
+			<code>GAME_CONFIG__TEAMS_REMOVE_TEAM__ONE_TEAM_REMOVED</code>
 			<value>%s has been removed from %s</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__TEAMS_REMOVE__SEVERAL_TEAMS_REMOVED</code>
+			<code>GAME_CONFIG__TEAMS_REMOVE_TEAM__SEVERAL_TEAMS_REMOVED</code>
 			<value>Teams %s have been removed from %s</value>
 		</message>
 		<message>
 			<code>GAME_CONFIG__TEAMS_MODIFY__EXPLANATION</code>
 			<value>To modify the characteristics of a team</value>
+		</message>
+		<message>
+			<code>GAME_CONFIG__TEAMS_MODIFY__TEAM_NOT_FOUND</code>
+			<value>Cannot modify team %s, this team does not exist</value>
+		</message>
+		<message>
+			<code>GAME_CONFIG__TEAMS_MODIFY_PLAYERS__EXPLANATION</code>
+			<value>To modify the list of players of a team</value>
 		</message>
 		<message>
 			<code>GAME_CONFIG__FEATURE__EXPLANATION</code>
@@ -287,14 +311,6 @@
 			<value>The maximum number of players per team should be strictly positive</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__TEAMS_RANDOM__MAX_PLAYERS_PER_TEAM__BAD_FORMAT</code>
-			<value>A positive integer</value>
-		</message>
-		<message>
-			<code>GAME_CONFIG__TEAMS_RANDOM__NOT_ENOUGH_PLAYERS</code>
-			<value>Cannot creates random teams, there is not enough players</value>
-		</message>
-		<message>
 			<code>GAME_CONFIG__TEAMS_RANDOM__NOT_ENOUGH_TEAMS</code>
 			<value>Cannot creates random teams, there is not enough teams</value>
 		</message>
@@ -303,27 +319,27 @@
 			<value>Teams:%n%s</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__MOVE_PLAYER__EXPLANATION</code>
+			<code>GAME_CONFIG__MOVE__EXPLANATION</code>
 			<value>To move a player from a team to another one</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__MOVE_PLAYER__PLAYER_NAME_IS_MISSING</code>
+			<code>GAME_CONFIG__MOVE__PLAYER_NAME_IS_MISSING</code>
 			<value>Cannot move a player, the player name is missing</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__MOVE_PLAYER__TEAM_NAME_IS_MISSING</code>
-			<value>Cannot move a player, the team name is missing</value>
+			<code>GAME_CONFIG__MOVE__TEAM_NAME_IS_MISSING</code>
+			<value>Cannot move %s, the team name is missing</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__MOVE_PLAYER__PLAYER_NOT_FOUND</code>
+			<code>GAME_CONFIG__MOVE__PLAYER_NOT_FOUND</code>
 			<value>Cannot move %s, this player does not exist</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__MOVE_PLAYER__TEAM_NOT_FOUND</code>
+			<code>GAME_CONFIG__MOVE__TEAM_NOT_FOUND</code>
 			<value>Cannot move %s to %s, the team does not exist</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__MOVE_PLAYER__PLAYER_MOVED_FROM_TO</code>
+			<code>GAME_CONFIG__MOVE__PLAYER_MOVED_FROM_TO</code>
 			<value>%s moved from %s to %s</value>
 		</message>
 		<message>
@@ -336,11 +352,11 @@
 		</message>
 		<message>
 			<code>GAME_CONFIG__LIST__ONE_TEAM_REGISTERED</code>
-			<value>%s's team: %s</value>
+			<value>%s's team:%n%s</value>
 		</message>
 		<message>
 			<code>GAME_CONFIG__LIST__SEVERAL_TEAMS_REGISTERED</code>
-			<value>%s's teams: %s</value>
+			<value>%s's teams:%n%s</value>
 		</message>
 	</messages>
 </dictionary>

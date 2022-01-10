@@ -28,6 +28,15 @@ public interface ITeam {
 	String getColoredName();
 
 	/**
+	 * Get the name of this team, in the team color and specify which color to use after?
+	 * 
+	 * @param next The color after to used after.
+	 * 
+	 * @return The name of this team using {@link EColor#getInColor(String, EColor)} with parameters String equals {@link #getName()}.
+	 */
+	String getColoredName(EColor next);
+
+	/**
 	 * @return The color of this team. The default value is {@link EColor#RESET}.
 	 */
 	EColor getColor();

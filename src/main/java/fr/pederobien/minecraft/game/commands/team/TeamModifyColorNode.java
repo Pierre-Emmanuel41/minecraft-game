@@ -7,6 +7,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
 import fr.pederobien.minecraft.game.impl.EGameCode;
+import fr.pederobien.minecraft.game.interfaces.ITeam;
 import fr.pederobien.minecraft.managers.EColor;
 
 public class TeamModifyColorNode extends TeamNode {
@@ -30,7 +31,7 @@ public class TeamModifyColorNode extends TeamNode {
 			for (EColor color : EColor.values())
 				if (!exceptedColors.contains(color))
 					colors.add(color.toString());
-			return colors;
+			return filter(colors.stream(), args);
 		default:
 			return emptyList();
 		}
@@ -38,27 +39,28 @@ public class TeamModifyColorNode extends TeamNode {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+		ITeam team = getTree().getTeam();
 		EColor color;
 		try {
 			color = EColor.getByColorName(args[0]);
 		} catch (IndexOutOfBoundsException e) {
-			send(eventBuilder(sender, EGameCode.TEAM__MODIFY_COLOR__COLOR_IS_MISSING, getTree().getTeam().getName()));
+			send(eventBuilder(sender, EGameCode.TEAM__MODIFY_COLOR__COLOR_IS_MISSING, team.getColoredName()));
 			return false;
 		}
 
 		if (color == null) {
-			send(eventBuilder(sender, EGameCode.TEAM__NEW__COLOR_NOT_FOUND, args[0]));
+			send(eventBuilder(sender, EGameCode.TEAM__MODIFY_COLOR__COLOR_NOT_FOUND, team.getColoredName(), args[0]));
 			return false;
 		}
 
 		if (exceptedColors.contains(color)) {
-			send(eventBuilder(sender, EGameCode.TEAM__MODIFY_COLOR__COLOR_IS_ALREADY_USED, getTree().getTeam().getName(), color));
+			send(eventBuilder(sender, EGameCode.TEAM__MODIFY_COLOR__COLOR_IS_ALREADY_USED, team.getColoredName(), color.getColoredColorName()));
 			return false;
 		}
 
-		EColor oldColor = getTree().getTeam().getColor();
-		getTree().getTeam().setColor(color);
-		sendSuccessful(sender, EGameCode.TEAM__MODIFY_COLOR__TEAM_COLOR_UPDATED, oldColor.getColoredColorName(), getTree().getTeam().getColor().getColoredColorName());
+		String oldTeamColor = team.getColoredName(EColor.GOLD);
+		team.setColor(color);
+		sendSuccessful(sender, EGameCode.TEAM__MODIFY_COLOR__TEAM_COLOR_UPDATED, oldTeamColor, team.getColoredName());
 		return true;
 	}
 

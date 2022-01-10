@@ -13,6 +13,9 @@ public enum EGameCode implements IMinecraftCode {
 	// Code when a bad format occurs
 	BAD_FORMAT,
 
+	// Code for the strictly positive integer bad format
+	STRICTLY_POSITIVE_INTEGER__BAD_FORMAT,
+
 	// Code for player's name speaking to a team
 	GAME__TEAM__PLAYER_NAME,
 
@@ -60,6 +63,9 @@ public enum EGameCode implements IMinecraftCode {
 
 	// Code when the new team color is missing
 	TEAM__MODIFY_COLOR__COLOR_IS_MISSING,
+
+	// Code when the new team color does not exist
+	TEAM__MODIFY_COLOR__COLOR_NOT_FOUND,
 
 	// Code when the new team name is missing
 	TEAM__MODIFY_COLOR__COLOR_IS_ALREADY_USED,
@@ -145,29 +151,38 @@ public enum EGameCode implements IMinecraftCode {
 	// Code for the "teams add" command -----------------------------------------
 	GAME_CONFIG__TEAMS_ADD__EXPLANATION,
 
-	// Code when a team has been added
-	GAME_CONFIG__TEAMS_ADD__TEAM_ADDED,
+	// Code for the "teams add team" command ------------------------------------
+	GAME_CONFIG__TEAMS_ADD_TEAM__EXPLANATION,
 
-	// Code for the "remove team" command ---------------------------------------
+	// Code when a team has been added
+	GAME_CONFIG__TEAMS_ADD_TEAM__TEAM_ADDED,
+
+	// Code for the "teams remove" command --------------------------------------
 	GAME_CONFIG__TEAMS_REMOVE__EXPLANATION,
 
+	// Code for the "teams remove team" command ---------------------------------
+	GAME_CONFIG__TEAMS_REMOVE_TEAM__EXPLANATION,
+
 	// Code when removing all teams from a configuration
-	GAME_CONFIG__TEAMS_REMOVE__ALL_PLAYERS_REMOVED,
+	GAME_CONFIG__TEAMS_REMOVE_TEAM__ALL_PLAYERS_REMOVED,
 
 	// Code when the player name refers to no player
-	GAME_CONFIG__TEAMS_REMOVE__TEAM_NOT_FOUND,
+	GAME_CONFIG__TEAMS_REMOVE_TEAM__TEAM_NOT_FOUND,
 
 	// Code when no team has been removed from a game.
-	GAME_CONFIG__TEAMS_REMOVE__NO_TEAM_REMOVED,
+	GAME_CONFIG__TEAMS_REMOVE_TEAM__NO_TEAM_REMOVED,
 
 	// Code when one team has been removed from a game.
-	GAME_CONFIG__TEAMS_REMOVE__ONE_TEAM_REMOVED,
+	GAME_CONFIG__TEAMS_REMOVE_TEAM__ONE_TEAM_REMOVED,
 
 	// Code when several teams have been removed from a game.
-	GAME_CONFIG__TEAMS_REMOVE__SEVERAL_TEAMS_REMOVED,
+	GAME_CONFIG__TEAMS_REMOVE_TEAM__SEVERAL_TEAMS_REMOVED,
 
 	// Code for the "teams modify" command --------------------------------------
 	GAME_CONFIG__TEAMS_MODIFY__EXPLANATION,
+
+	// Code when the team to modify does not exist
+	GAME_CONFIG__TEAMS_MODIFY__TEAM_NOT_FOUND,
 
 	// Code for the "feature" command -------------------------------------------
 	GAME_CONFIG__FEATURE__EXPLANATION,
@@ -208,17 +223,11 @@ public enum EGameCode implements IMinecraftCode {
 	// Code when the max player per team value is negative
 	GAME_CONFIG__TEAMS_RANDOM__MAX_PLAYERS_PER_TEAM__NEGATIVE_VALUE,
 
-	// Code when bad format for the max player per team value
-	GAME_CONFIG__TEAMS_RANDOM__MAX_PLAYERS_PER_TEAM__BAD_FORMAT,
-
-	// Code when there are not enough players to create random teams
-	GAME_CONFIG__TEAMS_RANDOM__NOT_ENOUGH_PLAYERS,
+	// Code when there are not enough teams to create dispatch players
+	GAME_CONFIG__TEAMS_RANDOM__NOT_ENOUGH_TEAMS,
 
 	// Code when there are not enough teams to create dispatch players
-	GAME_CONFIG__RANDOM_TEAMS__NOT_ENOUGH_TEAMS,
-
-	// Code when there are not enough teams to create dispatch players
-	GAME_CONFIG__RANDOM_TEAMS__PLAYERS_DISPATCHED_IN_TEAMS,
+	GAME_CONFIG__TEAMS_RANDOM__PLAYERS_DISPATCHED_IN_TEAMS,
 
 	// Code for the "move" command ----------------------------------------
 	GAME_CONFIG__MOVE__EXPLANATION,

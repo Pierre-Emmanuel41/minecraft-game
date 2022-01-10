@@ -98,6 +98,11 @@ public class Team implements ITeam, IEventListener, ICodeSender {
 	}
 
 	@Override
+	public String getColoredName(EColor next) {
+		return getColor().getInColor(getName(), next);
+	}
+
+	@Override
 	public EColor getColor() {
 		return color;
 	}
@@ -158,6 +163,18 @@ public class Team implements ITeam, IEventListener, ICodeSender {
 		for (Player player : getPlayers())
 			players.add(player.getName());
 		return getColor().getInColor(getName() + " " + players.toString());
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+
+		if (!(obj instanceof ITeam))
+			return false;
+
+		ITeam other = (ITeam) obj;
+		return name.equals(other.getName());
 	}
 
 	@EventHandler

@@ -13,6 +13,7 @@ import org.bukkit.entity.Player;
 import fr.pederobien.minecraft.game.impl.EGameCode;
 import fr.pederobien.minecraft.game.interfaces.ITeam;
 import fr.pederobien.minecraft.game.interfaces.ITeamConfigurable;
+import fr.pederobien.minecraft.managers.EColor;
 import fr.pederobien.minecraft.managers.PlayerManager;
 
 public class TeamsMoveNode extends TeamsNode {
@@ -53,6 +54,12 @@ public class TeamsMoveNode extends TeamsNode {
 			return false;
 		}
 
+		Player player = PlayerManager.getPlayer(playerName);
+		if (player == null) {
+			send(eventBuilder(sender, EGameCode.GAME_CONFIG__MOVE__PLAYER_NOT_FOUND, playerName));
+			return false;
+		}
+
 		String teamName;
 		try {
 			teamName = args[1];
@@ -61,23 +68,19 @@ public class TeamsMoveNode extends TeamsNode {
 			return false;
 		}
 
-		Player player = PlayerManager.getPlayer(playerName);
-		if (player == null) {
-			send(eventBuilder(sender, EGameCode.GAME_CONFIG__MOVE__PLAYER_NOT_FOUND, playerName));
-			return false;
-		}
-
 		Optional<ITeam> optTeam = getTeams().getTeam(teamName);
 		if (!optTeam.isPresent()) {
-			send(eventBuilder(sender, EGameCode.GAME_CONFIG__MOVE__TEAM_NOT_FOUND, teamName));
+			send(eventBuilder(sender, EGameCode.GAME_CONFIG__MOVE__TEAM_NOT_FOUND, playerName, teamName));
 			return false;
 		}
 
-		ITeam team = getTeams().movePlayer(player, optTeam.get());
-		if (team != null)
-			sendSuccessful(sender, EGameCode.GAME_CONFIG__MOVE__PLAYER_MOVED_FROM_TO, playerName, optTeam.get().getColoredName(), team.getColoredName());
-		else
-			sendSuccessful(sender, EGameCode.TEAM__ADD_PLAYER__ONE_PLAYER_ADDED, playerName, optTeam.get().getColoredName());
+		ITeam newTeam = optTeam.get();
+		ITeam oldTeam = getTeams().movePlayer(player, optTeam.get());
+		if (oldTeam != null) {
+			String oldTeamColor = oldTeam.getColoredName(EColor.GOLD);
+			sendSuccessful(sender, EGameCode.GAME_CONFIG__MOVE__PLAYER_MOVED_FROM_TO, playerName, oldTeamColor, newTeam.getColoredName(EColor.GOLD));
+		} else
+			sendSuccessful(sender, EGameCode.TEAM__ADD_PLAYER__ONE_PLAYER_ADDED, playerName, optTeam.get().getColoredName(EColor.GOLD));
 		return true;
 	}
 
