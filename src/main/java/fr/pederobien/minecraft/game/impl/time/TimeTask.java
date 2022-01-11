@@ -27,7 +27,7 @@ public class TimeTask implements ITimeTask, Runnable {
 
 	@Override
 	public void start() {
-		if (state != PausableState.NOT_STARTED)
+		if (state == PausableState.STARTED)
 			return;
 
 		state = PausableState.STARTED;
@@ -37,7 +37,7 @@ public class TimeTask implements ITimeTask, Runnable {
 
 	@Override
 	public void stop() {
-		if (state != PausableState.STARTED || state != PausableState.PAUSED)
+		if (state == PausableState.NOT_STARTED)
 			return;
 
 		state = PausableState.NOT_STARTED;
@@ -48,7 +48,7 @@ public class TimeTask implements ITimeTask, Runnable {
 
 	@Override
 	public void pause() {
-		if (state != PausableState.NOT_STARTED)
+		if (state == PausableState.NOT_STARTED || state == PausableState.PAUSED)
 			return;
 
 		state = PausableState.PAUSED;
@@ -57,7 +57,7 @@ public class TimeTask implements ITimeTask, Runnable {
 
 	@Override
 	public void resume() {
-		if (state != PausableState.PAUSED)
+		if (state == PausableState.NOT_STARTED || state == PausableState.STARTED)
 			return;
 
 		state = PausableState.STARTED;

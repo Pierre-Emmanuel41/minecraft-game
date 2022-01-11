@@ -1,6 +1,7 @@
 package fr.pederobien.minecraft.game.commands.game;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -10,7 +11,12 @@ import fr.pederobien.minecraft.game.interfaces.IGame;
 
 public class StartGameNode extends GameNode {
 
-	protected StartGameNode(IGame game) {
+	/**
+	 * Creates a node to start a game.
+	 * 
+	 * @param game The game associated to this node.
+	 */
+	protected StartGameNode(Supplier<IGame> game) {
 		super(game, "startgame", EGameCode.START_GAME__EXPLANATION);
 	}
 

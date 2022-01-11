@@ -55,8 +55,11 @@ public class TimeLine implements ITimeLine, IEventListener {
 			return;
 
 		int current = obs.getCountDown().getInitialValue();
-		while (current != 0)
-			unregister(time.minusSeconds(current--), obs);
+		while (current != 0) {
+			observable = observers.get(time.minusSeconds(current--));
+			if (observable != null)
+				observable.removeObserver(obs);
+		}
 	}
 
 	@EventHandler

@@ -1,5 +1,7 @@
 package fr.pederobien.minecraft.game.commands.game;
 
+import java.util.function.Supplier;
+
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
@@ -9,7 +11,12 @@ import fr.pederobien.utils.IPausable.PausableState;
 
 public class PauseGameNode extends GameNode {
 
-	protected PauseGameNode(IGame game) {
+	/**
+	 * Creates a node to pause/resume a game.
+	 * 
+	 * @param game The game associated to this node.
+	 */
+	protected PauseGameNode(Supplier<IGame> game) {
 		super(game, "pausegame", EGameCode.PAUSE_GAME__EXPLANATION);
 	}
 

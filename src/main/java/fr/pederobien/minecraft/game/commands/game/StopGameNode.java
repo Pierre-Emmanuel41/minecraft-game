@@ -1,6 +1,7 @@
 package fr.pederobien.minecraft.game.commands.game;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -10,7 +11,12 @@ import fr.pederobien.minecraft.game.interfaces.IGame;
 
 public class StopGameNode extends GameNode {
 
-	protected StopGameNode(IGame game) {
+	/**
+	 * Creates a node to stop a game.
+	 * 
+	 * @param game The game to stop.
+	 */
+	protected StopGameNode(Supplier<IGame> game) {
 		super(game, "stopgame", EGameCode.STOP_GAME__EXPLANATION);
 	}
 

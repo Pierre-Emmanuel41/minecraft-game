@@ -37,7 +37,7 @@ public class TeamsListNode extends MinecraftCodeNodeWrapper {
 		public GameTeamListNodeBuilder(Supplier<ITeamConfigurable> teams) {
 			builder = ListNode.builder(() -> teams.get().getTeams().toList());
 			builder.onNoElement(sender -> sendSuccessful(sender, EGameCode.GAME_CONFIG__LIST__NO_TEAM_REGISTERED, teams.get().getTeams().getName()));
-			builder.onOneElement((sender, team) -> sendSuccessful(sender, EGameCode.GAME_CONFIG__LIST__ONE_TEAM_REGISTERED, teams.get().getTeams(), team));
+			builder.onOneElement((sender, team) -> sendSuccessful(sender, EGameCode.GAME_CONFIG__LIST__ONE_TEAM_REGISTERED, teams.get().getTeams().getName(), team));
 			builder.onSeveralElements((sender, teamsList) -> {
 				StringJoiner joiner = new StringJoiner("\n");
 				for (ITeam team : teamsList)

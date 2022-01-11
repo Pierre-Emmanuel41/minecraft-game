@@ -14,9 +14,9 @@ public class GameCommandTree implements IEventListener {
 	 * Creates a game command tree without root that gathers nodes to start, pause/resume and stop a game.
 	 */
 	public GameCommandTree() {
-		startGameNode = new StartGameNode(game);
-		pauseGameNode = new PauseGameNode(game);
-		stopGameNode = new StopGameNode(game);
+		startGameNode = new StartGameNode(() -> getGame());
+		pauseGameNode = new PauseGameNode(() -> getGame());
+		stopGameNode = new StopGameNode(() -> getGame());
 
 		EventManager.registerListener(this);
 	}
