@@ -11,9 +11,9 @@ import fr.pederobien.minecraft.game.interfaces.ITeamConfigurable;
 public class GameTeamsNode extends MinecraftCodeNode {
 	private TeamCommandTree teamTree;
 	private TeamsAddNode addNode;
-	private TeamsListNode listNode;
 	private TeamsRemoveNode removeNode;
 	private TeamsModifyNode modifyNode;
+	private TeamsListNode listNode;
 	private TeamsMoveNode moveNode;
 	private TeamsRandomNode randomNode;
 
@@ -45,13 +45,6 @@ public class GameTeamsNode extends MinecraftCodeNode {
 	}
 
 	/**
-	 * @return The node that displays the characteristics of each team of the list of teams.
-	 */
-	public TeamsListNode getListNode() {
-		return listNode;
-	}
-
-	/**
 	 * @return The node that removes teams from the list of teams.
 	 */
 	public TeamsRemoveNode getRemoveNode() {
@@ -63,6 +56,13 @@ public class GameTeamsNode extends MinecraftCodeNode {
 	 */
 	public TeamsModifyNode getModifyNode() {
 		return modifyNode;
+	}
+
+	/**
+	 * @return The node that displays the characteristics of each team of the list of teams.
+	 */
+	public TeamsListNode getListNode() {
+		return listNode;
 	}
 
 	/**

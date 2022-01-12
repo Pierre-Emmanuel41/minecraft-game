@@ -60,11 +60,20 @@ public interface ITeamList extends Iterable<ITeam> {
 	/**
 	 * Get the team associated to the given color.
 	 * 
-	 * @param volor The team color.
+	 * @param color The team color.
 	 * 
 	 * @return An optional that contains the team if registered, an empty optional otherwise.
 	 */
 	Optional<ITeam> getTeam(EColor color);
+
+	/**
+	 * Get the team of the given player.
+	 * 
+	 * @param player The player used to retrieve its team.
+	 * 
+	 * @return An optional that contains the team if the player is registered in a team, an empty optional otherwise.
+	 */
+	Optional<ITeam> getTeam(Player player);
 
 	/**
 	 * @return a sequential {@code Stream} over the elements in this collection.

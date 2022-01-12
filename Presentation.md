@@ -205,12 +205,33 @@ From the <code>GamePlugin</code> class, the developer can have access to the <co
 
 The <code>TeamCommandTree</code> gather commands in order to create new teams, to modify team characteristics or to add/remove players from a team. Those command are not registered for minecraft commands. The root is "team" which means that when registered as commands argument for a game the user has access to the following tree:
 
-team  
-&ensp;new  
-&ensp;modify  
-&ensp;&ensp;name  
-&ensp;&ensp;color  
-&ensp;remove  
-&ensp;add  
+<code>team</code> - To create a new team.</br>  
+&ensp;<code>new</code> - To create/modify a team.</br>
+&ensp;<code>modify</code> - To modify the characteristics of a team.</br>
+&ensp;&ensp;<code>name</code> - To modify the name of a team.</br>
+&ensp;&ensp;<code>color</code> - To modify the color of a team.</br>
+&ensp;<code>remove</code> - To remove players from a team.</br>
+&ensp;<code>add</code> - To add players to a team.</br>
 
-Finally, the <code>NodeFactory</code> gather nodes in order to add/remove/modify teams of a game, to move player(s) from a team to another one and to setup features of a game.
+Finally, the <code>NodeFactory</code> gather nodes in order to add/remove/modify teams of a game, to move player(s) from a team to another one and to setup features of a game. Those nodes are <code>GameTeamsNode</code> and <code>GameFeaturesNode</code>.
+
+To set up the teams of a game :  
+<code>teams</code> - To modify a list of teams of a game. In that case, the game should implements the <code>ITeamConfigurable</code> interface.</br>
+&ensp;<code>add</code> - To add a team to a game or to add a player to a team.</br>
+&ensp;&ensp;<code>team</code> - To add a team to a game.</br>
+&ensp;&ensp;<code>player</code> - To add players to a team.</br>
+&ensp;<code>remove</code> - To remove a team from a game or to add a player from a team.</br>
+&ensp;&ensp;<code>team</code> - To remove a team from a game.</br>
+&ensp;&ensp;<code>player</code> - To remove players from to a team.</br>
+&ensp;<code>modify</code> - To modify the characteristics of a team.</br>
+&ensp;&ensp;<code>name</code> - To modify the name of a team.</br>
+&ensp;&ensp;<code>color</code> - To modify the color of a team.</br>
+&ensp;<code>list</code> - To display the list of team.</br>
+&ensp;<code>move</code> - To move a player from a team to another one.</br>
+&ensp;<code>random</code> - To create random teams.</br>
+<br/>
+To set up features of a game :  
+<code>features</code> - To setup a feature.</br>
+&ensp;<code>enable</code> - To enable a feature.</br>
+&ensp;<code>disable</code> - To disable a feature.</br>
+&ensp;<code>args</code> - To set the argument before starting a feature.</br>

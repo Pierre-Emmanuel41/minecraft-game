@@ -20,13 +20,13 @@ public class FeatureEnableNode extends FeatureNode {
 	 * @param features The list of features associated to this node.
 	 */
 	protected FeatureEnableNode(Supplier<IFeatureConfigurable> features) {
-		super(features, "enable", EGameCode.GAME_CONFIG__FEATURE_ENABLE__EXPLANATION, f -> f != null && f.getFeatures() != null);
+		super(features, "enable", EGameCode.GAME_CONFIG__FEATURES_ENABLE__EXPLANATION, f -> f != null && f.getFeatures() != null);
 	}
 
 	@Override
 	public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
 		switch (args.length) {
-		case 0:
+		case 1:
 			List<String> alreadyMentionnedFeatures = asList(args);
 			Predicate<String> filter = name -> alreadyMentionnedFeatures.contains(name);
 			return filter(getFeatures().stream().map(feature -> feature.getName()).filter(filter), args);
@@ -41,12 +41,12 @@ public class FeatureEnableNode extends FeatureNode {
 		try {
 			optFeature = getFeatures().getFeature(args[0]);
 		} catch (IndexOutOfBoundsException e) {
-			send(eventBuilder(sender, EGameCode.GAME_CONFIG__FEATURE_ENABLE__NAME_IS_MISSING).build());
+			send(eventBuilder(sender, EGameCode.GAME_CONFIG__FEATURES_ENABLE__NAME_IS_MISSING).build());
 			return false;
 		}
 
 		optFeature.get().setEnabled(true);
-		sendSuccessful(sender, EGameCode.GAME_CONFIG__FEATURE_ENABLE__ENABLED, optFeature.get().getName());
+		sendSuccessful(sender, EGameCode.GAME_CONFIG__FEATURES_ENABLE__ENABLED, optFeature.get().getName());
 		return true;
 	}
 }

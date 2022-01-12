@@ -101,6 +101,19 @@ public class TeamList implements ITeamList, IEventListener {
 	}
 
 	@Override
+	public Optional<ITeam> getTeam(Player player) {
+		lock.lock();
+		try {
+			for (ITeam team : teams.values())
+				if (team.getPlayers().toList().contains(player))
+					return Optional.of(team);
+			return Optional.empty();
+		} finally {
+			lock.unlock();
+		}
+	}
+
+	@Override
 	public Stream<ITeam> stream() {
 		return teams.values().stream();
 	}

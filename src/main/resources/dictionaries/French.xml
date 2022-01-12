@@ -24,7 +24,7 @@
 			<value>Moi</value>
 		</message>
 		<message>
-			<code>GAME__TEAM__ROOT_EXPLANATION</code>
+			<code>TEAM__ROOT_EXPLANATION</code>
 			<value>Pour créer/modifier une équipe</value>
 		</message>
 		<message>
@@ -248,43 +248,43 @@
 			<value>Pour modifier la liste des joueurs d'une équipe</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__FEATURE__EXPLANATION</code>
+			<code>GAME_CONFIG__FEATURES__EXPLANATION</code>
 			<value>Pour paramétrer une fonctionnalité</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__FEATURE_ENABLE__EXPLANATION</code>
+			<code>GAME_CONFIG__FEATURES_ENABLE__EXPLANATION</code>
 			<value>Pour activer une fonctionnalité</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__FEATURE_ENABLE__NAME_IS_MISSING</code>
+			<code>GAME_CONFIG__FEATURES_ENABLE__NAME_IS_MISSING</code>
 			<value>Impossible d'activer une fonctionnalité, le nom est manquant.</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__FEATURE_ENABLE__ENABLED</code>
+			<code>GAME_CONFIG__FEATURES_ENABLE__ENABLED</code>
 			<value>Fonctionnalité %s est activée</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__FEATURE_DISABLE__EXPLANATION</code>
+			<code>GAME_CONFIG__FEATURES_DISABLE__EXPLANATION</code>
 			<value>Pour désactiver une fonctionnalité</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__FEATURE_DISABLE__NAME_IS_MISSING</code>
+			<code>GAME_CONFIG__FEATURES_DISABLE__NAME_IS_MISSING</code>
 			<value>Impossible de désactiver une fonctionnalité, le nom est manquant.</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__FEATURE_DISABLE__DISABLED</code>
+			<code>GAME_CONFIG__FEATURES_DISABLE__DISABLED</code>
 			<value>Fonctionnalité %s est désactivée</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__FEATURE_ARGS__EXPLANATION</code>
+			<code>GAME_CONFIG__FEATURES_ARGS__EXPLANATION</code>
 			<value>Pour définir les argument avant de lancer une fonctionnalité</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__FEATURE_ARGS__NAME_IS_MISSING</code>
+			<code>GAME_CONFIG__FEATURES_ARGS__NAME_IS_MISSING</code>
 			<value>Impossible de définir les arguments d'une fonctionnalité, le nom est manquant</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__FEATURE_ARGS__FEATURE_NOT_REGISTERED</code>
+			<code>GAME_CONFIG__FEATURES_ARGS__FEATURE_NOT_REGISTERED</code>
 			<value>Impossible de définir les arguments de %s, elle n'est pas enregistrée pour %s</value>
 		</message>
 		<message>

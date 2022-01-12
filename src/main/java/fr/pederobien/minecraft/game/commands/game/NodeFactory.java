@@ -27,7 +27,7 @@ public class NodeFactory {
 	 * 
 	 * @return A node.
 	 */
-	public static GameFeatureNode features(Supplier<IFeatureConfigurable> configurable) {
-		return new GameFeatureNode(configurable);
+	public static GameFeaturesNode features(Supplier<IFeatureConfigurable> configurable) {
+		return new GameFeaturesNode(configurable);
 	}
 }

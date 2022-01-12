@@ -19,7 +19,7 @@ public class FeatureArgumentNode extends FeatureNode {
 	 * @param features The list of features associated to this node.
 	 */
 	protected FeatureArgumentNode(Supplier<IFeatureConfigurable> features) {
-		super(features, "args", EGameCode.GAME_CONFIG__FEATURE_ARGS__EXPLANATION, f -> f != null && f.getFeatures() != null);
+		super(features, "args", EGameCode.GAME_CONFIG__FEATURES_ARGS__EXPLANATION, f -> f != null && f.getFeatures() != null);
 	}
 
 	@Override
@@ -45,13 +45,13 @@ public class FeatureArgumentNode extends FeatureNode {
 		try {
 			name = args[0];
 		} catch (IndexOutOfBoundsException e) {
-			send(eventBuilder(sender, EGameCode.GAME_CONFIG__FEATURE_ARGS__NAME_IS_MISSING).build());
+			send(eventBuilder(sender, EGameCode.GAME_CONFIG__FEATURSE_ARGS__NAME_IS_MISSING).build());
 			return false;
 		}
 		Optional<IFeature> optFeature = getFeatures().getFeature(name);
 
 		if (!optFeature.isPresent()) {
-			send(eventBuilder(sender, EGameCode.GAME_CONFIG__FEATURE_ARGS__FEATURE_NOT_REGISTERED, name, getFeatures().getName()));
+			send(eventBuilder(sender, EGameCode.GAME_CONFIG__FEATURES_ARGS__FEATURE_NOT_REGISTERED, name, getFeatures().getName()));
 			return false;
 		}
 

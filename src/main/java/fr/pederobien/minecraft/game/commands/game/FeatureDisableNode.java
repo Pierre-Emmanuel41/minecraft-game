@@ -20,7 +20,7 @@ public class FeatureDisableNode extends FeatureNode {
 	 * @param features The list of features associated to this node.
 	 */
 	protected FeatureDisableNode(Supplier<IFeatureConfigurable> features) {
-		super(features, "disable", EGameCode.GAME_CONFIG__FEATURE_DISABLE__EXPLANATION, f -> f != null && f.getFeatures() != null);
+		super(features, "disable", EGameCode.GAME_CONFIG__FEATURES_DISABLE__EXPLANATION, f -> f != null && f.getFeatures() != null);
 	}
 
 	@Override
@@ -41,12 +41,12 @@ public class FeatureDisableNode extends FeatureNode {
 		try {
 			optFeature = getFeatures().getFeature(args[0]);
 		} catch (IndexOutOfBoundsException e) {
-			send(eventBuilder(sender, EGameCode.GAME_CONFIG__FEATURE_DISABLE__NAME_IS_MISSING).build());
+			send(eventBuilder(sender, EGameCode.GAME_CONFIG__FEATURES_DISABLE__NAME_IS_MISSING).build());
 			return false;
 		}
 
 		optFeature.get().setEnabled(false);
-		sendSuccessful(sender, EGameCode.GAME_CONFIG__FEATURE_DISABLE__DISABLED, optFeature.get().getName());
+		sendSuccessful(sender, EGameCode.GAME_CONFIG__FEATURES_DISABLE__DISABLED, optFeature.get().getName());
 		return true;
 	}
 }

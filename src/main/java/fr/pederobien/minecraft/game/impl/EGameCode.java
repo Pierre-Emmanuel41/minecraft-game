@@ -185,34 +185,34 @@ public enum EGameCode implements IMinecraftCode {
 	GAME_CONFIG__TEAMS_MODIFY__TEAM_NOT_FOUND,
 
 	// Code for the "feature" command -------------------------------------------
-	GAME_CONFIG__FEATURE__EXPLANATION,
+	GAME_CONFIG__FEATURES__EXPLANATION,
 
 	// Code for the "feature enable" command ------------------------------------
-	GAME_CONFIG__FEATURE_ENABLE__EXPLANATION,
+	GAME_CONFIG__FEATURES_ENABLE__EXPLANATION,
 
 	// Code when the feature name is missing
-	GAME_CONFIG__FEATURE_ENABLE__NAME_IS_MISSING,
+	GAME_CONFIG__FEATURES_ENABLE__NAME_IS_MISSING,
 
 	// Code when the feature is enabled
-	GAME_CONFIG__FEATURE_ENABLE__ENABLED,
+	GAME_CONFIG__FEATURES_ENABLE__ENABLED,
 
 	// Code for the "feature disable" command -----------------------------------
-	GAME_CONFIG__FEATURE_DISABLE__EXPLANATION,
+	GAME_CONFIG__FEATURES_DISABLE__EXPLANATION,
 
 	// Code when the feature name is missing
-	GAME_CONFIG__FEATURE_DISABLE__NAME_IS_MISSING,
+	GAME_CONFIG__FEATURES_DISABLE__NAME_IS_MISSING,
 
 	// Code when the feature is disable
-	GAME_CONFIG__FEATURE_DISABLE__DISABLED,
+	GAME_CONFIG__FEATURES_DISABLE__DISABLED,
 
 	// Code for the "feature args" command ----------------------------------
-	GAME_CONFIG__FEATURE_ARGS__EXPLANATION,
+	GAME_CONFIG__FEATURES_ARGS__EXPLANATION,
 
 	// Code when the feature name is missing
-	GAME_CONFIG__FEATURE_ARGS__NAME_IS_MISSING,
+	GAME_CONFIG__FEATURSE_ARGS__NAME_IS_MISSING,
 
 	// Code when the feature is not registered
-	GAME_CONFIG__FEATURE_ARGS__FEATURE_NOT_REGISTERED,
+	GAME_CONFIG__FEATURES_ARGS__FEATURE_NOT_REGISTERED,
 
 	// Code when the "random" command --------------------------------------
 	GAME_CONFIG__TEAMS_RANDOM__EXPLANATION,

@@ -6,7 +6,7 @@ import fr.pederobien.minecraft.commandtree.impl.MinecraftCodeNode;
 import fr.pederobien.minecraft.game.impl.EGameCode;
 import fr.pederobien.minecraft.game.interfaces.IFeatureConfigurable;
 
-public class GameFeatureNode extends MinecraftCodeNode {
+public class GameFeaturesNode extends MinecraftCodeNode {
 	private FeatureEnableNode enableNode;
 	private FeatureDisableNode disableNode;
 	private FeatureArgumentNode argumentNode;
@@ -16,8 +16,8 @@ public class GameFeatureNode extends MinecraftCodeNode {
 	 * 
 	 * @param configurable The configurable object associated to this node.
 	 */
-	protected GameFeatureNode(Supplier<IFeatureConfigurable> configurable) {
-		super("feature", EGameCode.GAME_CONFIG__FEATURE__EXPLANATION, () -> configurable.get() != null);
+	protected GameFeaturesNode(Supplier<IFeatureConfigurable> configurable) {
+		super("features", EGameCode.GAME_CONFIG__FEATURES__EXPLANATION, () -> configurable.get() != null);
 		add(enableNode = new FeatureEnableNode(configurable));
 		add(disableNode = new FeatureDisableNode(configurable));
 		add(argumentNode = new FeatureArgumentNode(configurable));

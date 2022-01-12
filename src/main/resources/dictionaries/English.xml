@@ -35,7 +35,7 @@
 			<value>Me</value>
 		</message>
 		<message>
-			<code>GAME__TEAM__ROOT_EXPLANATION</code>
+			<code>TEAM__ROOT_EXPLANATION</code>
 			<value>To create/modify a team</value>
 		</message>
 		<message>
@@ -259,43 +259,43 @@
 			<value>To modify the list of players of a team</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__FEATURE__EXPLANATION</code>
+			<code>GAME_CONFIG__FEATURES__EXPLANATION</code>
 			<value>To setup a feature</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__FEATURE_ENABLE__EXPLANATION</code>
+			<code>GAME_CONFIG__FEATURES_ENABLE__EXPLANATION</code>
 			<value>To enable a feature</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__FEATURE_ENABLE__NAME_IS_MISSING</code>
+			<code>GAME_CONFIG__FEATURES_ENABLE__NAME_IS_MISSING</code>
 			<value>Cannot enable a feature, the name is missing</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__FEATURE_ENABLE__ENABLED</code>
+			<code>GAME_CONFIG__FEATURES_ENABLE__ENABLED</code>
 			<value>Feature %s is enabled</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__FEATURE_DISABLE__EXPLANATION</code>
+			<code>GAME_CONFIG__FEATURES_DISABLE__EXPLANATION</code>
 			<value>To disable a feature</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__FEATURE_DISABLE__NAME_IS_MISSING</code>
+			<code>GAME_CONFIG__FEATURES_DISABLE__NAME_IS_MISSING</code>
 			<value>Cannot disable a feature, the name is missing</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__FEATURE_DISABLE__DISABLED</code>
+			<code>GAME_CONFIG__FEATURES_DISABLE__DISABLED</code>
 			<value>Feature %s is disabled</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__FEATURE_ARGS__EXPLANATION</code>
+			<code>GAME_CONFIG__FEATURES_ARGS__EXPLANATION</code>
 			<value>To set the argument before starting a feature</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__FEATURE_ARGS__NAME_IS_MISSING</code>
+			<code>GAME_CONFIG__FEATURES_ARGS__NAME_IS_MISSING</code>
 			<value>Cannot set the argument of a feature, the name is missing</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__FEATURE_ARGS__FEATURE_NOT_REGISTERED</code>
+			<code>GAME_CONFIG__FEATURES_ARGS__FEATURE_NOT_REGISTERED</code>
 			<value>Cannot set the argument of a %s, it is not registered for %s</value>
 		</message>
 		<message>
