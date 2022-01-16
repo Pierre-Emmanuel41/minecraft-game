@@ -48,24 +48,36 @@ public class Game implements IGame {
 
 	@Override
 	public void start() {
+		if (state == PausableState.STARTED || state == PausableState.PAUSED)
+			return;
+
 		state = PausableState.STARTED;
 		EventManager.callEvent(new GameStartPostEvent(this));
 	}
 
 	@Override
 	public void stop() {
+		if (state == PausableState.NOT_STARTED)
+			return;
+
 		state = PausableState.NOT_STARTED;
 		EventManager.callEvent(new GameStopPostEvent(this));
 	}
 
 	@Override
 	public void pause() {
+		if (state == PausableState.PAUSED || state == PausableState.NOT_STARTED)
+			return;
+
 		state = PausableState.PAUSED;
 		EventManager.callEvent(new GamePausePostEvent(this));
 	}
 
 	@Override
 	public void resume() {
+		if (state == PausableState.STARTED || state == PausableState.NOT_STARTED)
+			return;
+
 		state = PausableState.STARTED;
 		EventManager.callEvent(new GameResumePostEvent(this));
 	}

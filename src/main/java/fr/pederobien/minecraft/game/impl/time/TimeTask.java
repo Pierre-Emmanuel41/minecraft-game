@@ -27,7 +27,7 @@ public class TimeTask implements ITimeTask, Runnable {
 
 	@Override
 	public void start() {
-		if (state == PausableState.STARTED)
+		if (state == PausableState.STARTED || state == PausableState.PAUSED)
 			return;
 
 		state = PausableState.STARTED;

@@ -63,6 +63,9 @@ public class Feature implements IFeature {
 	@Override
 	public void start() {
 		if (isEnable) {
+			if (state == PausableState.STARTED || state == PausableState.PAUSED)
+				return;
+
 			state = PausableState.STARTED;
 			EventManager.callEvent(new FeatureStartPostEvent(this));
 		}
@@ -70,18 +73,27 @@ public class Feature implements IFeature {
 
 	@Override
 	public void stop() {
+		if (state == PausableState.NOT_STARTED)
+			return;
+
 		state = PausableState.NOT_STARTED;
 		EventManager.callEvent(new FeatureStopPostEvent(this));
 	}
 
 	@Override
 	public void pause() {
+		if (state == PausableState.PAUSED || state == PausableState.NOT_STARTED)
+			return;
+
 		state = PausableState.PAUSED;
 		EventManager.callEvent(new FeaturePausePostEvent(this));
 	}
 
 	@Override
 	public void resume() {
+		if (state == PausableState.STARTED || state == PausableState.NOT_STARTED)
+			return;
+
 		state = PausableState.STARTED;
 		EventManager.callEvent(new FeatureResumePostEvent(this));
 	}
