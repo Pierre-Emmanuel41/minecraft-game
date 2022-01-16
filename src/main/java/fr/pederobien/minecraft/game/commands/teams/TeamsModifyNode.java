@@ -1,4 +1,4 @@
-package fr.pederobien.minecraft.game.commands.game;
+package fr.pederobien.minecraft.game.commands.teams;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,7 +13,7 @@ import fr.pederobien.minecraft.game.commands.team.TeamModifyColorNode;
 import fr.pederobien.minecraft.game.commands.team.TeamModifyNameNode;
 import fr.pederobien.minecraft.game.impl.EGameCode;
 import fr.pederobien.minecraft.game.interfaces.ITeam;
-import fr.pederobien.minecraft.game.interfaces.ITeamConfigurable;
+import fr.pederobien.minecraft.game.interfaces.ITeamList;
 
 public class TeamsModifyNode extends TeamsNode {
 	private TeamCommandTree teamTree;
@@ -24,8 +24,8 @@ public class TeamsModifyNode extends TeamsNode {
 	 * @param teams    The list of teams associated to this node.
 	 * @param teamTree The command tree in order create or modify a team.
 	 */
-	protected TeamsModifyNode(Supplier<ITeamConfigurable> teams, TeamCommandTree teamTree) {
-		super(teams, "modify", EGameCode.GAME_CONFIG__TEAMS_MODIFY__EXPLANATION, t -> t != null && t.getTeams() != null);
+	protected TeamsModifyNode(Supplier<ITeamList> teams, TeamCommandTree teamTree) {
+		super(teams, "modify", EGameCode.TEAMS__MODIFY__EXPLANATION, t -> t != null);
 		this.teamTree = teamTree;
 
 		add(teamTree.getModifyNode().getNameNode());
@@ -56,7 +56,7 @@ public class TeamsModifyNode extends TeamsNode {
 		try {
 			optTeam = getTeams().getTeam(args[0]);
 			if (!optTeam.isPresent()) {
-				send(eventBuilder(sender, EGameCode.GAME_CONFIG__TEAMS_MODIFY__TEAM_NOT_FOUND, args[0]));
+				send(eventBuilder(sender, EGameCode.TEAMS__MODIFY__TEAM_NOT_FOUND, args[0]));
 				return false;
 			}
 		} catch (IndexOutOfBoundsException e) {

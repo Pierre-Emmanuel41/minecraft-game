@@ -1,4 +1,4 @@
-package fr.pederobien.minecraft.game.commands.game;
+package fr.pederobien.minecraft.game.commands.teams;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,12 +12,12 @@ import fr.pederobien.minecraft.game.commands.team.TeamAddPlayerNode;
 import fr.pederobien.minecraft.game.commands.team.TeamCommandTree;
 import fr.pederobien.minecraft.game.impl.EGameCode;
 import fr.pederobien.minecraft.game.interfaces.ITeam;
-import fr.pederobien.minecraft.game.interfaces.ITeamConfigurable;
+import fr.pederobien.minecraft.game.interfaces.ITeamList;
 
 public class TeamsAddPlayerNode extends TeamsNode {
 	private TeamCommandTree teamTree;
 
-	protected TeamsAddPlayerNode(Supplier<ITeamConfigurable> teams, TeamCommandTree teamTree) {
+	protected TeamsAddPlayerNode(Supplier<ITeamList> teams, TeamCommandTree teamTree) {
 		super(teams, "player", EGameCode.TEAM__ADD_PLAYER__EXPLANATION, t -> t != null);
 		this.teamTree = teamTree;
 	}
@@ -46,7 +46,7 @@ public class TeamsAddPlayerNode extends TeamsNode {
 		try {
 			optTeam = getTeams().getTeam(args[0]);
 			if (!optTeam.isPresent()) {
-				send(eventBuilder(sender, EGameCode.GAME_CONFIG__TEAMS_MODIFY__TEAM_NOT_FOUND, args[0]));
+				send(eventBuilder(sender, EGameCode.TEAMS__MODIFY__TEAM_NOT_FOUND, args[0]));
 				return false;
 			}
 		} catch (IndexOutOfBoundsException e) {

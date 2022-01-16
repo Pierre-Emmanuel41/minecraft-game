@@ -1,4 +1,4 @@
-package fr.pederobien.minecraft.game.commands.game;
+package fr.pederobien.minecraft.game.commands.teams;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -9,7 +9,7 @@ import org.bukkit.command.CommandSender;
 import fr.pederobien.minecraft.game.commands.team.TeamCommandTree;
 import fr.pederobien.minecraft.game.impl.EGameCode;
 import fr.pederobien.minecraft.game.interfaces.ITeam;
-import fr.pederobien.minecraft.game.interfaces.ITeamConfigurable;
+import fr.pederobien.minecraft.game.interfaces.ITeamList;
 import fr.pederobien.minecraft.managers.EColor;
 
 public class TeamsAddTeamNode extends TeamsNode {
@@ -21,8 +21,8 @@ public class TeamsAddTeamNode extends TeamsNode {
 	 * @param teams    The list of teams associated to this node.
 	 * @param teamTree The command tree in order create or modify a team.
 	 */
-	protected TeamsAddTeamNode(Supplier<ITeamConfigurable> teams, TeamCommandTree teamTree) {
-		super(teams, "team", EGameCode.GAME_CONFIG__TEAMS_ADD_TEAM__EXPLANATION, t -> t != null);
+	protected TeamsAddTeamNode(Supplier<ITeamList> teams, TeamCommandTree teamTree) {
+		super(teams, "team", EGameCode.TEAMS__ADD_TEAM__EXPLANATION, t -> t != null);
 		this.teamTree = teamTree;
 	}
 
@@ -44,7 +44,7 @@ public class TeamsAddTeamNode extends TeamsNode {
 		if (result) {
 			ITeam team = teamTree.getTeam();
 			getTeams().add(team);
-			sendSuccessful(sender, EGameCode.GAME_CONFIG__TEAMS_ADD_TEAM__TEAM_ADDED, team.getColoredName(EColor.GOLD), getTeams().getName());
+			sendSuccessful(sender, EGameCode.TEAMS__ADD_TEAM__TEAM_ADDED, team.getColoredName(EColor.GOLD), getTeams().getName());
 		}
 		return result;
 	}

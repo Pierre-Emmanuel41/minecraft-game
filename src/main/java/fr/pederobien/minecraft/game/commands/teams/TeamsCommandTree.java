@@ -1,14 +1,18 @@
-package fr.pederobien.minecraft.game.commands.game;
+package fr.pederobien.minecraft.game.commands.teams;
 
 import java.util.function.Supplier;
 
-import fr.pederobien.minecraft.commandtree.impl.MinecraftCodeNode;
+import fr.pederobien.minecraft.commandtree.impl.MinecraftCodeRootNode;
+import fr.pederobien.minecraft.commandtree.interfaces.IMinecraftCodeRootNode;
 import fr.pederobien.minecraft.dictionary.impl.PlayerGroup;
 import fr.pederobien.minecraft.game.commands.team.TeamCommandTree;
 import fr.pederobien.minecraft.game.impl.EGameCode;
 import fr.pederobien.minecraft.game.interfaces.ITeamConfigurable;
+import fr.pederobien.minecraft.game.interfaces.ITeamList;
 
-public class GameTeamsNode extends MinecraftCodeNode {
+public class TeamsCommandTree {
+	private Supplier<ITeamConfigurable> configurable;
+	private IMinecraftCodeRootNode root;
 	private TeamCommandTree teamTree;
 	private TeamsAddNode addNode;
 	private TeamsRemoveNode removeNode;
@@ -17,24 +21,36 @@ public class GameTeamsNode extends MinecraftCodeNode {
 	private TeamsMoveNode moveNode;
 	private TeamsRandomNode randomNode;
 
-	/**
-	 * Creates a node in order to modify a team configurable object.
-	 * 
-	 * @param configurable The configurable object associated to this node.
-	 */
-	protected GameTeamsNode(Supplier<ITeamConfigurable> configurable) {
-		super("teams", EGameCode.GAME_CONFIG__TEAMS__EXPLANATION, () -> configurable.get() != null);
+	public TeamsCommandTree(Supplier<ITeamConfigurable> configurable) {
+		this.configurable = configurable;
+
+		root = new MinecraftCodeRootNode("teams", EGameCode.TEAMS__EXPLANATION, () -> configurable.get() != null);
 
 		teamTree = new TeamCommandTree();
-		add(addNode = new TeamsAddNode(configurable, teamTree));
-		add(removeNode = new TeamsRemoveNode(configurable, teamTree));
-		add(modifyNode = new TeamsModifyNode(configurable, teamTree));
-		add(listNode = TeamsListNode.newInstance(configurable));
-		add(moveNode = new TeamsMoveNode(configurable));
-		add(randomNode = new TeamsRandomNode(configurable));
+		root.add(addNode = new TeamsAddNode(() -> getTeams(), teamTree));
+		root.add(removeNode = new TeamsRemoveNode(() -> getTeams(), teamTree));
+		root.add(modifyNode = new TeamsModifyNode(() -> getTeams(), teamTree));
+		root.add(listNode = TeamsListNode.newInstance(() -> getTeams()));
+		root.add(moveNode = new TeamsMoveNode(() -> getTeams()));
+		root.add(randomNode = new TeamsRandomNode(() -> getTeams()));
 
 		// By default, all players receive the new teams composition
 		randomNode.setTeamsCompositionGroup(PlayerGroup.ALL);
+	}
+
+	/**
+	 * @return The list of teams associated to this command tree.
+	 */
+	public ITeamList getTeams() {
+		ITeamConfigurable teams = configurable.get();
+		return teams == null ? null : teams.getTeams();
+	}
+
+	/**
+	 * @return The root of this tree.
+	 */
+	public IMinecraftCodeRootNode getRoot() {
+		return root;
 	}
 
 	/**

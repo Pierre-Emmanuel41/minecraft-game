@@ -1,4 +1,4 @@
-package fr.pederobien.minecraft.game.commands.game;
+package fr.pederobien.minecraft.game.commands.teams;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +12,7 @@ import org.bukkit.entity.Player;
 
 import fr.pederobien.minecraft.game.impl.EGameCode;
 import fr.pederobien.minecraft.game.interfaces.ITeam;
-import fr.pederobien.minecraft.game.interfaces.ITeamConfigurable;
+import fr.pederobien.minecraft.game.interfaces.ITeamList;
 import fr.pederobien.minecraft.managers.EColor;
 import fr.pederobien.minecraft.managers.PlayerManager;
 
@@ -23,8 +23,8 @@ public class TeamsMoveNode extends TeamsNode {
 	 * 
 	 * @param teams The list of teams associated to this node.
 	 */
-	protected TeamsMoveNode(Supplier<ITeamConfigurable> teams) {
-		super(teams, "move", EGameCode.GAME_CONFIG__MOVE__EXPLANATION, t -> t != null && t.getTeams() != null);
+	protected TeamsMoveNode(Supplier<ITeamList> teams) {
+		super(teams, "move", EGameCode.TEAMS__MOVE__EXPLANATION, t -> t != null);
 	}
 
 	@Override
@@ -50,13 +50,13 @@ public class TeamsMoveNode extends TeamsNode {
 		try {
 			playerName = args[0];
 		} catch (IndexOutOfBoundsException e) {
-			send(eventBuilder(sender, EGameCode.GAME_CONFIG__MOVE__PLAYER_NAME_IS_MISSING).build());
+			send(eventBuilder(sender, EGameCode.TEAMS__MOVE__PLAYER_NAME_IS_MISSING).build());
 			return false;
 		}
 
 		Player player = PlayerManager.getPlayer(playerName);
 		if (player == null) {
-			send(eventBuilder(sender, EGameCode.GAME_CONFIG__MOVE__PLAYER_NOT_FOUND, playerName));
+			send(eventBuilder(sender, EGameCode.TEAMS__MOVE__PLAYER_NOT_FOUND, playerName));
 			return false;
 		}
 
@@ -64,13 +64,13 @@ public class TeamsMoveNode extends TeamsNode {
 		try {
 			teamName = args[1];
 		} catch (IndexOutOfBoundsException e) {
-			send(eventBuilder(sender, EGameCode.GAME_CONFIG__MOVE__TEAM_NAME_IS_MISSING, playerName));
+			send(eventBuilder(sender, EGameCode.TEAMS__MOVE__TEAM_NAME_IS_MISSING, playerName));
 			return false;
 		}
 
 		Optional<ITeam> optTeam = getTeams().getTeam(teamName);
 		if (!optTeam.isPresent()) {
-			send(eventBuilder(sender, EGameCode.GAME_CONFIG__MOVE__TEAM_NOT_FOUND, playerName, teamName));
+			send(eventBuilder(sender, EGameCode.TEAMS__MOVE__TEAM_NOT_FOUND, playerName, teamName));
 			return false;
 		}
 
@@ -78,7 +78,7 @@ public class TeamsMoveNode extends TeamsNode {
 		ITeam oldTeam = getTeams().movePlayer(player, optTeam.get());
 		if (oldTeam != null) {
 			String oldTeamColor = oldTeam.getColoredName(EColor.GOLD);
-			sendSuccessful(sender, EGameCode.GAME_CONFIG__MOVE__PLAYER_MOVED_FROM_TO, playerName, oldTeamColor, newTeam.getColoredName(EColor.GOLD));
+			sendSuccessful(sender, EGameCode.TEAMS__MOVE__PLAYER_MOVED_FROM_TO, playerName, oldTeamColor, newTeam.getColoredName(EColor.GOLD));
 		} else
 			sendSuccessful(sender, EGameCode.TEAM__ADD_PLAYER__ONE_PLAYER_ADDED, playerName, optTeam.get().getColoredName(EColor.GOLD));
 		return true;

@@ -1,4 +1,4 @@
-package fr.pederobien.minecraft.game.commands.game;
+package fr.pederobien.minecraft.game.commands.teams;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +11,7 @@ import org.bukkit.command.CommandSender;
 
 import fr.pederobien.minecraft.game.impl.EGameCode;
 import fr.pederobien.minecraft.game.interfaces.ITeam;
-import fr.pederobien.minecraft.game.interfaces.ITeamConfigurable;
+import fr.pederobien.minecraft.game.interfaces.ITeamList;
 
 public class TeamsRemoveTeamNode extends TeamsNode {
 
@@ -21,8 +21,8 @@ public class TeamsRemoveTeamNode extends TeamsNode {
 	 * @param teams    The list of teams associated to this node.
 	 * @param teamTree The command tree in order create or modify a team.
 	 */
-	protected TeamsRemoveTeamNode(Supplier<ITeamConfigurable> teams) {
-		super(teams, "team", EGameCode.GAME_CONFIG__TEAMS_REMOVE_TEAM__EXPLANATION, t -> t != null);
+	protected TeamsRemoveTeamNode(Supplier<ITeamList> teams) {
+		super(teams, "team", EGameCode.TEAMS__REMOVE_TEAM__EXPLANATION, t -> t != null);
 	}
 
 	@Override
@@ -45,7 +45,7 @@ public class TeamsRemoveTeamNode extends TeamsNode {
 		// Clearing the current configuration from its teams.
 		if (args[0].equals("all")) {
 			getTeams().clear();
-			sendSuccessful(sender, EGameCode.GAME_CONFIG__TEAMS_REMOVE_TEAM__ALL_PLAYERS_REMOVED, getTeams().getName());
+			sendSuccessful(sender, EGameCode.TEAMS__REMOVE_TEAM__ALL_PLAYERS_REMOVED, getTeams().getName());
 			return true;
 		}
 
@@ -55,7 +55,7 @@ public class TeamsRemoveTeamNode extends TeamsNode {
 
 			// Checking if the team name refers to a registered team.
 			if (!optTeam.isPresent()) {
-				send(eventBuilder(sender, EGameCode.GAME_CONFIG__TEAMS_REMOVE_TEAM__TEAM_NOT_FOUND, name, getTeams().getName()));
+				send(eventBuilder(sender, EGameCode.TEAMS__REMOVE_TEAM__TEAM_NOT_FOUND, name, getTeams().getName()));
 				return false;
 			}
 
@@ -69,13 +69,13 @@ public class TeamsRemoveTeamNode extends TeamsNode {
 
 		switch (teams.size()) {
 		case 0:
-			sendSuccessful(sender, EGameCode.GAME_CONFIG__TEAMS_REMOVE_TEAM__NO_TEAM_REMOVED, getTeams().getName());
+			sendSuccessful(sender, EGameCode.TEAMS__REMOVE_TEAM__NO_TEAM_REMOVED, getTeams().getName());
 			break;
 		case 1:
-			sendSuccessful(sender, EGameCode.GAME_CONFIG__TEAMS_REMOVE_TEAM__ONE_TEAM_REMOVED, teamNames, getTeams().getName());
+			sendSuccessful(sender, EGameCode.TEAMS__REMOVE_TEAM__ONE_TEAM_REMOVED, teamNames, getTeams().getName());
 			break;
 		default:
-			sendSuccessful(sender, EGameCode.GAME_CONFIG__TEAMS_REMOVE_TEAM__SEVERAL_TEAMS_REMOVED, teamNames, getTeams().getName());
+			sendSuccessful(sender, EGameCode.TEAMS__REMOVE_TEAM__SEVERAL_TEAMS_REMOVED, teamNames, getTeams().getName());
 			break;
 		}
 

@@ -192,159 +192,191 @@
 			<value>Arrêt de %s...</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__TEAMS__EXPLANATION</code>
-			<value>Pour modifier la liste des équipes d'une partie</value>
+			<code>FEATURE__EXPLANATION</code>
+			<value>Pour configurer une fonctionnalité</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__TEAMS_ADD__EXPLANATION</code>
-			<value>Pour ajouter une équipe à une partie ou des joueurs à une équipe</value>
-		</message>
-		<message>
-			<code>GAME_CONFIG__TEAMS_ADD_TEAM__EXPLANATION</code>
-			<value>Pour ajouter une équipe à une partie</value>
-		</message>
-		<message>
-			<code>GAME_CONFIG__TEAMS_ADD_TEAM__TEAM_ADDED</code>
-			<value>L'équipe %s a été ajoutée à %s</value>
-		</message>
-		<message>
-			<code>GAME_CONFIG__TEAMS_REMOVE__EXPLANATION</code>
-			<value>Pour enlever une équipe d'une partie ou des joueurs d'une équipe</value>
-		</message>
-		<message>
-			<code>GAME_CONFIG__TEAMS_REMOVE_TEAM__EXPLANATION</code>
-			<value>Pour enlever une équipe d'une partie</value>
-		</message>
-		<message>
-			<code>GAME_CONFIG__TEAMS_REMOVE_TEAM__ALL_PLAYERS_REMOVED</code>
-			<value>Toutes les équipes de %s ont été enlevées</value>
-		</message>
-		<message>
-			<code>GAME_CONFIG__TEAMS_REMOVE_TEAM__TEAM_NOT_FOUND</code>
-			<value>Impossible d'enlever %s de %s, l'équipe n'est enregistrée dans cette partie</value>
-		</message>
-		<message>
-			<code>GAME_CONFIG__TEAMS_REMOVE_TEAM__NO_TEAM_REMOVED</code>
-			<value>Aucune équipe n'a été enlevée de %s</value>
-		</message>
-		<message>
-			<code>GAME_CONFIG__TEAMS_REMOVE_TEAM__ONE_TEAM_REMOVED</code>
-			<value>%s a été enlevée de %s</value>
-		</message>
-		<message>
-			<code>GAME_CONFIG__TEAMS_REMOVE_TEAM__SEVERAL_TEAMS_REMOVED</code>
-			<value>Les équipes %s ont été enlevées de %s</value>
-		</message>
-		<message>
-			<code>GAME_CONFIG__TEAMS_MODIFY__EXPLANATION</code>
-			<value>Pour modifier les caractéristiques d'une équipe</value>
-		</message>
-		<message>
-			<code>GAME_CONFIG__TEAMS_MODIFY__TEAM_NOT_FOUND</code>
-			<value>Impossible de modifier l'équipe %s, cette équipe n'existe pas</value>
-		</message>
-		<message>
-			<code>GAME_CONFIG__TEAMS_MODIFY_PLAYERS__EXPLANATION</code>
-			<value>Pour modifier la liste des joueurs d'une équipe</value>
-		</message>
-		<message>
-			<code>GAME_CONFIG__FEATURES__EXPLANATION</code>
-			<value>Pour paramétrer une fonctionnalité</value>
-		</message>
-		<message>
-			<code>GAME_CONFIG__FEATURES_ENABLE__EXPLANATION</code>
+			<code>FEATURE__ENABLE__EXPLANATION</code>
 			<value>Pour activer une fonctionnalité</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__FEATURES_ENABLE__NAME_IS_MISSING</code>
-			<value>Impossible d'activer une fonctionnalité, le nom est manquant.</value>
+			<code>FEATURE__ENABLE__FEATURE_ENABLED</code>
+			<value>La fonctionnalité %s a été activée</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__FEATURES_ENABLE__ENABLED</code>
-			<value>Fonctionnalité %s est activée</value>
-		</message>
-		<message>
-			<code>GAME_CONFIG__FEATURES_DISABLE__EXPLANATION</code>
+			<code>FEATURE__DISABLE__EXPLANATION</code>
 			<value>Pour désactiver une fonctionnalité</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__FEATURES_DISABLE__NAME_IS_MISSING</code>
-			<value>Impossible de désactiver une fonctionnalité, le nom est manquant.</value>
+			<code>FEATURE__DISABLE__FEATURE_DISABLED</code>
+			<value>La fonctionnalité %s a été désactivée</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__FEATURES_DISABLE__DISABLED</code>
-			<value>Fonctionnalité %s est désactivée</value>
+			<code>FEATURE__ARGS__EXPLANATION</code>
+			<value>Pour configurer les argument d'une fonctionnalité avant le démarrage de celle-ci</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__FEATURES_ARGS__EXPLANATION</code>
-			<value>Pour définir les argument avant de lancer une fonctionnalité</value>
+			<code>FEATURES__ENABLE__EXPLANATION</code>
+			<value>Pour activer plusieurs fonctionnalités</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__FEATURES_ARGS__NAME_IS_MISSING</code>
+			<code>FEATURES__ENABLE__FEATURE_NOT_FOUND</code>
+			<value>Impossible d'activer %s, cette fonctionnalité n'existe pas</value>
+		</message>
+		<message>
+			<code>FEATURES__ENABLE__NO_FEATURE_ENABLED</code>
+			<value>Aucune fonctionnalité n'a été activée</value>
+		</message>
+		<message>
+			<code>FEATURES__ENABLE__ONE_FEATURE_ENABLED</code>
+			<value>La fonctionnalité %s a été activée</value>
+		</message>
+		<message>
+			<code>FEATURES__ENABLE__SEVERAL_FEATURES_ENABLED</code>
+			<value>Les fonctionnalités %s ont été activée</value>
+		</message>
+		<message>
+			<code>FEATURES__DISABLE__EXPLANATION</code>
+			<value>Pour désactiver plusieurs fonctionnalités</value>
+		</message>
+		<message>
+			<code>FEATURES__DISABLE__FEATURE_NOT_FOUND</code>
+			<value>Impossible de désactiver %s, cette fonctionnalité n'existe pas</value>
+		</message>
+		<message>
+			<code>FEATURES__DISABLE__NO_FEATURE_DISABLED</code>
+			<value>Aucune fonctionnalité n'a été désactivée</value>
+		</message>
+		<message>
+			<code>FEATURES__DISABLE__ONE_FEATURE_DISABLED</code>
+			<value>La fonctionnalité %s a été désactivée</value>
+		</message>
+		<message>
+			<code>FEATURES__DISABLE__SEVERAL_FEATURES_DISABLED</code>
+			<value>Les fonctionnalités %s ont été désactivées</value>
+		</message>
+		<message>
+			<code>FEATURES__ARGS__NAME_IS_MISSING</code>
 			<value>Impossible de définir les arguments d'une fonctionnalité, le nom est manquant</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__FEATURES_ARGS__FEATURE_NOT_REGISTERED</code>
-			<value>Impossible de définir les arguments de %s, elle n'est pas enregistrée pour %s</value>
+			<code>FEATURES__ARGS__FEATURE_NOT_FOUND</code>
+			<value>Impossible de définir les arguments de %s, cette fonctionnalité n'existe pas</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__TEAMS_RANDOM__EXPLANATION</code>
+			<code>FEATURES__ARGS__FEATURE_NOT_ENABLED</code>
+			<value>Impossible de définir les arguments de %s, cette fonctionnalité est désactivée</value>
+		</message>
+		<message>
+			<code>TEAMS___EXPLANATION</code>
+			<value>Pour modifier la liste des équipes d'une partie</value>
+		</message>
+		<message>
+			<code>TEAMS__ADD__EXPLANATION</code>
+			<value>Pour ajouter une équipe à une partie ou des joueurs à une équipe</value>
+		</message>
+		<message>
+			<code>TEAMS__ADD_TEAM__EXPLANATION</code>
+			<value>Pour ajouter une équipe à une partie</value>
+		</message>
+		<message>
+			<code>TEAMS__ADD_TEAM__TEAM_ADDED</code>
+			<value>L'équipe %s a été ajoutée à %s</value>
+		</message>
+		<message>
+			<code>TEAMS__REMOVE__EXPLANATION</code>
+			<value>Pour enlever une équipe d'une partie ou des joueurs d'une équipe</value>
+		</message>
+		<message>
+			<code>TEAMS__REMOVE_TEAM__EXPLANATION</code>
+			<value>Pour enlever une équipe d'une partie</value>
+		</message>
+		<message>
+			<code>TEAMS__REMOVE_TEAM__ALL_PLAYERS_REMOVED</code>
+			<value>Toutes les équipes de %s ont été enlevées</value>
+		</message>
+		<message>
+			<code>TEAMS__REMOVE_TEAM__TEAM_NOT_FOUND</code>
+			<value>Impossible d'enlever %s de %s, l'équipe n'est enregistrée dans cette partie</value>
+		</message>
+		<message>
+			<code>TEAMS__REMOVE_TEAM__NO_TEAM_REMOVED</code>
+			<value>Aucune équipe n'a été enlevée de %s</value>
+		</message>
+		<message>
+			<code>TEAMS__REMOVE_TEAM__ONE_TEAM_REMOVED</code>
+			<value>%s a été enlevée de %s</value>
+		</message>
+		<message>
+			<code>TEAMS__REMOVE_TEAM__SEVERAL_TEAMS_REMOVED</code>
+			<value>Les équipes %s ont été enlevées de %s</value>
+		</message>
+		<message>
+			<code>TEAMS__MODIFY__EXPLANATION</code>
+			<value>Pour modifier les caractéristiques d'une équipe</value>
+		</message>
+		<message>
+			<code>TEAMS__MODIFY__TEAM_NOT_FOUND</code>
+			<value>Impossible de modifier l'équipe %s, cette équipe n'existe pas</value>
+		</message>
+		<message>
+			<code>TEAMS__RANDOM__EXPLANATION</code>
 			<value>Pour créer des équipes aléatoires</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__TEAMS_RANDOM__MAX_PLAYERS_PER_TEAM</code>
+			<code>TEAMS__RANDOM__MAX_PLAYERS_PER_TEAM</code>
 			<value>&lt;maxJoueursParEquipe&gt;</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__TEAMS_RANDOM__MAX_PLAYERS_PER_TEAM__NEGATIVE_VALUE</code>
+			<code>TEAMS__RANDOM__MAX_PLAYERS_PER_TEAM__NEGATIVE_VALUE</code>
 			<value>Le nombre maximum de joueur par équipe doit être strictement positif</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__TEAMS_RANDOM__NOT_ENOUGH_TEAMS</code>
+			<code>TEAMS__RANDOM__NOT_ENOUGH_TEAMS</code>
 			<value>Impossible de créer des équipes aléatoires, il n'y a pas assez d'équipes</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__TEAMS_RANDOM__PLAYERS_DISPATCHED_IN_TEAMS</code>
+			<code>TEAMS__RANDOM__PLAYERS_DISPATCHED_IN_TEAMS</code>
 			<value>Equipes :%n%s</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__MOVE__EXPLANATION</code>
+			<code>TEAMS__MOVE__EXPLANATION</code>
 			<value>Pour déplacer un joueur d'une équipe une autre</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__MOVE__PLAYER_NAME_IS_MISSING</code>
+			<code>TEAMS__MOVE__PLAYER_NAME_IS_MISSING</code>
 			<value>Impossible de déplacer un joueur, le nom du joueur est manquant</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__MOVE__TEAM_NAME_IS_MISSING</code>
+			<code>TEAMS__MOVE__TEAM_NAME_IS_MISSING</code>
 			<value>Impossible de déplacer %s, le nom de l'équipe est manquant</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__MOVE__PLAYER_NOT_FOUND</code>
+			<code>TEAMS__MOVE__PLAYER_NOT_FOUND</code>
 			<value>Impossible de déplacer %s, ce joueur n'existe pas</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__MOVE__TEAM_NOT_FOUND</code>
+			<code>TEAMS__MOVE__TEAM_NOT_FOUND</code>
 			<value>Impossible de déplacer %s dans %s, cette équipe n'existe pas</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__MOVE__PLAYER_MOVED_FROM_TO</code>
+			<code>TEAMS__MOVE__PLAYER_MOVED_FROM_TO</code>
 			<value>%s a été déplacé de %s à %s</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__LIST__EXPLANATION</code>
+			<code>TEAMS__LIST__EXPLANATION</code>
 			<value>Pour afficher la list des équipes</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__LIST__NO_TEAM_REGISTERED</code>
+			<code>TEAMS__LIST__NO_TEAM_REGISTERED</code>
 			<value>%s n'a pas d'équipe</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__LIST__ONE_TEAM_REGISTERED</code>
+			<code>TEAMS__LIST__ONE_TEAM_REGISTERED</code>
 			<value>Equipe de %s: %s</value>
 		</message>
 		<message>
-			<code>GAME_CONFIG__LIST__SEVERAL_TEAMS_REGISTERED</code>
+			<code>TEAMS__LIST__SEVERAL_TEAMS_REGISTERED</code>
 			<value>Equipes de %s: %s</value>
 		</message>
 	</messages>

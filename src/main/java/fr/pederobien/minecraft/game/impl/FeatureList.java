@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.Stream;
 
 import fr.pederobien.minecraft.game.event.FeatureListFeatureAddPostEvent;
@@ -26,6 +27,7 @@ public class FeatureList implements IFeatureList {
 	public FeatureList(String name) {
 		this.name = name;
 		features = new LinkedHashMap<String, IFeature>();
+		lock = new ReentrantLock(true);
 	}
 
 	@Override

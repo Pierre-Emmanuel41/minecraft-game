@@ -1,10 +1,10 @@
-package fr.pederobien.minecraft.game.commands.game;
+package fr.pederobien.minecraft.game.commands.teams;
 
 import java.util.function.Supplier;
 
 import fr.pederobien.minecraft.game.commands.team.TeamCommandTree;
 import fr.pederobien.minecraft.game.impl.EGameCode;
-import fr.pederobien.minecraft.game.interfaces.ITeamConfigurable;
+import fr.pederobien.minecraft.game.interfaces.ITeamList;
 
 public class TeamsAddNode extends TeamsNode {
 	private TeamsAddTeamNode teamNode;
@@ -16,8 +16,8 @@ public class TeamsAddNode extends TeamsNode {
 	 * @param teams    The list of teams associated to this node.
 	 * @param teamTree The command tree in order create or modify a team.
 	 */
-	protected TeamsAddNode(Supplier<ITeamConfigurable> teams, TeamCommandTree teamTree) {
-		super(teams, "add", EGameCode.GAME_CONFIG__TEAMS_ADD__EXPLANATION, t -> t != null && t.getTeams() != null);
+	protected TeamsAddNode(Supplier<ITeamList> teams, TeamCommandTree teamTree) {
+		super(teams, "add", EGameCode.TEAMS__ADD__EXPLANATION, t -> t != null);
 		add(teamNode = new TeamsAddTeamNode(teams, teamTree));
 		add(playerNode = new TeamsAddPlayerNode(teams, teamTree));
 	}

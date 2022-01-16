@@ -145,119 +145,149 @@ public enum EGameCode implements IMinecraftCode {
 	// Code when a game starts
 	STOP_GAME__STOPPING_GAME(PlayerGroup.ALL),
 
-	// Code for the "teams" command ---------------------------------------------
-	GAME_CONFIG__TEAMS__EXPLANATION,
-
-	// Code for the "teams add" command -----------------------------------------
-	GAME_CONFIG__TEAMS_ADD__EXPLANATION,
-
-	// Code for the "teams add team" command ------------------------------------
-	GAME_CONFIG__TEAMS_ADD_TEAM__EXPLANATION,
-
-	// Code when a team has been added
-	GAME_CONFIG__TEAMS_ADD_TEAM__TEAM_ADDED,
-
-	// Code for the "teams remove" command --------------------------------------
-	GAME_CONFIG__TEAMS_REMOVE__EXPLANATION,
-
-	// Code for the "teams remove team" command ---------------------------------
-	GAME_CONFIG__TEAMS_REMOVE_TEAM__EXPLANATION,
-
-	// Code when removing all teams from a configuration
-	GAME_CONFIG__TEAMS_REMOVE_TEAM__ALL_PLAYERS_REMOVED,
-
-	// Code when the player name refers to no player
-	GAME_CONFIG__TEAMS_REMOVE_TEAM__TEAM_NOT_FOUND,
-
-	// Code when no team has been removed from a game.
-	GAME_CONFIG__TEAMS_REMOVE_TEAM__NO_TEAM_REMOVED,
-
-	// Code when one team has been removed from a game.
-	GAME_CONFIG__TEAMS_REMOVE_TEAM__ONE_TEAM_REMOVED,
-
-	// Code when several teams have been removed from a game.
-	GAME_CONFIG__TEAMS_REMOVE_TEAM__SEVERAL_TEAMS_REMOVED,
-
-	// Code for the "teams modify" command --------------------------------------
-	GAME_CONFIG__TEAMS_MODIFY__EXPLANATION,
-
-	// Code when the team to modify does not exist
-	GAME_CONFIG__TEAMS_MODIFY__TEAM_NOT_FOUND,
-
 	// Code for the "feature" command -------------------------------------------
-	GAME_CONFIG__FEATURES__EXPLANATION,
+	FEATURE__EXPLANATION,
 
 	// Code for the "feature enable" command ------------------------------------
-	GAME_CONFIG__FEATURES_ENABLE__EXPLANATION,
-
-	// Code when the feature name is missing
-	GAME_CONFIG__FEATURES_ENABLE__NAME_IS_MISSING,
+	FEATURE__ENABLE__EXPLANATION,
 
 	// Code when the feature is enabled
-	GAME_CONFIG__FEATURES_ENABLE__ENABLED,
+	FEATURE__ENABLE__FEATURE_ENABLED,
 
 	// Code for the "feature disable" command -----------------------------------
-	GAME_CONFIG__FEATURES_DISABLE__EXPLANATION,
-
-	// Code when the feature name is missing
-	GAME_CONFIG__FEATURES_DISABLE__NAME_IS_MISSING,
+	FEATURE__DISABLE__EXPLANATION,
 
 	// Code when the feature is disable
-	GAME_CONFIG__FEATURES_DISABLE__DISABLED,
+	FEATURE__DISABLE__FEATURE_DISABLED,
 
-	// Code for the "feature args" command ----------------------------------
-	GAME_CONFIG__FEATURES_ARGS__EXPLANATION,
+	// Code for the "feature args" command --------------------------------------
+	FEATURE__ARGS__EXPLANATION,
 
-	// Code when the feature name is missing
-	GAME_CONFIG__FEATURSE_ARGS__NAME_IS_MISSING,
+	// Code for the "features" command ------------------------------------------
+	FEATURES__EXPLANATION,
 
-	// Code when the feature is not registered
-	GAME_CONFIG__FEATURES_ARGS__FEATURE_NOT_REGISTERED,
+	// Code for the "features enable" command -----------------------------------
+	FEATURES__ENABLE__EXPLANATION,
 
-	// Code when the "random" command --------------------------------------
-	GAME_CONFIG__TEAMS_RANDOM__EXPLANATION,
+	// Code when the feature does not exist
+	FEATURES__ENABLE__FEATURE_NOT_FOUND,
 
-	// Code to get the max number of players per team
-	GAME_CONFIG__TEAMS_RANDOM__MAX_PLAYERS_PER_TEAM,
+	// Code when no feature has been enabled
+	FEATURES__ENABLE__NO_FEATURE_ENABLED,
 
-	// Code when the max player per team value is negative
-	GAME_CONFIG__TEAMS_RANDOM__MAX_PLAYERS_PER_TEAM__NEGATIVE_VALUE,
+	// Code when one feature has been enabled
+	FEATURES__ENABLE__ONE_FEATURE_ENABLED,
 
-	// Code when there are not enough teams to create dispatch players
-	GAME_CONFIG__TEAMS_RANDOM__NOT_ENOUGH_TEAMS,
+	// Code when several feature have been enabled
+	FEATURES__ENABLE__SEVERAL_FEATURES_ENABLED,
 
-	// Code when there are not enough teams to create dispatch players
-	GAME_CONFIG__TEAMS_RANDOM__PLAYERS_DISPATCHED_IN_TEAMS,
+	// Code for the "features disable" command ----------------------------------
+	FEATURES__DISABLE__EXPLANATION,
 
-	// Code for the "move" command ----------------------------------------
-	GAME_CONFIG__MOVE__EXPLANATION,
+	// Code when the feature does not exist
+	FEATURES__DISABLE__FEATURE_NOT_FOUND,
 
-	// Code when the player name is missing
-	GAME_CONFIG__MOVE__PLAYER_NAME_IS_MISSING,
+	// Code when no feature has been disabled
+	FEATURES__DISABLE__NO_FEATURE_DISABLED,
 
-	// Code when the team name is missing
-	GAME_CONFIG__MOVE__TEAM_NAME_IS_MISSING,
+	// Code when one feature has been disabled
+	FEATURES__DISABLE__ONE_FEATURE_DISABLED,
+
+	// Code when several feature have been disabled
+	FEATURES__DISABLE__SEVERAL_FEATURES_DISABLED,
+
+	// Code for the "features args" command -------------------------------------
+	FEATURES__ARGS__NAME_IS_MISSING,
+
+	// Code when the feature does not exist
+	FEATURES__ARGS__FEATURE_NOT_FOUND,
+
+	// Code when the feature is not enabled
+	FEATURES__ARGS__FEATURE_NOT_ENABLED,
+
+	// Code for the "teams" command ---------------------------------------------
+	TEAMS__EXPLANATION,
+
+	// Code for the "teams add" command -----------------------------------------
+	TEAMS__ADD__EXPLANATION,
+
+	// Code for the "teams add team" command ------------------------------------
+	TEAMS__ADD_TEAM__EXPLANATION,
+
+	// Code when a team has been added
+	TEAMS__ADD_TEAM__TEAM_ADDED,
+
+	// Code for the "teams remove" command --------------------------------------
+	TEAMS__REMOVE__EXPLANATION,
+
+	// Code for the "teams remove team" command ---------------------------------
+	TEAMS__REMOVE_TEAM__EXPLANATION,
+
+	// Code when removing all teams from a configuration
+	TEAMS__REMOVE_TEAM__ALL_PLAYERS_REMOVED,
 
 	// Code when the player name refers to no player
-	GAME_CONFIG__MOVE__PLAYER_NOT_FOUND,
+	TEAMS__REMOVE_TEAM__TEAM_NOT_FOUND,
+
+	// Code when no team has been removed from a game.
+	TEAMS__REMOVE_TEAM__NO_TEAM_REMOVED,
+
+	// Code when one team has been removed from a game.
+	TEAMS__REMOVE_TEAM__ONE_TEAM_REMOVED,
+
+	// Code when several teams have been removed from a game.
+	TEAMS__REMOVE_TEAM__SEVERAL_TEAMS_REMOVED,
+
+	// Code for the "teams modify" command --------------------------------------
+	TEAMS__MODIFY__EXPLANATION,
+
+	// Code when the team to modify does not exist
+	TEAMS__MODIFY__TEAM_NOT_FOUND,
+
+	// Code when the "teams random" command -------------------------------------
+	TEAMS__RANDOM__EXPLANATION,
+
+	// Code to get the max number of players per team
+	TEAMS__RANDOM__MAX_PLAYERS_PER_TEAM,
+
+	// Code when the max player per team value is negative
+	TEAMS__RANDOM__MAX_PLAYERS_PER_TEAM__NEGATIVE_VALUE,
+
+	// Code when there are not enough teams to create dispatch players
+	TEAMS__RANDOM__NOT_ENOUGH_TEAMS,
+
+	// Code when there are not enough teams to create dispatch players
+	TEAMS__RANDOM__PLAYERS_DISPATCHED_IN_TEAMS,
+
+	// Code for the "teams move" command ----------------------------------------
+	TEAMS__MOVE__EXPLANATION,
+
+	// Code when the player name is missing
+	TEAMS__MOVE__PLAYER_NAME_IS_MISSING,
+
+	// Code when the team name is missing
+	TEAMS__MOVE__TEAM_NAME_IS_MISSING,
+
+	// Code when the player name refers to no player
+	TEAMS__MOVE__PLAYER_NOT_FOUND,
 
 	// Code when the team name refers to no team
-	GAME_CONFIG__MOVE__TEAM_NOT_FOUND,
+	TEAMS__MOVE__TEAM_NOT_FOUND,
 
 	// Code when a player is moved from a team to another one
-	GAME_CONFIG__MOVE__PLAYER_MOVED_FROM_TO,
+	TEAMS__MOVE__PLAYER_MOVED_FROM_TO,
 
-	// Code for the "list" command ----------------------------------------------
-	GAME_CONFIG__LIST__EXPLANATION,
-
-	// Code when there is no list in configuration
-	GAME_CONFIG__LIST__NO_TEAM_REGISTERED,
+	// Code for the "teams list" command ----------------------------------------
+	TEAMS__LIST__EXPLANATION,
 
 	// Code when there is no list in configuration
-	GAME_CONFIG__LIST__ONE_TEAM_REGISTERED,
+	TEAMS__LIST__NO_TEAM_REGISTERED,
 
 	// Code when there is no list in configuration
-	GAME_CONFIG__LIST__SEVERAL_TEAMS_REGISTERED,
+	TEAMS__LIST__ONE_TEAM_REGISTERED,
+
+	// Code when there is no list in configuration
+	TEAMS__LIST__SEVERAL_TEAMS_REGISTERED,
 
 	;
 

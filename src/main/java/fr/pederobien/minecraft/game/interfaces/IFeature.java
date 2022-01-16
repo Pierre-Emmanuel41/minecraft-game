@@ -7,6 +7,11 @@ import fr.pederobien.utils.IPausable;
 public interface IFeature extends IPausable {
 
 	/**
+	 * @return The game associated to this feature.
+	 */
+	IGame getGame();
+
+	/**
 	 * @return The name of this feature.
 	 */
 	String getName();
