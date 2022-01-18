@@ -9,7 +9,7 @@ import fr.pederobien.minecraft.game.impl.EGameCode;
 import fr.pederobien.minecraft.game.interfaces.IFeatureConfigurable;
 import fr.pederobien.minecraft.game.interfaces.IFeatureList;
 
-public class FeaturesCommandNode {
+public class FeaturesCommandTree {
 	private Supplier<IFeatureConfigurable> configurable;
 	private IMinecraftCodeRootNode root;
 
@@ -18,7 +18,7 @@ public class FeaturesCommandNode {
 	private FeaturesDisableNode disableNode;
 	private FeaturesArgumentNode argumentNode;
 
-	public FeaturesCommandNode(Supplier<IFeatureConfigurable> configurable) {
+	public FeaturesCommandTree(Supplier<IFeatureConfigurable> configurable) {
 		this.configurable = configurable;
 
 		root = new MinecraftCodeRootNode("features", EGameCode.FEATURES__EXPLANATION, () -> configurable.get() != null);
