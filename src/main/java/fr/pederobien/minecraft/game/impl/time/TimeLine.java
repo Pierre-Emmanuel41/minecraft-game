@@ -51,7 +51,7 @@ public class TimeLine implements ITimeLine, IEventListener {
 		if (observable != null)
 			observable.removeObserver(obs);
 
-		if (obs.getCountDown() == null)
+		if (obs.getCountDown() == null || obs.getCountDown().getInitialValue() == 0)
 			return;
 
 		int current = obs.getCountDown().getInitialValue();

@@ -18,7 +18,7 @@ public class CountDown implements ICountDown {
 	 * @param onTimeAction    Action to run when the count down is reached.
 	 */
 	public CountDown(int initialValue, Consumer<Integer> countDownAction, Consumer<LocalTime> onTimeAction) {
-		this.initial = current = initialValue;
+		this.initial = current = initialValue == 0 ? 0 : initialValue - 1;
 		this.countDownAction = countDownAction;
 		this.onTimeAction = onTimeAction;
 	}
