@@ -18,6 +18,7 @@ import fr.pederobien.minecraft.game.event.TeamListTeamAddPostEvent;
 import fr.pederobien.minecraft.game.event.TeamListTeamRemovePostEvent;
 import fr.pederobien.minecraft.game.event.TeamNameChangePostEvent;
 import fr.pederobien.minecraft.game.exceptions.TeamAlreadyRegisteredException;
+import fr.pederobien.minecraft.game.interfaces.IGame;
 import fr.pederobien.minecraft.game.interfaces.ITeam;
 import fr.pederobien.minecraft.game.interfaces.ITeamList;
 import fr.pederobien.minecraft.managers.EColor;
@@ -26,12 +27,17 @@ import fr.pederobien.utils.event.EventManager;
 import fr.pederobien.utils.event.IEventListener;
 
 public class TeamList implements ITeamList, IEventListener {
-	private String name;
+	private IGame game;
 	private Map<String, ITeam> teams;
 	private Lock lock;
 
-	public TeamList(String name) {
-		this.name = name;
+	/**
+	 * Creates a list of teams associated to a game.
+	 * 
+	 * @param game The game associated to this list.
+	 */
+	public TeamList(IGame game) {
+		this.game = game;
 		teams = new LinkedHashMap<String, ITeam>();
 		lock = new ReentrantLock(true);
 
@@ -45,7 +51,7 @@ public class TeamList implements ITeamList, IEventListener {
 
 	@Override
 	public String getName() {
-		return name;
+		return game.getName();
 	}
 
 	@Override
@@ -148,8 +154,13 @@ public class TeamList implements ITeamList, IEventListener {
 		if (optNewTeam.isPresent())
 			throw new TeamAlreadyRegisteredException(this, optNewTeam.get());
 
-		remove(event.getOldName());
-		add(event.getTeam());
+		lock.lock();
+		try {
+			teams.remove(event.getOldName());
+			teams.put(event.getTeam().getName(), event.getTeam());
+		} finally {
+			lock.unlock();
+		}
 	}
 
 	/**

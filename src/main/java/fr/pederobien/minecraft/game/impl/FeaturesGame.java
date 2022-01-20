@@ -18,7 +18,7 @@ public class FeaturesGame extends Game implements IFeatureConfigurable {
 	public FeaturesGame(String name, Plugin plugin) {
 		super(name, plugin);
 
-		features = new FeatureList(name);
+		features = new FeatureList(this);
 	}
 
 	@Override

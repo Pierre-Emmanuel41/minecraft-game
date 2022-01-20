@@ -17,15 +17,21 @@ import fr.pederobien.minecraft.game.event.FeatureListFeatureRemovePostEvent;
 import fr.pederobien.minecraft.game.exceptions.FeatureAlreadyRegisteredException;
 import fr.pederobien.minecraft.game.interfaces.IFeature;
 import fr.pederobien.minecraft.game.interfaces.IFeatureList;
+import fr.pederobien.minecraft.game.interfaces.IGame;
 import fr.pederobien.utils.event.EventManager;
 
 public class FeatureList implements IFeatureList {
-	private String name;
+	private IGame game;
 	private Map<String, IFeature> features;
 	private Lock lock;
 
-	public FeatureList(String name) {
-		this.name = name;
+	/**
+	 * Creates a list of features associated to a game.
+	 * 
+	 * @param game The game associated to this list.
+	 */
+	public FeatureList(IGame game) {
+		this.game = game;
 		features = new LinkedHashMap<String, IFeature>();
 		lock = new ReentrantLock(true);
 	}
@@ -37,7 +43,7 @@ public class FeatureList implements IFeatureList {
 
 	@Override
 	public String getName() {
-		return name;
+		return game.getName();
 	}
 
 	@Override

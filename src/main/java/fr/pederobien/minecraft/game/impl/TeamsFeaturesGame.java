@@ -36,8 +36,8 @@ public class TeamsFeaturesGame extends Game implements ITeamConfigurable, IFeatu
 	public TeamsFeaturesGame(String name, Plugin plugin) {
 		super(name, plugin);
 
-		teams = new TeamList(name);
-		features = new FeatureList(name);
+		teams = new TeamList(this);
+		features = new FeatureList(this);
 	}
 
 	@Override
