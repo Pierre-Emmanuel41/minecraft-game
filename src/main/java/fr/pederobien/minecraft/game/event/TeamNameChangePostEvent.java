@@ -28,7 +28,7 @@ public class TeamNameChangePostEvent extends TeamEvent {
 	@Override
 	public String toString() {
 		StringJoiner joiner = new StringJoiner(", ", "{", "}");
-		joiner.add("oldName=" + oldName);
+		joiner.add("oldName=" + getOldName());
 		joiner.add("newName=" + getTeam().getName());
 		return String.format("%s_%s", getName(), joiner.toString());
 	}
