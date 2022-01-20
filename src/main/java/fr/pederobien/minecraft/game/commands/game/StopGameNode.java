@@ -25,7 +25,7 @@ public class StopGameNode extends GameNode {
 		if (getGame() == null)
 			return emptyList();
 
-		return getGame().getStartTabExecutor().onTabComplete(sender, command, alias, args);
+		return getGame().getStopTabExecutor().onTabComplete(sender, command, alias, args);
 	}
 
 	@Override
@@ -35,7 +35,7 @@ public class StopGameNode extends GameNode {
 			return false;
 		}
 
-		if (getGame().getStartTabExecutor().onCommand(sender, command, label, args)) {
+		if (getGame().getStopTabExecutor().onCommand(sender, command, label, args)) {
 			getGame().stop();
 			sendSuccessful(sender, EGameCode.STOP_GAME__STOPPING_GAME, getGame().getName());
 			return true;
