@@ -35,7 +35,7 @@ public class Team implements ITeam, IEventListener, ICodeSender {
 	private Lock lock;
 	private IPlayerList players;
 	private List<Player> quitPlayers;
-	private boolean clone;
+	private boolean clone, isCreatedOnServer;
 	private org.bukkit.scoreboard.Team team;
 
 	/**
@@ -114,7 +114,7 @@ public class Team implements ITeam, IEventListener, ICodeSender {
 
 		EColor oldColor = this.color;
 		this.color = color;
-		synchronizeWithServerTeam(team -> team.setDisplayName(name), new TeamColorChangePostEvent(this, oldColor));
+		synchronizeWithServerTeam(team -> team.setColor(color.getChatColor()), new TeamColorChangePostEvent(this, oldColor));
 	}
 
 	@Override
@@ -143,13 +143,27 @@ public class Team implements ITeam, IEventListener, ICodeSender {
 	}
 
 	@Override
+	public void createOnserver() {
+		if (isCreatedOnServer)
+			return;
+
+		team = TeamManager.createTeam(getName(), getColor().getChatColor(), getPlayers().stream());
+		isCreatedOnServer = true;
+	}
+
+	@Override
+	public void removeFromServer() {
+		if (!isCreatedOnServer)
+			return;
+
+		TeamManager.removeTeam(team.getName());
+		team = null;
+		isCreatedOnServer = false;
+	}
+
+	@Override
 	public boolean isCreatedOnServer() {
-		Optional<org.bukkit.scoreboard.Team> optTeam = getServerTeam();
-		if (optTeam.isPresent()) {
-			team = optTeam.get();
-			return true;
-		}
-		return false;
+		return isCreatedOnServer;
 	}
 
 	@Override
@@ -212,7 +226,7 @@ public class Team implements ITeam, IEventListener, ICodeSender {
 	 * @param consumer The consumer used to update the server team.
 	 */
 	private void updateServerTeam(Consumer<org.bukkit.scoreboard.Team> consumer) {
-		if (team != null && isCreatedOnServer() && !clone)
+		if (isCreatedOnServer() && !clone)
 			consumer.accept(team);
 	}
 

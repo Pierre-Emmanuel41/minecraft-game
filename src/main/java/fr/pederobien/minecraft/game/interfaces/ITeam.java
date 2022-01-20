@@ -80,6 +80,16 @@ public interface ITeam {
 	ITeam clone();
 
 	/**
+	 * Creates the equivalent of this team on the server.
+	 */
+	void createOnserver();
+
+	/**
+	 * Removes this team from the server teams list.
+	 */
+	void removeFromServer();
+
+	/**
 	 * @return If this team has been created on this server.
 	 */
 	boolean isCreatedOnServer();
