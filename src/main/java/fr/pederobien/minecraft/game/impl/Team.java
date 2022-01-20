@@ -174,7 +174,20 @@ public class Team implements ITeam, IEventListener, ICodeSender {
 			return false;
 
 		ITeam other = (ITeam) obj;
-		return name.equals(other.getName());
+		if (!name.equals(other.getName()))
+			return false;
+
+		if (getPlayers().toList().size() != other.getPlayers().toList().size())
+			return false;
+
+		List<Player> myPlayers = getPlayers().toList(), otherPlayers = other.getPlayers().toList();
+		myPlayers.sort((p1, p2) -> p1.getName().compareTo(p2.getName()));
+		otherPlayers.sort((p1, p2) -> p1.getName().compareTo(p2.getName()));
+		for (int i = 0; i < getPlayers().toList().size(); i++)
+			if (!myPlayers.get(i).equals(otherPlayers.get(i)))
+				return false;
+
+		return true;
 	}
 
 	@EventHandler
