@@ -28,18 +28,13 @@ public class TeamsAddTeamNode extends TeamsNode {
 
 	@Override
 	public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
+		updateExceptedList();
 		return teamTree.getNewNode().onTabComplete(sender, command, alias, args);
 	}
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-		teamTree.getNewNode().getExceptedNames().clear();
-		teamTree.getNewNode().getExceptedColors().clear();
-		getTeams().toList().forEach(team -> {
-			teamTree.getNewNode().getExceptedNames().add(team.getName());
-			teamTree.getNewNode().getExceptedColors().add(team.getColor());
-		});
-
+		updateExceptedList();
 		boolean result = teamTree.getNewNode().onCommand(sender, command, label, args);
 		if (result) {
 			ITeam team = teamTree.getTeam();
@@ -47,5 +42,14 @@ public class TeamsAddTeamNode extends TeamsNode {
 			sendSuccessful(sender, EGameCode.TEAMS__ADD_TEAM__TEAM_ADDED, team.getColoredName(EColor.GOLD), getTeams().getName());
 		}
 		return result;
+	}
+
+	private void updateExceptedList() {
+		teamTree.getNewNode().getExceptedNames().clear();
+		teamTree.getNewNode().getExceptedColors().clear();
+		getTeams().toList().forEach(team -> {
+			teamTree.getNewNode().getExceptedNames().add(team.getName());
+			teamTree.getNewNode().getExceptedColors().add(team.getColor());
+		});
 	}
 }
