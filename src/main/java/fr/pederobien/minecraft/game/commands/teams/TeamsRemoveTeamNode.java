@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.bukkit.command.Command;
@@ -12,6 +13,7 @@ import org.bukkit.command.CommandSender;
 import fr.pederobien.minecraft.game.impl.EGameCode;
 import fr.pederobien.minecraft.game.interfaces.ITeam;
 import fr.pederobien.minecraft.game.interfaces.ITeamList;
+import fr.pederobien.minecraft.managers.EColor;
 
 public class TeamsRemoveTeamNode extends TeamsNode {
 
@@ -62,7 +64,7 @@ public class TeamsRemoveTeamNode extends TeamsNode {
 			teams.add(optTeam.get());
 		}
 
-		String teamNames = concat(args);
+		String teamNames = concat(teams.stream().map(chat -> chat.getColoredName(EColor.GOLD)).collect(Collectors.toList()), ", ");
 
 		for (ITeam team : teams)
 			getTeams().remove(team);
