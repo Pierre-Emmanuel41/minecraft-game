@@ -12,7 +12,6 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
-import org.bukkit.scoreboard.Team;
 
 import fr.pederobien.minecraft.game.exceptions.RandomTeamNotEnoughTeam;
 import fr.pederobien.minecraft.game.interfaces.ITeam;
@@ -23,49 +22,6 @@ import fr.pederobien.minecraft.managers.WorldManager;
 
 public class TeamHelper {
 	private static final Random RANDOM = new Random();
-
-	/**
-	 * Create the given team on the server. A team with the name, the color and players is created on the server.
-	 * 
-	 * @param team The team to create on the server.
-	 */
-	public static Team createTeamOnServer(ITeam team) {
-		Optional<Team> optTeam = TeamManager.getTeam(team.getName());
-		return optTeam.isPresent() ? optTeam.get() : TeamManager.createTeam(team.getName(), team.getColor().getChatColor(), team.getPlayers().stream());
-	}
-
-	/**
-	 * Creates a {@link Team} for each {@link ITeam} present in the given list.
-	 * 
-	 * @param teams A list that contains all teams to create on the server.
-	 * 
-	 * @see #createTeamOnServer(ITeam)
-	 */
-	public static void createTeamsOnServer(List<ITeam> teams) {
-		for (ITeam team : teams)
-			createTeamOnServer(team);
-	}
-
-	/**
-	 * Remove the given team from the server.
-	 * 
-	 * @param team The team to remove.
-	 */
-	public static void removeTeamFromServer(ITeam team) {
-		TeamManager.removeTeam(team.getName());
-	}
-
-	/**
-	 * Remove each team present in the given list from the server.
-	 * 
-	 * @param teams A list that contains all teams to remove from the server.
-	 * 
-	 * @see #removeTeamFromServer(ITeam)
-	 */
-	public static void removeTeamsFromServer(List<ITeam> teams) {
-		for (ITeam team : teams)
-			removeTeamFromServer(team);
-	}
 
 	/**
 	 * Pick a random player from the given stream that verify the given predicate.
