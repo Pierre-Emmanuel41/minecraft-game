@@ -227,6 +227,10 @@
 			<value>To set the feature argument before starting it</value>
 		</message>
 		<message>
+			<code>FEATURES__EXPLANATION</code>
+			<value>To enable/disable and setup features</value>
+		</message>
+		<message>
 			<code>FEATURES__ENABLE__EXPLANATION</code>
 			<value>To enable several features</value>
 		</message>

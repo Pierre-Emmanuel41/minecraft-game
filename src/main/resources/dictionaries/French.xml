@@ -216,6 +216,10 @@
 			<value>Pour configurer les argument d'une fonctionnalité avant le démarrage de celle-ci</value>
 		</message>
 		<message>
+			<code>FEATURES__EXPLANATION</code>
+			<value>Pour activer/désactiver et configurer une fonctionnalité</value>
+		</message>
+		<message>
 			<code>FEATURES__ENABLE__EXPLANATION</code>
 			<value>Pour activer plusieurs fonctionnalités</value>
 		</message>
