@@ -25,7 +25,7 @@ public class TeamsRandomNode extends TeamsNode {
 	 * @param teams The list of teams associated to this node.
 	 */
 	protected TeamsRandomNode(Supplier<ITeamList> teams) {
-		super(teams, "random", EGameCode.TEAMS__RANDOM__EXPLANATION, t -> t != null);
+		super(teams, "random", EGameCode.TEAMS__RANDOM__EXPLANATION, t -> t != null && t.toList().size() > 0);
 	}
 
 	@Override
