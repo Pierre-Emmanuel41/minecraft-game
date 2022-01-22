@@ -2,4 +2,4 @@
 	path = minecraft-command-tree
 	url = https://github.com/Pierre-Emmanuel41/minecraft-command-tree.git
 	update = rebase
-	branch = 1.0_MC_1.13.2-SNAPSHOT
+	branch = 1.0_MC_1.16.5-SNAPSHOT

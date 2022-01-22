@@ -89,7 +89,7 @@ public interface ITeam {
 	Optional<Team> getServerTeam();
 }
 ```
-whose the default implementation can is [here](https://github.com/Pierre-Emmanuel41/minecraft-game/blob/master/src/main/java/fr/pederobien/minecraft/game/impl/Team.java).
+whose the default implementation can is [here](https://github.com/Pierre-Emmanuel41/minecraft-game/blob/1.0_MC_1.16.5-SNAPSHOT/src/main/java/fr/pederobien/minecraft/game/impl/Team.java).
 
 ### 1.2) Game
 
@@ -125,30 +125,48 @@ public interface IGame extends IPausable {
 }
 ```
 
-This interface can be extends by other game interfaces in order to add parameters. The default implementation of a game can be found [here](https://github.com/Pierre-Emmanuel41/minecraft-game/blob/master/src/main/java/fr/pederobien/minecraft/game/impl/Game.java).  
+This interface can be extends by other game interfaces in order to add parameters. The default implementation of a game can be found [here](https://github.com/Pierre-Emmanuel41/minecraft-game/blob/1.0_MC_1.16.5-SNAPSHOT/src/main/java/fr/pederobien/minecraft/game/impl/Game.java).  
 
-There are three implementations of an IGame : <code>TeamsGame</code>, <code>FeaturesGame</code> and <code>TeamsFeaturesGame</code> in order to add teams management, features management or both. The interface IFeature can be used for adding new behaviors during the game. The default feature implementation is :
+There are two implementations of an IGame : <code>FeaturesGame</code> and <code>TeamsFeaturesGame</code> in order to add teams management or features management. The interface IFeature can be used for adding new behaviors during the game. The default feature implementation is :
 
 ```java
 public class Feature implements IFeature {
 	private String name;
+	private IGame game;
+	private PausableState state;
 	private TabExecutor startTabExecutor;
 	private boolean isEnable;
 
 	/**
 	 * Creates an simple feature.
 	 * 
-	 * @param name The feature name.
+	 * @param name             The feature name.
+	 * @param game             The feature game.
+	 * @param startTabExecutor The tab executor in order to run specific treatment according to argument line before starting the
+	 *                         feature.
 	 */
-	public Feature(String name, TabExecutor startTabExecutor) {
+	public Feature(String name, IGame game, TabExecutor startTabExecutor) {
 		this.name = name;
+		this.game = game;
 		this.startTabExecutor = startTabExecutor;
+		state = PausableState.NOT_STARTED;
+	}
+
+	/**
+	 * Creates an simple feature.
+	 * 
+	 * @param name             The feature name.
+	 * @param game             The feature game.
+	 * @param startTabExecutor The tab executor in order to run specific treatment according to argument line before starting the
+	 *                         feature.
+	 */
+	public Feature(String name, IGame game) {
+		this(name, game, new DefaultStartTabExecutor());
 	}
 
 	@Override
-	public void start() {
-		if (isEnable)
-			EventManager.callEvent(new FeatureStartPostEvent(this));
+	public IGame getGame() {
+		return game;
 	}
 
 	@Override
@@ -157,17 +175,40 @@ public class Feature implements IFeature {
 	}
 
 	@Override
+	public void start() {
+		if (isEnable) {
+			if (state == PausableState.STARTED || state == PausableState.PAUSED)
+				return;
+
+			state = PausableState.STARTED;
+			EventManager.callEvent(new FeatureStartPostEvent(this));
+		}
+	}
+
+	@Override
 	public void stop() {
+		if (state == PausableState.NOT_STARTED)
+			return;
+
+		state = PausableState.NOT_STARTED;
 		EventManager.callEvent(new FeatureStopPostEvent(this));
 	}
 
 	@Override
 	public void pause() {
+		if (state == PausableState.PAUSED || state == PausableState.NOT_STARTED)
+			return;
+
+		state = PausableState.PAUSED;
 		EventManager.callEvent(new FeaturePausePostEvent(this));
 	}
 
 	@Override
 	public void resume() {
+		if (state == PausableState.STARTED || state == PausableState.NOT_STARTED)
+			return;
+
+		state = PausableState.STARTED;
 		EventManager.callEvent(new FeatureResumePostEvent(this));
 	}
 
@@ -189,15 +230,32 @@ public class Feature implements IFeature {
 	public TabExecutor getStartTabExecutor() {
 		return startTabExecutor;
 	}
-}
+
+	@Override
+	public PausableState getState() {
+		return state;
+	}
+
+	private static class DefaultStartTabExecutor implements TabExecutor {
+
+		@Override
+		public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
+			return new ArrayList<String>();
+		}
+
+		@Override
+		public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+			return true;
+		}
+	}
 ```
 
 ### 1.4) Time
 
 The package <code>game.interfaces.time</code> proposes objects associated to the time elapsed during the game in order to perform actions punctually or periodically during the game. The two objects are <code>ITimeTask</code> and <code>ITimeLine</code>.  
 
-The time task, whose the default implementation is [TimeTask](https://github.com/Pierre-Emmanuel41/minecraft-game/blob/master/src/main/java/fr/pederobien/minecraft/game/impl/time/TimeTask.java) , gather the time elapsed since the beginning of the game, the time elapsed while the game was running and the time while the game was paused.  
-The time line, whose the default implementation is [TimeLine](https://github.com/Pierre-Emmanuel41/minecraft-game/blob/master/src/main/java/fr/pederobien/minecraft/game/impl/time/TimeLine.java), is based on a time task and is used to perform action punctually or periodically while the game is in progress.
+The time task, whose the default implementation is [TimeTask](https://github.com/Pierre-Emmanuel41/minecraft-game/blob/1.0_MC_1.16.5-SNAPSHOT/src/main/java/fr/pederobien/minecraft/game/impl/time/TimeTask.java) , gather the time elapsed since the beginning of the game, the time elapsed while the game was running and the time while the game was paused.  
+The time line, whose the default implementation is [TimeLine](https://github.com/Pierre-Emmanuel41/minecraft-game/blob/1.0_MC_1.16.5-SNAPSHOT/src/main/java/fr/pederobien/minecraft/game/impl/time/TimeLine.java), is based on a time task and is used to perform action punctually or periodically while the game is in progress.
 
 # 2) Commands
 

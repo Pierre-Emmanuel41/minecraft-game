@@ -5,7 +5,7 @@
 	<groupId>fr.pederobien.minecraft</groupId>
 	<artifactId>game</artifactId>
 	<packaging>jar</packaging>
-	<version>1.0_MC_1.13.2-SNAPSHOT</version>
+	<version>1.0_MC_1.16.5-SNAPSHOT</version>
 	<name>game</name>
 	<url>http://maven.apache.org</url>
 
@@ -20,13 +20,13 @@
 		<dependency>
 			<groupId>org.spigotmc</groupId>
 			<artifactId>spigot-api</artifactId>
-			<version>1.13-R0.1-SNAPSHOT</version>
+			<version>1.16.5-R0.1-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>fr.pederobien.minecraft</groupId>
 			<artifactId>command-tree</artifactId>
-			<version>1.0_MC_1.13.2-SNAPSHOT</version>
+			<version>1.0_MC_1.16.5-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 
