@@ -1,7 +1,7 @@
 main: fr.pederobien.minecraft.game.GamePlugin
 name: minecraft-game
 version: 1.0_MC_1.16.5-SNAPSHOT
-api-version: 1.16.5
+api-version: 1.16
 
 commands:
   startgame:
