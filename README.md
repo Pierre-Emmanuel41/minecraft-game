@@ -25,4 +25,4 @@ The jar plugin should be present on the minecraft server in order to be used by 
 
 To see how to develop minecraft commands, please see [this tutorial](https://github.com/Pierre-Emmanuel41/minecraft-command-tree/blob/1.0_MC_1.16.5-SNAPSHOT/Tutorial.md) and for language sensitive commands, please see [this tutorial](https://github.com/Pierre-Emmanuel41/minecraft-command-tree/blob/1.0_MC_1.16.5-SNAPSHOT/Tutorial_language.md) from the minecraft-command-tree project.
 
-To see the tools proposed by this project, please have a look to [that presentation](https://github.com/Pierre-Emmanuel41/minecraft-command-tree/blob/1.0_MC_1.16.5-SNAPSHOT/Presentation.md)
+To see the tools proposed by this project, please have a look to [that presentation](https://github.com/Pierre-Emmanuel41/minecraft-game/blob/1.0_MC_1.16.5-SNAPSHOT/Presentation.md)
