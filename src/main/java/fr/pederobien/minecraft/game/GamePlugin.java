@@ -8,6 +8,7 @@ import fr.pederobien.dictionary.event.DictionaryEvent;
 import fr.pederobien.dictionary.impl.JarXmlDictionaryParser;
 import fr.pederobien.minecraft.dictionary.impl.MinecraftDictionaryContext;
 import fr.pederobien.minecraft.game.commands.game.GameCommandTree;
+import fr.pederobien.minecraft.game.event.TimeTaskEvent;
 import fr.pederobien.minecraft.game.impl.PlayerQuitOrJoinEventHandler;
 import fr.pederobien.utils.AsyncConsole;
 import fr.pederobien.utils.event.EventLogger;
@@ -39,7 +40,7 @@ public class GamePlugin extends JavaPlugin {
 		instance = this;
 		gameTree = new GameCommandTree();
 
-		EventLogger.instance().newLine(false).timeStamp(false).ignore(DictionaryEvent.class).register();
+		EventLogger.instance().newLine(false).timeStamp(false).ignore(DictionaryEvent.class).ignore(TimeTaskEvent.class).register();
 		PlayerQuitOrJoinEventHandler.instance().register(this);
 
 		registerDictionaries();
