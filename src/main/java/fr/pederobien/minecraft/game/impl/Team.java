@@ -27,6 +27,7 @@ import fr.pederobien.minecraft.managers.MessageManager;
 import fr.pederobien.minecraft.managers.TeamManager;
 import fr.pederobien.utils.event.EventHandler;
 import fr.pederobien.utils.event.EventManager;
+import fr.pederobien.utils.event.EventPriority;
 import fr.pederobien.utils.event.IEventListener;
 
 public class Team implements ITeam, IEventListener, ICodeSender {
@@ -204,7 +205,7 @@ public class Team implements ITeam, IEventListener, ICodeSender {
 		return true;
 	}
 
-	@EventHandler
+	@EventHandler(priority = EventPriority.LOWEST)
 	private void onPlayerAdd(PlayerListPlayerAddPostEvent event) {
 		if (!event.getList().equals(players))
 			return;
@@ -212,7 +213,7 @@ public class Team implements ITeam, IEventListener, ICodeSender {
 		updateServerTeam(team -> team.addEntry(event.getPlayer().getName()));
 	}
 
-	@EventHandler
+	@EventHandler(priority = EventPriority.LOWEST)
 	private void onPlayerRemove(PlayerListPlayerRemovePostEvent event) {
 		if (!event.getList().equals(players))
 			return;
