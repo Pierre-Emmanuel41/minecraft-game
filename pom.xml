@@ -34,15 +34,7 @@
 		<finalName>minecraft-game_v${project.version}</finalName>
 		<resources>
 			<resource>
-				<targetPath>.</targetPath>
-				<filtering>true</filtering>
-				<directory>${basedir}/src/main/resources/</directory>
-				<includes>
-					<include>plugin.yml</include>
-				</includes>
-			</resource>
-			<resource>
-				<targetPath>./resources/dictionaries</targetPath>
+				<targetPath>./resources/dictionaries/game</targetPath>
 				<filtering>true</filtering>
 				<directory>${basedir}/src/main/resources/dictionaries</directory>
 				<includes>
