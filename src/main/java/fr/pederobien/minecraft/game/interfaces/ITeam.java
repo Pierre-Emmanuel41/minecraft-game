@@ -68,7 +68,7 @@ public interface ITeam {
 	/**
 	 * @return The list of teams for this team.
 	 */
-	IPlayerList getPlayers();
+	ITeamPlayerList getPlayers();
 
 	/**
 	 * Clone this team. The returned team will have the same name, the same color and the same players than the original team. One

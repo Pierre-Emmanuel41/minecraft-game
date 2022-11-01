@@ -20,8 +20,8 @@ import fr.pederobien.minecraft.game.event.PlayerListPlayerRemovePostEvent;
 import fr.pederobien.minecraft.game.event.TeamColorChangePostEvent;
 import fr.pederobien.minecraft.game.event.TeamEvent;
 import fr.pederobien.minecraft.game.event.TeamNameChangePostEvent;
-import fr.pederobien.minecraft.game.interfaces.IPlayerList;
 import fr.pederobien.minecraft.game.interfaces.ITeam;
+import fr.pederobien.minecraft.game.interfaces.ITeamPlayerList;
 import fr.pederobien.minecraft.managers.EColor;
 import fr.pederobien.minecraft.managers.MessageManager;
 import fr.pederobien.minecraft.managers.TeamManager;
@@ -34,7 +34,7 @@ public class Team implements ITeam, IEventListener, ICodeSender {
 	private String name;
 	private EColor color;
 	private Lock lock;
-	private IPlayerList players;
+	private ITeamPlayerList players;
 	private List<Player> quitPlayers;
 	private boolean clone, isCreatedOnServer;
 	private org.bukkit.scoreboard.Team team;
@@ -70,7 +70,7 @@ public class Team implements ITeam, IEventListener, ICodeSender {
 		this.clone = clone;
 
 		lock = new ReentrantLock(true);
-		players = new PlayerList(name);
+		players = new TeamPlayerList(this);
 		quitPlayers = new ArrayList<Player>();
 
 		PlayerQuitOrJoinEventHandler.instance().registerQuitEventHandler(this, event -> onPlayerQuitEvent(event));
@@ -131,7 +131,7 @@ public class Team implements ITeam, IEventListener, ICodeSender {
 	}
 
 	@Override
-	public IPlayerList getPlayers() {
+	public ITeamPlayerList getPlayers() {
 		return players;
 	}
 
