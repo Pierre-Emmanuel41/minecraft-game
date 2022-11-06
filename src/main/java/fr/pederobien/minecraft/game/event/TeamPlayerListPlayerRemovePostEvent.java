@@ -17,6 +17,7 @@ public class TeamPlayerListPlayerRemovePostEvent extends TeamPlayerListEvent {
 	 */
 	public TeamPlayerListPlayerRemovePostEvent(ITeamPlayerList list, Player player) {
 		super(list);
+		this.player = player;
 	}
 
 	/**
