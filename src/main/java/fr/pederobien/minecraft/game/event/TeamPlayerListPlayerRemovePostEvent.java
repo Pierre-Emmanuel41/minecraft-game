@@ -4,20 +4,19 @@ import java.util.StringJoiner;
 
 import org.bukkit.entity.Player;
 
-import fr.pederobien.minecraft.game.interfaces.IPlayerList;
+import fr.pederobien.minecraft.game.interfaces.ITeamPlayerList;
 
-public class PlayerListPlayerRemovePostEvent extends PlayerListEvent {
+public class TeamPlayerListPlayerRemovePostEvent extends TeamPlayerListEvent {
 	private Player player;
 
 	/**
-	 * Creates an event thrown when a player has been removed from a players list.
+	 * Creates an event thrown when a player has been removed from a players list associated to a team.
 	 * 
 	 * @param list   The list from which a player has been removed.
 	 * @param player The removed player.
 	 */
-	public PlayerListPlayerRemovePostEvent(IPlayerList list, Player player) {
+	public TeamPlayerListPlayerRemovePostEvent(ITeamPlayerList list, Player player) {
 		super(list);
-		this.player = player;
 	}
 
 	/**
@@ -32,6 +31,6 @@ public class PlayerListPlayerRemovePostEvent extends PlayerListEvent {
 		StringJoiner joiner = new StringJoiner(", ", "{", "}");
 		joiner.add("list=" + getList().getName());
 		joiner.add("player=" + getPlayer().getName());
-		return String.format("%s_%s", getName(), joiner.toString());
+		return String.format("%s_%s", getName(), joiner);
 	}
 }

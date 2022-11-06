@@ -4,18 +4,18 @@ import java.util.StringJoiner;
 
 import org.bukkit.entity.Player;
 
-import fr.pederobien.minecraft.game.interfaces.IPlayerList;
+import fr.pederobien.minecraft.game.interfaces.ITeamPlayerList;
 
-public class PlayerListPlayerAddPostEvent extends PlayerListEvent {
+public class TeamPlayerListPlayerAddPostEvent extends TeamPlayerListEvent {
 	private Player player;
 
 	/**
-	 * Creates an event thrown when a player has been added to a players list.
+	 * Creates an event thrown when a player has been added to the players list of a team.
 	 * 
 	 * @param list   The list to which a player has been added.
 	 * @param player The added player.
 	 */
-	public PlayerListPlayerAddPostEvent(IPlayerList list, Player player) {
+	public TeamPlayerListPlayerAddPostEvent(ITeamPlayerList list, Player player) {
 		super(list);
 		this.player = player;
 	}

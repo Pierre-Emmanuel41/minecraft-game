@@ -2,13 +2,13 @@ package fr.pederobien.minecraft.game.exceptions;
 
 import org.bukkit.entity.Player;
 
-import fr.pederobien.minecraft.game.interfaces.IPlayerList;
+import fr.pederobien.minecraft.game.interfaces.ITeamPlayerList;
 
-public class PlayerAlreadyRegisteredException extends PlayerListException {
+public class TeamPlayerAlreadyRegisteredException extends TeamPlayerListException {
 	private static final long serialVersionUID = 1L;
 	private Player player;
 
-	public PlayerAlreadyRegisteredException(IPlayerList list, Player player) {
+	public TeamPlayerAlreadyRegisteredException(ITeamPlayerList list, Player player) {
 		super(String.format("A player %s is already registered", player.getName()), list);
 		this.player = player;
 	}

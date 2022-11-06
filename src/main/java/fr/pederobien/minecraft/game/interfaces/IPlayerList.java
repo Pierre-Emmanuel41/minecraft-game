@@ -6,9 +6,14 @@ import java.util.stream.Stream;
 
 import org.bukkit.entity.Player;
 
-import fr.pederobien.minecraft.game.exceptions.PlayerAlreadyRegisteredException;
+import fr.pederobien.minecraft.game.exceptions.TeamPlayerAlreadyRegisteredException;
 
-public interface IPlayerList extends Iterable<Player> {
+public interface IPlayerList<T> extends Iterable<Player> {
+
+	/**
+	 * @return The object to which this players list is attached
+	 */
+	T getParent();
 
 	/**
 	 * @return The name of this player list.
@@ -20,7 +25,7 @@ public interface IPlayerList extends Iterable<Player> {
 	 * 
 	 * @param player The player to add.
 	 * 
-	 * @throws PlayerAlreadyRegisteredException If a player is already registered for the player name.
+	 * @throws TeamPlayerAlreadyRegisteredException If a player is already registered for the player name.
 	 */
 	void add(Player player);
 

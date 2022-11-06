@@ -15,11 +15,11 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 import fr.pederobien.minecraft.commandtree.interfaces.ICodeSender;
 import fr.pederobien.minecraft.dictionary.interfaces.IMinecraftCode;
-import fr.pederobien.minecraft.game.event.PlayerListPlayerAddPostEvent;
-import fr.pederobien.minecraft.game.event.PlayerListPlayerRemovePostEvent;
 import fr.pederobien.minecraft.game.event.TeamColorChangePostEvent;
 import fr.pederobien.minecraft.game.event.TeamEvent;
 import fr.pederobien.minecraft.game.event.TeamNameChangePostEvent;
+import fr.pederobien.minecraft.game.event.TeamPlayerListPlayerAddPostEvent;
+import fr.pederobien.minecraft.game.event.TeamPlayerListPlayerRemovePostEvent;
 import fr.pederobien.minecraft.game.interfaces.ITeam;
 import fr.pederobien.minecraft.game.interfaces.ITeamPlayerList;
 import fr.pederobien.minecraft.managers.EColor;
@@ -206,7 +206,7 @@ public class Team implements ITeam, IEventListener, ICodeSender {
 	}
 
 	@EventHandler(priority = EventPriority.LOWEST)
-	private void onPlayerAdd(PlayerListPlayerAddPostEvent event) {
+	private void onPlayerAdd(TeamPlayerListPlayerAddPostEvent event) {
 		if (!event.getList().equals(players))
 			return;
 
@@ -214,7 +214,7 @@ public class Team implements ITeam, IEventListener, ICodeSender {
 	}
 
 	@EventHandler(priority = EventPriority.LOWEST)
-	private void onPlayerRemove(PlayerListPlayerRemovePostEvent event) {
+	private void onPlayerRemove(TeamPlayerListPlayerRemovePostEvent event) {
 		if (!event.getList().equals(players))
 			return;
 
