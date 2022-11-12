@@ -302,7 +302,7 @@ public enum EGameCode implements IMinecraftCode {
 	}
 
 	@Override
-	public String value() {
+	public String getCode() {
 		return name();
 	}
 
@@ -318,6 +318,6 @@ public enum EGameCode implements IMinecraftCode {
 
 	@Override
 	public String toString() {
-		return String.format("value=%s,group=%s", value(), getGroup());
+		return String.format("value=%s,group=%s", getCode(), getGroup());
 	}
 }
